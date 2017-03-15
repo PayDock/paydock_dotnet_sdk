@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Models\ChargeResponse.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\ErrorResponse.cs" />
     <Compile Include="Models\PaymentSource.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Services\Charges.cs" />
     <Compile Include="Services\Config.cs" />
     <Compile Include="Services\IServiceHelper.cs" />
+    <Compile Include="Services\ResponseException.cs" />
     <Compile Include="Services\ServiceHelper.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.IO;
+using System.Dynamic;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
+using Paydock_dotnet_sdk.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Paydock_dotnet_sdk.Services
 {
@@ -36,22 +41,45 @@ namespace Paydock_dotnet_sdk.Services
                 client.Headers["x-user-secret-key"] = Config.SecretKey;
 
                 // TODO: set timeout
-                // TODO: return the error code
                 try
                 {
-                    result = client.UploadString(url, method.ToString(), "");
+                    result = client.UploadString(url, method.ToString(), json);
                 }
                 catch (WebException ex)
                 {
-                    using (var reader = new StreamReader(ex.Response.GetResponseStream()))
-                    {
-                        result = reader.ReadToEnd();
-                    }
+                    HandleException(ex);
                 }
             }
             
             return result;
 
+        }
+
+        private void HandleException(WebException exception)
+        {
+            using (var reader = new StreamReader(exception.Response.GetResponseStream()))
+            {
+                var result = reader.ReadToEnd();
+                dynamic obj = JsonConvert.DeserializeObject<ExpandoObject>(result, new ExpandoObjectConverter());
+                var errorResponse = new ErrorResponse()
+                {
+                    Status = Convert.ToInt32(obj.status),
+                    ExtendedInformation = obj,
+                    JsonResponse = result
+                };
+
+                var json = JObject.Parse(result);
+                if (json["error"]["message"].Count() == 0)
+                {
+                    errorResponse.ErrorMessage = (string)json["error"]["message"];
+                }
+                else if (json["error"]["message"]["message"].Count() == 0)
+                {
+                    errorResponse.ErrorMessage = (string)json["error"]["message"]["message"];
+                }
+                
+                throw new ResponseException(errorResponse, exception.Status.ToString());
+            }
         }
     }
 }

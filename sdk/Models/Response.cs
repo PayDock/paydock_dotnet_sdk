@@ -7,11 +7,11 @@ namespace Paydock_dotnet_sdk.Models
 {
     public class Response
     {
-        public int ResponseCode { get; set; }
-        public string Error { get; set; }
+        public int status { get; set; }
+        public string error { get; set; }
         public bool IsSuccess
         {
-            get { return ResponseCode == 200 || ResponseCode == 201; }
+            get { return status == 200 || status == 201; }
         }
     }
 }

@@ -1,19 +1,20 @@
 ﻿using NUnit.Framework;
 using Paydock_dotnet_sdk.Services;
 using Paydock_dotnet_sdk.Models;
+using System;
 
 namespace FunctionalTests
 {
     [TestFixture]
     public class ChargesServiceTests
     {
+        string secretKey = "";
+        string gatewayId = "";
+
         [Test]
         public void SimpleCharge()
         {
-            var secretKey = "your_secret_key";
-            var gatewayId = "your_gateway_id";
-
-            Config.Initialise(Environment.Sandbox, secretKey);
+            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, secretKey);
 
             var charge = new ChargeRequest
             {
@@ -33,8 +34,9 @@ namespace FunctionalTests
                 }
             };
 
-            var chargeSvc = new Charges();
-            var result = chargeSvc.Add(charge);
+            var result = new Charges().Add(charge);
+
+            Assert.IsTrue(result.IsSuccess);
         }
     }
 }
