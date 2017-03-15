@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C6EB8BB-36A1-4881-AB5A-BB7D08E6A0C9}</ProjectGuid>
+    <ProjectGuid>{5CEC6144-C1D9-4A3C-AEC1-630D5DD7B3BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Paydock_dotnet_sdk</RootNamespace>
-    <AssemblyName>Paydock_dotnet_sdk</AssemblyName>
+    <RootNamespace>FunctionalTests</RootNamespace>
+    <AssemblyName>FunctionalTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.6.1\lib\net40\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -45,15 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ChargeResponse.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\PaymentSource.cs" />
-    <Compile Include="Models\Response.cs" />
+    <Compile Include="ChargesServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\ChargeRequest.cs" />
-    <Compile Include="Services\Charges.cs" />
-    <Compile Include="Services\Config.cs" />
-    <Compile Include="Services\ServiceHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\sdk\Paydock_dotnet_sdk.csproj">
+      <Project>{9c6eb8bb-36a1-4881-ab5a-bb7d08e6a0c9}</Project>
+      <Name>Paydock_dotnet_sdk</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

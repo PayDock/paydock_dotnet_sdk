@@ -22,7 +22,7 @@ namespace Paydock_dotnet_sdk.Services
         {
             // TODO: throw an error if missing required config
 
-            var requestData = JsonConvert.SerializeObject(data);
+            var requestData = JsonConvert.SerializeObject(data, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             var response = _serviceHelper.CallPaydock("charges", HttpMethod.POST, requestData);
 
             // TODO: pull out the service logs independantly
