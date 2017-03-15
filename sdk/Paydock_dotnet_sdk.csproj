@@ -55,6 +55,7 @@
     <Compile Include="Services\Charges.cs" />
     <Compile Include="Services\Config.cs" />
     <Compile Include="Services\IServiceHelper.cs" />
+    <Compile Include="Services\RequiresConfigAttribute.cs" />
     <Compile Include="Services\ResponseException.cs" />
     <Compile Include="Services\ServiceHelper.cs" />
   </ItemGroup>

@@ -2,5 +2,6 @@
 {
     public class ChargeResponse : Response
     {
+        // TODO: map remaining fields
     }
 }

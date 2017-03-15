@@ -40,7 +40,6 @@ namespace Paydock_dotnet_sdk.Services
                 client.Headers[HttpRequestHeader.ContentType] = "application/json";
                 client.Headers["x-user-secret-key"] = Config.SecretKey;
 
-                // TODO: set timeout
                 try
                 {
                     result = client.UploadString(url, method.ToString(), json);

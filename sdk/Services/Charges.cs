@@ -6,6 +6,8 @@ namespace Paydock_dotnet_sdk.Services
 {
     public class Charges
     {
+        // TODO: add function signature definitions and interfaces
+
         protected IServiceHelper _serviceHelper;
 
         public Charges()
@@ -18,15 +20,13 @@ namespace Paydock_dotnet_sdk.Services
             _serviceHelper = serviceHelper;
         }
 
+        [RequiresConfig]
         public ChargeResponse Add(ChargeRequest data)
         {
-            // TODO: throw an error if missing required config
-
             var requestData = JsonConvert.SerializeObject(data, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             var response = _serviceHelper.CallPaydock("charges", HttpMethod.POST, requestData);
 
-            // TODO: pull out the service logs independantly
-            // TODO: review exception handling
+            // TODO: pull out the service logs independently
             return (ChargeResponse) JsonConvert.DeserializeObject(response, typeof(ChargeResponse));
         }
     }
