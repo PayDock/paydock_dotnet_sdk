@@ -1,8 +1,5 @@
 ﻿using Paydock_dotnet_sdk.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Paydock_dotnet_sdk.Services
 {
