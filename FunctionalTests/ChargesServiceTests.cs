@@ -2,6 +2,7 @@
 using Paydock_dotnet_sdk.Services;
 using Paydock_dotnet_sdk.Models;
 using System;
+using System.Linq;
 
 namespace FunctionalTests
 {
@@ -48,5 +49,25 @@ namespace FunctionalTests
             var result = new Charges().Get();
             Assert.IsTrue(result.IsSuccess);
         }
+
+        [Test]
+        public void GetChargesWithSearch()
+        {
+            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, secretKey);
+
+            var result = new Charges().Get(new GetChargeRequest { gateway_id = gatewayId });
+            Assert.IsTrue(result.IsSuccess);
         }
+
+        [Test]
+        public void GetSingleCharge()
+        {
+            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, secretKey);
+
+            var chargeList = new Charges().Get();
+            var chargeId = chargeList.resource.data.First()._id;
+            var result = new Charges().Get(chargeId);
+            Assert.IsTrue(result.IsSuccess);
+        }
+    }
 }

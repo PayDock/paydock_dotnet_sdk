@@ -95,7 +95,7 @@ namespace Paydock_dotnet_sdk.Services
             chargeId = Uri.EscapeUriString(chargeId);
             var responseJson = _serviceHelper.CallPaydock("charges/" + chargeId, HttpMethod.GET, "");
 
-            var response = (ChargeItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeItemsResponse));
+            var response = (ChargeItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeItemResponse));
             response.JsonResponse = responseJson;
             return response;
         }
