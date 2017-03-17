@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Package</id>
+    <version>0.1.0</version>
+    <authors>Paydock</authors>
+    <owners>Paydoc</owners>
+    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <projectUrl>https://github.com/paydockdev</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package description</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>Tag1 Tag2</tags>
+    <dependencies>
+      <dependency id="SampleDependency" version="1.0" />
+    </dependencies>
+  </metadata>
+</package>
