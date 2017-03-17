@@ -8,6 +8,5 @@ namespace Paydock_dotnet_sdk.Services
         ChargeItemsResponse Get();
         ChargeItemResponse Get(string chargeId);
         ChargeItemsResponse Get(GetChargeRequest request);
-        // TODO: implement refund and archive
     }
 }

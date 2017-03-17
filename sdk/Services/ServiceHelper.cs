@@ -20,15 +20,30 @@ namespace Paydock_dotnet_sdk.Services
         DELETE
     }
 
+    /// <summary>
+    /// Helper class to handle calling the API and basic serialisation
+    /// </summary>
     public class ServiceHelper : IServiceHelper
     {
-        public string CallPaydock(string endpoint, HttpMethod method, string json)
+        static ServiceHelper()
         {
-            var url = Config.BaseUrl() + endpoint;
-            var request = HttpWebRequest.Create(url);
+            // set to TLS1.2
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             ServicePointManager.DefaultConnectionLimit = 9999;
+        }
+
+        /// <summary>
+        /// Call the API, throws ResponseException on any errors
+        /// </summary>
+        /// <param name="url">relative URL to call (eg charge or notification/templates)</param>
+        /// <param name="method">HTTP method to call</param>
+        /// <param name="json">Data to send, will be ignored for some HTTP methods</param>
+        /// <returns>the response string</returns>
+        public string CallPaydock(string url, HttpMethod method, string json)
+        {
+            var url = Config.BaseUrl() + url;
+            var request = HttpWebRequest.Create((string)url);
 
             request.ContentType = "application/json";
             request.Headers.Add("x-user-secret-key", Config.SecretKey);
@@ -36,7 +51,7 @@ namespace Paydock_dotnet_sdk.Services
 
             string result = "";
 
-            var webRequest = WebRequest.Create(url);
+            var webRequest = WebRequest.Create((string)url);
             webRequest.Method = method.ToString();
             webRequest.ContentType = "application/json";
             webRequest.Headers.Add("x-user-secret-key", Config.SecretKey);
@@ -58,7 +73,7 @@ namespace Paydock_dotnet_sdk.Services
 
             catch (WebException ex)
             {
-                HandleException(ex);
+                ConvertException(ex);
             }
 
             using (var reader = new StreamReader(response.GetResponseStream()))
@@ -69,7 +84,11 @@ namespace Paydock_dotnet_sdk.Services
             return result;
         }
         
-        private void HandleException(WebException exception)
+        /// <summary>
+        /// Parses and converts exception & response into common format
+        /// </summary>
+        /// <param name="exception">Exception to convert</param>
+        private void ConvertException(WebException exception)
         {
             using (var reader = new StreamReader(exception.Response.GetResponseStream()))
             {

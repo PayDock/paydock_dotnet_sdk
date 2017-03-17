@@ -4,20 +4,34 @@ using Newtonsoft.Json;
 
 namespace Paydock_dotnet_sdk.Services
 {
+    /// <summary>
+    /// Provides abstraction over the /charges endpoint for the APU
+    /// </summary>
     public class Charges : ICharges
     {
         protected IServiceHelper _serviceHelper;
-
+        
+        /// <summary>
+        /// Service locator style constructor
+        /// </summary>
         public Charges()
         {
             _serviceHelper = new ServiceHelper();
         }
 
+        /// <summary>
+        /// Dependency injection constructor to enable testing
+        /// </summary>
         public Charges(IServiceHelper serviceHelper)
         {
             _serviceHelper = serviceHelper;
         }
 
+        /// <summary>
+        /// Add a charge
+        /// </summary>
+        /// <param name="request">Charge data</param>
+        /// <returns>Charge response</returns>
         [RequiresConfig]
         public ChargeResponse Add(ChargeRequest request)
         {
@@ -29,6 +43,10 @@ namespace Paydock_dotnet_sdk.Services
             return response;
         }
 
+        /// <summary>
+        /// Retrieve full list of charges, limited to 1000
+        /// </summary>
+        /// <returns>List of charges</returns>
         [RequiresConfig]
         public ChargeItemsResponse Get()
         {
@@ -39,6 +57,11 @@ namespace Paydock_dotnet_sdk.Services
             return response;
         }
 
+        /// <summary>
+        /// Retrieve a filtered list of charges, limited to 1000
+        /// </summary>
+        /// <param name="request">filter parameters</param>
+        /// <returns>List of charges</returns>
         [RequiresConfig]
         public ChargeItemsResponse Get(GetChargeRequest request)
         {
@@ -89,6 +112,11 @@ namespace Paydock_dotnet_sdk.Services
             return Uri.EscapeUriString(name) + "=" + Uri.EscapeUriString(value);
         }
 
+        /// <summary>
+        /// Retrive a single charge
+        /// </summary>
+        /// <param name="chargeId">id of the charge to retreive</param>
+        /// <returns>charge data</returns>
         [RequiresConfig]
         public ChargeItemResponse Get(string chargeId)
         {
@@ -100,6 +128,12 @@ namespace Paydock_dotnet_sdk.Services
             return response;
         }
 
+        /// <summary>t
+        /// Refund a transaction
+        /// </summary>
+        /// <param name="chargeId">id of the charge to refund</param>
+        /// <param name="amount">amount to refund, can be used to issue partial refunds</param>
+        /// <returns>information on the transaction</returns>
         [RequiresConfig]
         public RefundResponse Refund(string chargeId, decimal amount)
         {
@@ -112,6 +146,11 @@ namespace Paydock_dotnet_sdk.Services
             return response;
         }
 
+        /// <summary>
+        /// Archive a transaction
+        /// </summary>
+        /// <param name="chargeId">id of the charge to archive</param>
+        /// <returns>information on the transaction</returns>
         [RequiresConfig]
         public RefundResponse Archive(string chargeId)
         {
