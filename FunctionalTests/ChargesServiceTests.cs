@@ -69,5 +69,22 @@ namespace FunctionalTests
             var result = new Charges().Get(chargeId);
             Assert.IsTrue(result.IsSuccess);
         }
+
+        [Test]
+        public void GetSingleChargeWithInvalidID()
+        {
+            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, secretKey);
+
+            try
+            {
+                var result = new Charges().Get("invalid_id_string");
+            }
+            catch (ResponseException ex)
+            {
+                Assert.IsTrue(ex.ErrorResponse.Status == 404);
+                return;
+            }
+            Assert.Fail();
+        }
     }
 }
