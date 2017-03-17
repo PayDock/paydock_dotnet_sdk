@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using Paydock_dotnet_sdk.Services;
 using Paydock_dotnet_sdk.Models;
-using System;
-using System.Linq;
 
 namespace FunctionalTests
 {
@@ -12,14 +10,25 @@ namespace FunctionalTests
         string secretKey = "";
         string gatewayId = "";
 
+        [SetUp]
+        public void Init()
+        {
+            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, secretKey);
+        }
+
         [Test]
         public void SimpleCharge()
         {
-            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, secretKey);
+            var result = CreateBasicCharge(10.1M, gatewayId);
 
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        private ChargeResponse CreateBasicCharge(decimal amount, string gatewayId)
+        {
             var charge = new ChargeRequest
             {
-                amount = 10,
+                amount = amount,
                 currency = "AUD",
                 customer = new Customer
                 {
@@ -35,16 +44,14 @@ namespace FunctionalTests
                 }
             };
 
-            var result = new Charges().Add(charge);
-
-            Assert.IsTrue(result.IsSuccess);
+            return new Charges().Add(charge);
         }
 
 
         [Test]
         public void GetCharges()
         {
-            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, secretKey);
+            CreateBasicCharge(5, gatewayId);
 
             var result = new Charges().Get();
             Assert.IsTrue(result.IsSuccess);
@@ -53,8 +60,7 @@ namespace FunctionalTests
         [Test]
         public void GetChargesWithSearch()
         {
-            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, secretKey);
-
+            CreateBasicCharge(6, gatewayId);
             var result = new Charges().Get(new GetChargeRequest { gateway_id = gatewayId });
             Assert.IsTrue(result.IsSuccess);
         }
@@ -62,19 +68,14 @@ namespace FunctionalTests
         [Test]
         public void GetSingleCharge()
         {
-            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, secretKey);
-
-            var chargeList = new Charges().Get();
-            var chargeId = chargeList.resource.data.First()._id;
-            var result = new Charges().Get(chargeId);
+            var charge = CreateBasicCharge(6, gatewayId);
+            var result = new Charges().Get(charge.resource.data._id);
             Assert.IsTrue(result.IsSuccess);
         }
 
         [Test]
         public void GetSingleChargeWithInvalidID()
         {
-            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, secretKey);
-
             try
             {
                 var result = new Charges().Get("invalid_id_string");
@@ -85,6 +86,23 @@ namespace FunctionalTests
                 return;
             }
             Assert.Fail();
+        }
+
+        [Test]
+        public void Refund()
+        {
+            // NOTE: depending on the gateway, refunds may fail if transactions have not settled
+            var charge = CreateBasicCharge(7, gatewayId);
+            var result = new Charges().Refund(charge.resource.data._id, 7);
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [Test]
+        public void Archive()
+        {
+            var charge = CreateBasicCharge(8, gatewayId);
+            var result = new Charges().Archive(charge.resource.data._id);
+            Assert.IsTrue(result.IsSuccess);
         }
     }
 }

@@ -99,5 +99,28 @@ namespace Paydock_dotnet_sdk.Services
             response.JsonResponse = responseJson;
             return response;
         }
+
+        [RequiresConfig]
+        public RefundResponse Refund(string chargeId, decimal amount)
+        {
+            chargeId = Uri.EscapeUriString(chargeId);
+            var json = string.Format("{{\"amount\" : \"{0}\"}}", amount);
+            var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}/refunds", chargeId), HttpMethod.POST, json);
+
+            var response = (RefundResponse)JsonConvert.DeserializeObject(responseJson, typeof(RefundResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
+
+        [RequiresConfig]
+        public RefundResponse Archive(string chargeId)
+        {
+            chargeId = Uri.EscapeUriString(chargeId);
+            var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}", chargeId), HttpMethod.DELETE, "");
+
+            var response = (RefundResponse)JsonConvert.DeserializeObject(responseJson, typeof(RefundResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\ErrorResponse.cs" />
     <Compile Include="Models\PaymentSource.cs" />
+    <Compile Include="Models\RefundResponse.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ChargeRequest.cs" />
