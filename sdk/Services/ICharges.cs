@@ -5,10 +5,9 @@ namespace Paydock_dotnet_sdk.Services
     public interface ICharges
     {
         ChargeResponse Add(ChargeRequest request);
-        ChargeResponse Archive(string id);
         ChargeItemsResponse Get();
-        ChargeItemsResponse Get(string chargeId);
+        ChargeItemResponse Get(string chargeId);
         ChargeItemsResponse Get(GetChargeRequest request);
-        ChargeResponse Refund(RefundRequest request);
+        // TODO: implement refund and archive
     }
 }

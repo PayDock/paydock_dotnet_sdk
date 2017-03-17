@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ChargeItemResponse.cs" />
     <Compile Include="Models\ChargeItemsResponse.cs" />
     <Compile Include="Models\RefundRequest.cs" />
     <Compile Include="Models\GetChargesRequest.cs" />

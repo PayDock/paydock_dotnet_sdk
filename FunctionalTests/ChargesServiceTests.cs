@@ -38,5 +38,15 @@ namespace FunctionalTests
 
             Assert.IsTrue(result.IsSuccess);
         }
-    }
+
+
+        [Test]
+        public void GetCharges()
+        {
+            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, secretKey);
+
+            var result = new Charges().Get();
+            Assert.IsTrue(result.IsSuccess);
+        }
+        }
 }

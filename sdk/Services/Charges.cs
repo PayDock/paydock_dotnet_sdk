@@ -6,8 +6,6 @@ namespace Paydock_dotnet_sdk.Services
 {
     public class Charges : ICharges
     {
-        // TODO: add function signature definitions and interfaces
-
         protected IServiceHelper _serviceHelper;
 
         public Charges()
@@ -24,19 +22,21 @@ namespace Paydock_dotnet_sdk.Services
         public ChargeResponse Add(ChargeRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var response = _serviceHelper.CallPaydock("charges", HttpMethod.POST, requestData);
+            var responseJson = _serviceHelper.CallPaydock("charges", HttpMethod.POST, requestData);
 
-            // TODO: review serialisation of the data
-            return (ChargeResponse) JsonConvert.DeserializeObject(response, typeof(ChargeResponse));
+            var response = (ChargeResponse) JsonConvert.DeserializeObject(responseJson, typeof(ChargeResponse));
+            response.JsonResponse = responseJson;
+            return response;
         }
 
         [RequiresConfig]
         public ChargeItemsResponse Get()
         {
-            var response = _serviceHelper.CallPaydock("charges", HttpMethod.GET, "");
+            var responseJson = _serviceHelper.CallPaydock("charges", HttpMethod.GET, "");
 
-            // TODO: review serialisation of the data
-            return (ChargeItemsResponse)JsonConvert.DeserializeObject(response, typeof(ChargeItemsResponse));
+            var response = (ChargeItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeItemsResponse));
+            response.JsonResponse = responseJson;
+            return response;
         }
 
         [RequiresConfig]
@@ -76,7 +76,6 @@ namespace Paydock_dotnet_sdk.Services
 
             var response = _serviceHelper.CallPaydock("charges", HttpMethod.GET, "");
 
-            // TODO: review serialisation of the data
             return (ChargeItemsResponse)JsonConvert.DeserializeObject(response, typeof(ChargeItemsResponse));
         }
 
@@ -91,34 +90,14 @@ namespace Paydock_dotnet_sdk.Services
         }
 
         [RequiresConfig]
-        public ChargeItemsResponse Get(string chargeId)
+        public ChargeItemResponse Get(string chargeId)
         {
             chargeId = Uri.EscapeUriString(chargeId);
-            var response = _serviceHelper.CallPaydock("charges/" + chargeId, HttpMethod.GET, "");
+            var responseJson = _serviceHelper.CallPaydock("charges/" + chargeId, HttpMethod.GET, "");
 
-            // TODO: review serialisation of the data
-            return (ChargeItemsResponse)JsonConvert.DeserializeObject(response, typeof(ChargeItemsResponse));
-        }
-
-        [RequiresConfig]
-        public ChargeResponse Refund(RefundRequest request)
-        {
-            var chargeId = Uri.EscapeUriString(request.id);
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var response = _serviceHelper.CallPaydock("charges/" + chargeId + "/refunds", HttpMethod.POST, requestData);
-
-            // TODO: review serialisation of the data
-            return (ChargeResponse)JsonConvert.DeserializeObject(response, typeof(ChargeResponse));
-        }
-
-        [RequiresConfig]
-        public ChargeResponse Archive(string chargeId)
-        {
-            chargeId = Uri.EscapeUriString(chargeId);
-            var response = _serviceHelper.CallPaydock("charges/" + chargeId, HttpMethod.DELETE, "");
-
-            // TODO: review serialisation of the data
-            return (ChargeResponse)JsonConvert.DeserializeObject(response, typeof(ChargeResponse));
+            var response = (ChargeItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeItemsResponse));
+            response.JsonResponse = responseJson;
+            return response;
         }
     }
 }

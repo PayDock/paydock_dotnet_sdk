@@ -7,6 +7,8 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 using Paydock_dotnet_sdk.Models;
 using Newtonsoft.Json.Linq;
+using System.Collections.Specialized;
+using System.Text;
 
 namespace Paydock_dotnet_sdk.Services
 {
@@ -33,25 +35,40 @@ namespace Paydock_dotnet_sdk.Services
             request.Method = method.ToString();
 
             string result = "";
-            using (var client = new WebClient())
-            {
-                client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                client.Headers["x-user-secret-key"] = Config.SecretKey;
 
-                try
+            var webRequest = WebRequest.Create(url);
+            webRequest.Method = method.ToString();
+            webRequest.ContentType = "application/json";
+            webRequest.Headers.Add("x-user-secret-key", Config.SecretKey);
+
+            if (method == HttpMethod.POST || method == HttpMethod.PUT)
+            {
+                using (var stream = request.GetRequestStream())
                 {
-                    result = client.UploadString(url, method.ToString(), json);
+                    var data = Encoding.UTF8.GetBytes(json);
+                    stream.Write(data, 0, json.Length);
                 }
-                catch (WebException ex)
-                {
-                    HandleException(ex);
-                }
+            }
+
+            WebResponse response = null;
+            try
+            {
+                response = request.GetResponse();
+            }
+
+            catch (WebException ex)
+            {
+                HandleException(ex);
+            }
+
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+                result = reader.ReadToEnd();
             }
             
             return result;
-
         }
-
+        
         private void HandleException(WebException exception)
         {
             using (var reader = new StreamReader(exception.Response.GetResponseStream()))
