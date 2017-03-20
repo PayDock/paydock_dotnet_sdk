@@ -31,7 +31,7 @@ namespace Paydock_dotnet_sdk.Tools
         public static string AppendParameter(this string url, string parameterName, bool? value)
         {
             if (value.HasValue)
-                return addUrlParameter(url, parameterName, value.Value.ToString());
+                return addUrlParameter(url, parameterName, value.Value.ToString().ToLower());
 
             return url;
         }
