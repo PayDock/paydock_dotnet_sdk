@@ -7,8 +7,8 @@ namespace FunctionalTests
     [TestFixture]
     public class CustomerServiceTests
     {
-        string secretKey = "fccbf57c8a65a609ed86edd417177905bfd5a99b";
-        string gatewayId = "58377235377aea03343240cc";
+        string secretKey = "";
+        string gatewayId = "";
 
         [SetUp]
         public void Init()
