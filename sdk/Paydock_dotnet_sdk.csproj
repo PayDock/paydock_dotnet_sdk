@@ -47,7 +47,8 @@
   <ItemGroup>
     <Compile Include="Models\ChargeItemResponse.cs" />
     <Compile Include="Models\ChargeItemsResponse.cs" />
-    <Compile Include="Models\CustomerListResponse.cs" />
+    <Compile Include="Models\CustomerItemResponse.cs" />
+    <Compile Include="Models\CustomerItemsResponse.cs" />
     <Compile Include="Models\CustomerResponse.cs" />
     <Compile Include="Models\CustomerRequest.cs" />
     <Compile Include="Models\GetCustomersRequest.cs" />

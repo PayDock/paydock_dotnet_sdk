@@ -75,7 +75,7 @@ namespace FunctionalTests
         }
 
         [Test]
-        public void GetSingleChargeWithInvalidID()
+        public void GetSingleChargeWithInvalidId()
         {
             try
             {

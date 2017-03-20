@@ -62,5 +62,29 @@ namespace FunctionalTests
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual(1, result.resource.data.Count());
         }
+
+        [Test]
+        public void GetSingleCustomer()
+        {
+            var customer = CreateBasicCustomer();
+            var result = new Customers().Get(customer.resource.data._id);
+
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [Test]
+        public void GetSingleCustomerWithInvalidId()
+        {
+            try
+            {
+                var result = new Customers().Get("invalid_id_string");
+            }
+            catch (ResponseException ex)
+            {
+                Assert.IsTrue(ex.ErrorResponse.Status == 404);
+                return;
+            }
+            Assert.Fail();
+        }
     }
 }

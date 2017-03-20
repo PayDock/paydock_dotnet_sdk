@@ -46,11 +46,11 @@ namespace Paydock_dotnet_sdk.Services
         /// Retrieve full list of customers, limited to 1000
         /// </summary>
         /// <returns>list of customers</returns>
-        public CustomerListResponse Get()
+        public CustomerItemsResponse Get()
         {
             var responseJson = _serviceHelper.CallPaydock("customers", HttpMethod.GET, "");
 
-            var response = (CustomerListResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerListResponse));
+            var response = (CustomerItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemsResponse));
             response.JsonResponse = responseJson;
             return response;
         }
@@ -59,7 +59,7 @@ namespace Paydock_dotnet_sdk.Services
         /// Retrieve filtered list of customers, limited to 1000
         /// </summary>
         /// <returns>list of customers</returns>
-        public CustomerListResponse Get(GetCustomersRequest request)
+        public CustomerItemsResponse Get(GetCustomersRequest request)
         {
             var url = "customers/";
             url = url.AppendParameter("skip", request.skip);
@@ -72,7 +72,20 @@ namespace Paydock_dotnet_sdk.Services
 
             var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "");
 
-            var response = (CustomerListResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerListResponse));
+            var response = (CustomerItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemsResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
+
+        /// <summary>
+        /// Retrieve full list of customers, limited to 1000
+        /// </summary>
+        /// <returns>list of customers</returns>
+        public CustomerItemResponse Get(string customerId)
+        {
+            var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.GET, "");
+
+            var response = (CustomerItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemResponse));
             response.JsonResponse = responseJson;
             return response;
         }

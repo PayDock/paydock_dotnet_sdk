@@ -82,16 +82,6 @@ namespace Paydock_dotnet_sdk.Services
             return (ChargeItemsResponse)JsonConvert.DeserializeObject(response, typeof(ChargeItemsResponse));
         }
 
-        private string addUrlParameter(string currrentUrl, string name, string value)
-        {
-            if (!currrentUrl.Contains("?"))
-                currrentUrl += "?";
-            else
-                currrentUrl += "&";
-
-            return Uri.EscapeUriString(name) + "=" + Uri.EscapeUriString(value);
-        }
-
         /// <summary>
         /// Retrive a single charge
         /// </summary>
