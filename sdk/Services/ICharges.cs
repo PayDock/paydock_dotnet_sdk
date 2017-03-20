@@ -7,6 +7,6 @@ namespace Paydock_dotnet_sdk.Services
         ChargeResponse Add(ChargeRequest request);
         ChargeItemsResponse Get();
         ChargeItemResponse Get(string chargeId);
-        ChargeItemsResponse Get(GetChargeRequest request);
+        ChargeItemsResponse Get(ChargeSearchRequest request);
     }
 }

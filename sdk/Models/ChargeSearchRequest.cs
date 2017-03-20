@@ -2,7 +2,7 @@
 
 namespace Paydock_dotnet_sdk.Models
 {
-    public class GetChargeRequest
+    public class ChargeSearchRequest
     {
         public int? skip { get; set; }
         public int? limit { get; set; }

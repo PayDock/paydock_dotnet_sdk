@@ -1,13 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Paydock_dotnet_sdk.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Paydock_dotnet_sdk.Services
 {
-    public class Customers
+    public class Customers : ICustomers
     {
         protected IServiceHelper _serviceHelper;
 
@@ -60,7 +56,7 @@ namespace Paydock_dotnet_sdk.Services
         /// </summary>
         /// <param name="request">search paramters for the customers</param>
         /// <returns>list of customers</returns>
-        public CustomerItemsResponse Get(GetCustomersRequest request)
+        public CustomerItemsResponse Get(CustomerSearchRequest request)
         {
             var url = "customers/";
             url = url.AppendParameter("skip", request.skip);

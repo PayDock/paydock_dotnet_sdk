@@ -2,7 +2,7 @@
 
 namespace Paydock_dotnet_sdk.Models
 {
-    public class GetCustomersRequest
+    public class CustomerSearchRequest
     {
         public int? skip { get; set; }
         public int? limit { get; set; }

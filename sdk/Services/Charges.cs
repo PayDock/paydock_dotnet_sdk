@@ -63,7 +63,7 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="request">filter parameters</param>
         /// <returns>List of charges</returns>
         [RequiresConfig]
-        public ChargeItemsResponse Get(GetChargeRequest request)
+        public ChargeItemsResponse Get(ChargeSearchRequest request)
         {
             var url = "charges/";
             url = url.AppendParameter("skip", request.skip);
@@ -105,13 +105,13 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="amount">amount to refund, can be used to issue partial refunds</param>
         /// <returns>information on the transaction</returns>
         [RequiresConfig]
-        public RefundResponse Refund(string chargeId, decimal amount)
+        public ChargeRefundResponse Refund(string chargeId, decimal amount)
         {
             chargeId = Uri.EscapeUriString(chargeId);
             var json = string.Format("{{\"amount\" : \"{0}\"}}", amount);
             var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}/refunds", chargeId), HttpMethod.POST, json);
 
-            var response = (RefundResponse)JsonConvert.DeserializeObject(responseJson, typeof(RefundResponse));
+            var response = (ChargeRefundResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeRefundResponse));
             response.JsonResponse = responseJson;
             return response;
         }
@@ -122,12 +122,12 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="chargeId">id of the charge to archive</param>
         /// <returns>information on the transaction</returns>
         [RequiresConfig]
-        public RefundResponse Archive(string chargeId)
+        public ChargeRefundResponse Archive(string chargeId)
         {
             chargeId = Uri.EscapeUriString(chargeId);
             var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}", chargeId), HttpMethod.DELETE, "");
 
-            var response = (RefundResponse)JsonConvert.DeserializeObject(responseJson, typeof(RefundResponse));
+            var response = (ChargeRefundResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeRefundResponse));
             response.JsonResponse = responseJson;
             return response;
         }

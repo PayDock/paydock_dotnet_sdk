@@ -61,7 +61,7 @@ namespace FunctionalTests
         {
             var reference = Guid.NewGuid().ToString();
             CreateBasicCharge(6, TestConfig.GatewayId, reference);
-            var result = new Charges().Get(new GetChargeRequest { gateway_id = TestConfig.GatewayId, search = reference });
+            var result = new Charges().Get(new ChargeSearchRequest { gateway_id = TestConfig.GatewayId, search = reference });
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual(1, result.resource.data.Count());
         }

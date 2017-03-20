@@ -2,7 +2,7 @@
 
 namespace Paydock_dotnet_sdk.Models
 {
-    public class RefundRequest
+    public class ChargeRefundRequest
     {
         [JsonIgnore]
         public string id { get; set; }

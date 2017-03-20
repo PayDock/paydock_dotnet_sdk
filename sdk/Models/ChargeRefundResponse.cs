@@ -2,7 +2,7 @@
 
 namespace Paydock_dotnet_sdk.Models
 {
-    public class RefundResponse : Response
+    public class ChargeRefundResponse : Response
     {
         public Resource resource { get; set; }
         public string JsonResponse { get; set; }

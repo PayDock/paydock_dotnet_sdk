@@ -57,7 +57,7 @@ namespace FunctionalTests
         {
             var email = Guid.NewGuid().ToString() + "@email.com";
             var customer = CreateBasicCustomer(email);
-            var result = new Customers().Get(new GetCustomersRequest { search = email });
+            var result = new Customers().Get(new CustomerSearchRequest { search = email });
 
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual(1, result.resource.data.Count());
