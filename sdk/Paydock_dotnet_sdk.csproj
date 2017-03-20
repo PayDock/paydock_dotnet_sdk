@@ -49,13 +49,13 @@
     <Compile Include="Models\ChargeItemsResponse.cs" />
     <Compile Include="Models\CustomerItemResponse.cs" />
     <Compile Include="Models\CustomerItemsResponse.cs" />
+    <Compile Include="Models\CustomerUpdateRequest.cs" />
     <Compile Include="Models\CustomerResponse.cs" />
     <Compile Include="Models\CustomerRequest.cs" />
     <Compile Include="Models\GetCustomersRequest.cs" />
     <Compile Include="Models\RefundRequest.cs" />
     <Compile Include="Models\GetChargesRequest.cs" />
     <Compile Include="Models\ChargeResponse.cs" />
-    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\ErrorResponse.cs" />
     <Compile Include="Models\PaymentSource.cs" />
     <Compile Include="Models\RefundResponse.cs" />

@@ -13,6 +13,7 @@ namespace Paydock_dotnet_sdk.Models
             public Data data { get; set; }
         }
 
+        // TODO: work out how to parse statistics
         public class Data
         {
             public string _id { get; set; }

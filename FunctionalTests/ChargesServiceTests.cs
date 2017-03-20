@@ -29,7 +29,7 @@ namespace FunctionalTests
             {
                 amount = amount,
                 currency = "AUD",
-                customer = new Customer
+                customer = new ChargeRequest.Customer
                 {
                     email = customerEmail,
                     payment_source = new PaymentSource

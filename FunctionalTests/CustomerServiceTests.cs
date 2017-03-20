@@ -57,7 +57,7 @@ namespace FunctionalTests
         {
             var email = Guid.NewGuid().ToString() + "@email.com";
             var customer = CreateBasicCustomer(email);
-            var result = new Customers().Get(new GetCustomersRequest {search = email});
+            var result = new Customers().Get(new GetCustomersRequest { search = email });
 
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual(1, result.resource.data.Count());
@@ -81,10 +81,44 @@ namespace FunctionalTests
             }
             catch (ResponseException ex)
             {
-                Assert.IsTrue(ex.ErrorResponse.Status == 404);
+                Assert.AreEqual(404, ex.ErrorResponse.Status);
                 return;
             }
             Assert.Fail();
+        }
+
+        [Test]
+        public void UpdateCustomer()
+        {
+            var customer = CreateBasicCustomer();
+            var getCustomer = new Customers().Get(customer.resource.data._id);
+
+            var request = new CustomerUpdateRequest
+            {
+                customer_id = getCustomer.resource.data._id,
+                first_name = "john1",
+                last_name = "smith1",
+                payment_source = new PaymentSource
+                {
+                    gateway_id = TestConfig.GatewayId,
+                    card_name = "John Smith",
+                    card_number = "4111111111111111",
+                    card_ccv = "123",
+                    expire_month = "10",
+                    expire_year = "2020"
+                }
+            };
+
+            var result = new Customers().Update(request);
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [Test]
+        public void DeleteCustomer()
+        {
+            var customer = CreateBasicCustomer();
+            var result = new Customers().Delete(customer.resource.data._id);
+            Assert.IsTrue(result.IsSuccess);
         }
     }
 }

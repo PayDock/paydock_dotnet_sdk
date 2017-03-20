@@ -58,6 +58,7 @@ namespace Paydock_dotnet_sdk.Services
         /// <summary>
         /// Retrieve filtered list of customers, limited to 1000
         /// </summary>
+        /// <param name="request">search paramters for the customers</param>
         /// <returns>list of customers</returns>
         public CustomerItemsResponse Get(GetCustomersRequest request)
         {
@@ -78,12 +79,42 @@ namespace Paydock_dotnet_sdk.Services
         }
 
         /// <summary>
-        /// Retrieve full list of customers, limited to 1000
+        /// Retrieve a single customer
         /// </summary>
-        /// <returns>list of customers</returns>
+        /// <param name="request">id of customer to return</param>
+        /// <returns>customer information</returns>
         public CustomerItemResponse Get(string customerId)
         {
             var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.GET, "");
+
+            var response = (CustomerItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
+
+        /// <summary>
+        /// Update customer details
+        /// </summary>
+        /// <param name="request">customers details to change</param>
+        /// <returns>customer information</returns>
+        public CustomerItemResponse Update(CustomerUpdateRequest request)
+        {
+            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var responseJson = _serviceHelper.CallPaydock("customers/" + request.customer_id, HttpMethod.POST, requestData);
+
+            var response = (CustomerItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
+
+        /// <summary>
+        /// Deletes a single customer
+        /// </summary>
+        /// <param name="customerId">id of customer to delete</param>
+        /// <returns>customer information</returns>
+        public CustomerItemResponse Delete(string customerId)
+        {
+            var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.DELETE, "");
 
             var response = (CustomerItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemResponse));
             response.JsonResponse = responseJson;
