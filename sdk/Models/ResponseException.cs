@@ -1,7 +1,6 @@
-﻿using Paydock_dotnet_sdk.Models;
-using System;
+﻿using System;
 
-namespace Paydock_dotnet_sdk.Services
+namespace Paydock_dotnet_sdk.Models
 {
     public class ResponseException : Exception
     {

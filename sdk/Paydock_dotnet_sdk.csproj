@@ -69,7 +69,7 @@
     <Compile Include="Services\ICustomers.cs" />
     <Compile Include="Tools\IServiceHelper.cs" />
     <Compile Include="Tools\RequiresConfigAttribute.cs" />
-    <Compile Include="Services\ResponseException.cs" />
+    <Compile Include="Models\ResponseException.cs" />
     <Compile Include="Tools\ServiceHelper.cs" />
     <Compile Include="Tools\UrlExtensionMethods.cs" />
   </ItemGroup>
