@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Paydock_dotnet_sdk.Models;
+using Paydock_dotnet_sdk.Tools;
 
 namespace Paydock_dotnet_sdk.Services
 {

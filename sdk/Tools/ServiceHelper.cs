@@ -7,10 +7,10 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 using Paydock_dotnet_sdk.Models;
 using Newtonsoft.Json.Linq;
-using System.Collections.Specialized;
 using System.Text;
+using Paydock_dotnet_sdk.Services;
 
-namespace Paydock_dotnet_sdk.Services
+namespace Paydock_dotnet_sdk.Tools
 {
     public enum HttpMethod
     {

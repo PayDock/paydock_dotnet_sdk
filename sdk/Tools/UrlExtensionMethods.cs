@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Paydock_dotnet_sdk.Services
+namespace Paydock_dotnet_sdk.Tools
 {
     public static class UrlExtensionMethods
     {

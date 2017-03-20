@@ -1,4 +1,4 @@
-﻿namespace Paydock_dotnet_sdk.Services
+﻿namespace Paydock_dotnet_sdk.Tools
 {
     public interface IServiceHelper
     {

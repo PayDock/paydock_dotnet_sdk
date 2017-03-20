@@ -67,11 +67,11 @@
     <Compile Include="Services\Customers.cs" />
     <Compile Include="Services\ICharges.cs" />
     <Compile Include="Services\ICustomers.cs" />
-    <Compile Include="Services\IServiceHelper.cs" />
-    <Compile Include="Services\RequiresConfigAttribute.cs" />
+    <Compile Include="Tools\IServiceHelper.cs" />
+    <Compile Include="Tools\RequiresConfigAttribute.cs" />
     <Compile Include="Services\ResponseException.cs" />
-    <Compile Include="Services\ServiceHelper.cs" />
-    <Compile Include="Services\UrlExtensionMethods.cs" />
+    <Compile Include="Tools\ServiceHelper.cs" />
+    <Compile Include="Tools\UrlExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Package.nuspec" />

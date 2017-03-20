@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Paydock_dotnet_sdk.Services;
+using System;
 
-namespace Paydock_dotnet_sdk.Services
+namespace Paydock_dotnet_sdk.Tools
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class RequiresConfigAttribute : Attribute
