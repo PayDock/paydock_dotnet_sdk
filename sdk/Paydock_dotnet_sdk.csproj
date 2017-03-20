@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="Models\ChargeItemResponse.cs" />
     <Compile Include="Models\ChargeItemsResponse.cs" />
+    <Compile Include="Models\CustomerResponse.cs" />
+    <Compile Include="Models\CustomerRequest.cs" />
     <Compile Include="Models\RefundRequest.cs" />
     <Compile Include="Models\GetChargesRequest.cs" />
     <Compile Include="Models\ChargeResponse.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Models\ChargeRequest.cs" />
     <Compile Include="Services\Charges.cs" />
     <Compile Include="Services\Config.cs" />
+    <Compile Include="Services\Customers.cs" />
     <Compile Include="Services\ICharges.cs" />
     <Compile Include="Services\IServiceHelper.cs" />
     <Compile Include="Services\RequiresConfigAttribute.cs" />

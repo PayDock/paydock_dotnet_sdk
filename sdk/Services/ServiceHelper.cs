@@ -40,9 +40,9 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="method">HTTP method to call</param>
         /// <param name="json">Data to send, will be ignored for some HTTP methods</param>
         /// <returns>the response string</returns>
-        public string CallPaydock(string url, HttpMethod method, string json)
+        public string CallPaydock(string endpoint, HttpMethod method, string json)
         {
-            var url = Config.BaseUrl() + url;
+            var url = Config.BaseUrl() + endpoint;
             var request = HttpWebRequest.Create((string)url);
 
             request.ContentType = "application/json";
