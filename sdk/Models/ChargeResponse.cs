@@ -41,6 +41,7 @@ namespace Paydock_dotnet_sdk.Models
             public Payment_Source payment_source { get; set; }
         }
 
+        // TODO: need to look at combining this into other objects
         public class Payment_Source
         {
             public string type { get; set; }

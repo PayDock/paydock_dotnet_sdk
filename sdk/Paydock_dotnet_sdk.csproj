@@ -47,8 +47,10 @@
   <ItemGroup>
     <Compile Include="Models\ChargeItemResponse.cs" />
     <Compile Include="Models\ChargeItemsResponse.cs" />
+    <Compile Include="Models\CustomerListResponse.cs" />
     <Compile Include="Models\CustomerResponse.cs" />
     <Compile Include="Models\CustomerRequest.cs" />
+    <Compile Include="Models\GetCustomersRequest.cs" />
     <Compile Include="Models\RefundRequest.cs" />
     <Compile Include="Models\GetChargesRequest.cs" />
     <Compile Include="Models\ChargeResponse.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Services\RequiresConfigAttribute.cs" />
     <Compile Include="Services\ResponseException.cs" />
     <Compile Include="Services\ServiceHelper.cs" />
+    <Compile Include="Services\UrlExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Package.nuspec" />

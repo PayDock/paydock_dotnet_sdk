@@ -41,5 +41,40 @@ namespace Paydock_dotnet_sdk.Services
             response.JsonResponse = responseJson;
             return response;
         }
+
+        /// <summary>
+        /// Retrieve full list of customers, limited to 1000
+        /// </summary>
+        /// <returns>list of customers</returns>
+        public CustomerListResponse Get()
+        {
+            var responseJson = _serviceHelper.CallPaydock("customers", HttpMethod.GET, "");
+
+            var response = (CustomerListResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerListResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
+
+        /// <summary>
+        /// Retrieve filtered list of customers, limited to 1000
+        /// </summary>
+        /// <returns>list of customers</returns>
+        public CustomerListResponse Get(GetCustomersRequest request)
+        {
+            var url = "customers/";
+            url = url.AppendParameter("skip", request.skip);
+            url = url.AppendParameter("limit", request.limit);
+            url = url.AppendParameter("search", request.search);
+            url = url.AppendParameter("sortkey", request.sortkey);
+            url = url.AppendParameter("sortdirection", request.sortdirection);
+            url = url.AppendParameter("gateway_id", request.gateway_id);
+            url = url.AppendParameter("archived", request.archived);
+
+            var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "");
+
+            var response = (CustomerListResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerListResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
     }
 }

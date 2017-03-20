@@ -65,39 +65,19 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public ChargeItemsResponse Get(GetChargeRequest request)
         {
-            var url = "charges";
+            var url = "charges/";
+            url = url.AppendParameter("skip", request.skip);
+            url = url.AppendParameter("limit", request.limit);
+            url = url.AppendParameter("subscription_id", request.subscription_id);
+            url = url.AppendParameter("gateway_id", request.gateway_id);
+            url = url.AppendParameter("company_id", request.company_id);
+            url = url.AppendParameter("created_at.from", request.created_at_from);
+            url = url.AppendParameter("created_at.to", request.created_at_to);
+            url = url.AppendParameter("search", request.search);
+            url = url.AppendParameter("status", request.status);
+            url = url.AppendParameter("archived", request.archived);
 
-            if (request.skip.HasValue)
-                url = addUrlParameter(url, "skip", request.skip.Value.ToString());
-
-            if (request.limit.HasValue)
-                url = addUrlParameter(url, "limit", request.limit.Value.ToString());
-
-            if (request.subscription_id != null)
-                url = addUrlParameter(url, "subscription_id", request.subscription_id);
-
-            if (request.gateway_id != null)
-                url = addUrlParameter(url, "gateway_id", request.gateway_id);
-
-            if (request.company_id != null)
-                url = addUrlParameter(url, "company_id", request.company_id);
-
-            if (request.created_at_from.HasValue)
-                url = addUrlParameter(url, "created_at.from", request.created_at_from.Value.ToString());
-
-            if (request.created_at_to.HasValue)
-                url = addUrlParameter(url, "created_at.to", request.created_at_to.Value.ToString());
-
-            if (request.search != null)
-                url = addUrlParameter(url, "search", request.search);
-
-            if (request.status != null)
-                url = addUrlParameter(url, "status", request.status);
-
-            if (request.archived.HasValue)
-                url = addUrlParameter(url, "archived", request.archived.Value.ToString());
-
-            var response = _serviceHelper.CallPaydock("charges", HttpMethod.GET, "");
+            var response = _serviceHelper.CallPaydock(url, HttpMethod.GET, "");
 
             return (ChargeItemsResponse)JsonConvert.DeserializeObject(response, typeof(ChargeItemsResponse));
         }
