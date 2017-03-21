@@ -35,7 +35,7 @@ namespace FunctionalTests
                     last_name = "last",
                     email = "test@test.com",
                     payment_source = new PaymentSource
-                    { 
+                    {
                         gateway_id = TestConfig.GatewayId,
                         card_name = "John Smith",
                         card_number = "4111111111111111",
@@ -77,6 +77,14 @@ namespace FunctionalTests
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual(request.amount, result.resource.data.amount);
             Assert.AreEqual(request.schedule.frequency, result.resource.data.schedule.frequency);
+        }
+
+        [Test]
+        public void GetSubscriptions()
+        {
+            var subscription = CreateBasicSubscription();
+            var response = new Subscriptions().Get();
+            Assert.IsTrue(response.IsSuccess);
         }
     }
 }

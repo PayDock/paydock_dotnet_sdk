@@ -61,6 +61,7 @@
     <Compile Include="Models\PaymentSource.cs" />
     <Compile Include="Models\ChargeRefundResponse.cs" />
     <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\SubscriptionItemsResponse.cs" />
     <Compile Include="Models\SubscriptionUpdateRequest.cs" />
     <Compile Include="Models\SubscriptionRequest.cs" />
     <Compile Include="Models\SubscriptionResponse.cs" />

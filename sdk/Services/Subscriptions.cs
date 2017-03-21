@@ -57,5 +57,19 @@ namespace Paydock_dotnet_sdk.Services
             response.JsonResponse = responseJson;
             return response;
         }
+
+        /// <summary>
+        /// Retrieve all subscriptions, limited to 1000
+        /// </summary>
+        /// <returns>Subscription items</returns>
+        public SubscriptionItemsResponse Get()
+        {
+            var responseJson = _serviceHelper.CallPaydock("subscriptions", HttpMethod.GET, "");
+
+            var response = (SubscriptionItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemsResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }   
+
     }
 }
