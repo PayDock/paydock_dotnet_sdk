@@ -75,7 +75,64 @@ namespace Paydock_dotnet_sdk.Services
             var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
             response.JsonResponse = responseJson;
             return response;
+        }
 
+        /// <summary>
+        /// Creates a notification trigger
+        /// </summary>
+        /// <param name="request">data to create the trigger</param>
+        /// <returns>the created notification trigger</returns>
+        [RequiresConfig]
+        public NotificationTriggerResponse AddTrigger(NotificationTriggerRequest request)
+        {
+            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var responseJson = _serviceHelper.CallPaydock("notifications", HttpMethod.POST, requestData);
+
+            var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
+
+        /// <summary>
+        /// returns all notification triggers, limited to 1000
+        /// </summary>
+        /// <returns>notification triggers</returns>
+        [RequiresConfig]
+        public NotificationTriggerItemsResponse GetTriggers()
+        {
+            var responseJson = _serviceHelper.CallPaydock("notifications", HttpMethod.GET, "");
+
+            var response = (NotificationTriggerItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerItemsResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
+
+        /// <summary>
+        /// returns a single notification trigger
+        /// </summary>
+        /// <returns>notification trigger</returns>
+        [RequiresConfig]
+        public NotificationTriggerResponse GetTrigger(string notificationTriggerId)
+        {
+            var responseJson = _serviceHelper.CallPaydock("notifications/" + notificationTriggerId, HttpMethod.GET, "");
+
+            var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
+
+        /// <summary>
+        /// deletes a notification trigger
+        /// </summary>
+        /// <returns>notification trigger</returns>
+        [RequiresConfig]
+        public NotificationTriggerResponse DeleteTrigger(string notificationTriggerId)
+        {
+            var responseJson = _serviceHelper.CallPaydock("notifications/" + notificationTriggerId, HttpMethod.DELETE, "");
+
+            var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
+            response.JsonResponse = responseJson;
+            return response;
         }
     }
 }

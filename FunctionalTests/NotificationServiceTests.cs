@@ -18,11 +18,11 @@ namespace FunctionalTests
         [Test]
         public void AddTemplate()
         {
-            var result = CreateBasicNotification();
+            var result = CreateBasicNotificationTemplate();
             Assert.IsTrue(result.IsSuccess);
         }
 
-        private NotificationTemplateResponse CreateBasicNotification()
+        private NotificationTemplateResponse CreateBasicNotificationTemplate()
         {
             var template = new NotificationTemplateRequest
             {
@@ -38,7 +38,7 @@ namespace FunctionalTests
         [Test]
         public void UpdateTemplate()
         {
-            var template = CreateBasicNotification();
+            var template = CreateBasicNotificationTemplate();
 
             var updateTemplate = new NotificationTemplateUpdateRequest
             {
@@ -57,10 +57,57 @@ namespace FunctionalTests
         [Test]
         public void DeleteTemplate()
         {
-            var template = CreateBasicNotification();
-            Assert.IsTrue(template.IsSuccess);
+            var template = CreateBasicNotificationTemplate();
 
             var result = new Notifications().DeleteTemplate(template.resource.data._id);
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        private NotificationTriggerResponse CreateBasicNotificationTrigger(string templateId)
+        {
+            var template = new NotificationTriggerRequest
+            {
+                type = NotificationTriggerType.email,
+                destination = "email@email.com",
+                template_id = templateId,
+                eventTrigger = NotificationEvent.card_expiration_warning
+            };
+            var result = new Notifications().AddTrigger(template);
+            return result;
+        }
+
+        [Test]
+        public void AddTrigger()
+        {
+            var template = CreateBasicNotificationTemplate();
+            var result = CreateBasicNotificationTrigger(template.resource.data._id);
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [Test]
+        public void GetTriggers()
+        {
+            var template = CreateBasicNotificationTemplate();
+            var trigger = CreateBasicNotificationTrigger(template.resource.data._id);
+            var result = new Notifications().GetTriggers();
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [Test]
+        public void GetSingleTrigger()
+        {
+            var template = CreateBasicNotificationTemplate();
+            var trigger = CreateBasicNotificationTrigger(template.resource.data._id);
+            var result = new Notifications().GetTrigger(trigger.resource.data._id);
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [Test]
+        public void DeleteTrigger()
+        {
+            var template = CreateBasicNotificationTemplate();
+            var trigger = CreateBasicNotificationTrigger(template.resource.data._id);
+            var result = new Notifications().DeleteTrigger(trigger.resource.data._id);
             Assert.IsTrue(result.IsSuccess);
         }
     }
