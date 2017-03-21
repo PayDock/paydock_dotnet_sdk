@@ -16,7 +16,7 @@ namespace FunctionalTests
         }
 
         [Test]
-        public void CreateSubsription()
+        public void CreateSubscription()
         {
             var result = CreateBasicSubscription();
 

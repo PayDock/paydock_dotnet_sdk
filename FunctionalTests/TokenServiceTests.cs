@@ -16,7 +16,7 @@ namespace FunctionalTests
         }
 
         [Test]
-        public void CreateSubsription()
+        public void CreateToken()
         {
             var request = new TokenRequest
             {
