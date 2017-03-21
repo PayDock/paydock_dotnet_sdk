@@ -33,6 +33,7 @@ namespace Paydock_dotnet_sdk.Services
         /// </summary>
         /// <param name="request">Subscription data</param>
         /// <returns>created subscription</returns>
+        [RequiresConfig]
         public SubscriptionResponse Add(SubscriptionRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
@@ -48,6 +49,7 @@ namespace Paydock_dotnet_sdk.Services
         /// </summary>
         /// <param name="request">Subscription data</param>
         /// <returns>updated subscription</returns>
+        [RequiresConfig]
         public SubscriptionResponse Update(SubscriptionUpdateRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
@@ -62,6 +64,7 @@ namespace Paydock_dotnet_sdk.Services
         /// Retrieve all subscriptions, limited to 1000
         /// </summary>
         /// <returns>Subscription items</returns>
+        [RequiresConfig]
         public SubscriptionItemsResponse Get()
         {
             var responseJson = _serviceHelper.CallPaydock("subscriptions", HttpMethod.GET, "");
@@ -69,7 +72,31 @@ namespace Paydock_dotnet_sdk.Services
             var response = (SubscriptionItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemsResponse));
             response.JsonResponse = responseJson;
             return response;
-        }   
+        }
 
+        /// <summary>
+        /// Retrieve filtered list of subscriptions, limited to 1000
+        /// </summary>
+        /// <param name="request">search paramters for the subscriptions</param>
+        /// <returns>list of subscriptions</returns>
+        [RequiresConfig]
+        public SubscriptionItemsResponse Get(SubscriptionSearchRequest request)
+        {
+            var url = "subscriptions/";
+            url = url.AppendParameter("skip", request.skip);
+            url = url.AppendParameter("limit", request.limit);
+            url = url.AppendParameter("search", request.search);
+            url = url.AppendParameter("sortkey", request.sortkey);
+            url = url.AppendParameter("sortdirection", request.sortdirection);
+            url = url.AppendParameter("customer_id", request.customer_id);
+            url = url.AppendParameter("gateway_id", request.gateway_id);
+            url = url.AppendParameter("status", request.status);
+
+            var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "");
+
+            var response = (SubscriptionItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemsResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
     }
 }

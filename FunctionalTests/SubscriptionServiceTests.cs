@@ -2,6 +2,7 @@
 using Paydock_dotnet_sdk.Services;
 using Paydock_dotnet_sdk.Models;
 using System;
+using System.Linq;
 
 namespace FunctionalTests
 {
@@ -85,6 +86,15 @@ namespace FunctionalTests
             var subscription = CreateBasicSubscription();
             var response = new Subscriptions().Get();
             Assert.IsTrue(response.IsSuccess);
+        }
+
+        [Test]
+        public void GetSubscriptionsWithSearch()
+        {
+            var subscription = CreateBasicSubscription();
+            var response = new Subscriptions().Get(new SubscriptionSearchRequest { customer_id = subscription.resource.data.customer.customer_id });
+            Assert.IsTrue(response.IsSuccess);
+            Assert.AreEqual(1, response.resource.data.Count());
         }
     }
 }

@@ -5,7 +5,6 @@ namespace Paydock_dotnet_sdk.Models
     public class ChargeResponse : Response
     {
         public Resource resource { get; set; }
-        public string JsonResponse { get; set; }
 
         public class Resource
         {

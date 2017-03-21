@@ -4,7 +4,6 @@ namespace Paydock_dotnet_sdk.Models
 {
     public class CustomerItemsResponse : Response
     {
-        public string JsonResponse { get; set; }
         public Resource resource { get; set; }
 
         public class Resource

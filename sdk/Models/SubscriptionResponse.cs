@@ -3,7 +3,6 @@ namespace Paydock_dotnet_sdk.Models
 {
     public class SubscriptionResponse : Response
     {
-        public string JsonResponse { get; set; }
         public Resource resource { get; set; }
 
         public class Resource
