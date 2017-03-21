@@ -110,5 +110,20 @@ namespace FunctionalTests
             var result = new Notifications().DeleteTrigger(trigger.resource.data._id);
             Assert.IsTrue(result.IsSuccess);
         }
+
+        [Test]
+        public void GetLogs()
+        {
+            var result = new Notifications().GetLogs(new NotificationLogRequest());
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [Test]
+        public void DeleteLog()
+        {
+            var logs = new Notifications().GetLogs(new NotificationLogRequest());
+            var result = new Notifications().DeleteLog(logs.resource.data.First()._id);
+            Assert.IsTrue(result.IsSuccess);
+        }
     }
 }

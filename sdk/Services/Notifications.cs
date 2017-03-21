@@ -110,6 +110,7 @@ namespace Paydock_dotnet_sdk.Services
         /// <summary>
         /// returns a single notification trigger
         /// </summary>
+        /// <param name="notificationTriggerId">id for the trigger</param>
         /// <returns>notification trigger</returns>
         [RequiresConfig]
         public NotificationTriggerResponse GetTrigger(string notificationTriggerId)
@@ -124,11 +125,52 @@ namespace Paydock_dotnet_sdk.Services
         /// <summary>
         /// deletes a notification trigger
         /// </summary>
+        /// <param name="notificationTriggerId">id for the trigger</param>
         /// <returns>notification trigger</returns>
         [RequiresConfig]
         public NotificationTriggerResponse DeleteTrigger(string notificationTriggerId)
         {
             var responseJson = _serviceHelper.CallPaydock("notifications/" + notificationTriggerId, HttpMethod.DELETE, "");
+
+            var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
+
+        /// <summary>
+        /// gets notification logs
+        /// </summary>
+        /// <param name="request">data for the trigger</param>
+        /// <returns>notification logs</returns>
+        [RequiresConfig]
+        public NotificationLogsResponse GetLogs(NotificationLogRequest request)
+        {
+            var url = "notifications/logs/";
+            url = url.AppendParameter("_id", request._id);
+            url = url.AppendParameter("success", request.success);
+            url = url.AppendParameter("event", request.eventTrigger);
+            url = url.AppendParameter("type", request.type);
+            url = url.AppendParameter("created_at.from", request.created_at_from);
+            url = url.AppendParameter("created_at.to", request.created_at_to);
+            url = url.AppendParameter("parent_id", request.parent_id);
+            url = url.AppendParameter("destination", request.destination);
+
+            var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "");
+
+            var response = (NotificationLogsResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationLogsResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
+
+        /// <summary>
+        /// deletes a notification trigger
+        /// </summary>
+        /// <param name="notificationTriggerId">id for the trigger</param>
+        /// <returns>notification trigger</returns>
+        [RequiresConfig]
+        public NotificationTriggerResponse DeleteLog(string notificationLogId)
+        {
+            var responseJson = _serviceHelper.CallPaydock("notifications/logs/" + notificationLogId, HttpMethod.DELETE, "");
 
             var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
             response.JsonResponse = responseJson;
