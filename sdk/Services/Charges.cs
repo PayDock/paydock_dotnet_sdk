@@ -99,7 +99,7 @@ namespace Paydock_dotnet_sdk.Services
             return response;
         }
 
-        /// <summary>t
+        /// <summary>
         /// Refund a transaction
         /// </summary>
         /// <param name="chargeId">id of the charge to refund</param>

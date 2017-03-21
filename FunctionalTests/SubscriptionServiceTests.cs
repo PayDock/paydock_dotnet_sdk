@@ -104,5 +104,13 @@ namespace FunctionalTests
             var response = new Subscriptions().Get(subscription.resource.data._id);
             Assert.IsTrue(response.IsSuccess);
         }
+
+        [Test]
+        public void DeleteSubscription()
+        {
+            var subscription = CreateBasicSubscription();
+            var response = new Subscriptions().Delete(subscription.resource.data._id);
+            Assert.IsTrue(response.IsSuccess);
+        }
     }
 }

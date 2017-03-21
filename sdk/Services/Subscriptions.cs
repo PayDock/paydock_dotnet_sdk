@@ -113,5 +113,19 @@ namespace Paydock_dotnet_sdk.Services
             response.JsonResponse = responseJson;
             return response;
         }
+
+        /// <summary>
+        /// Deleta a subscription
+        /// </summary>
+        /// <param name="subscriptionId">id of the subscription</param>
+        /// <returns>information on the subscription</returns>
+        public SubscriptionItemResponse Delete(string subscriptionId)
+        {
+            var responseJson = _serviceHelper.CallPaydock("subscriptions/" + subscriptionId, HttpMethod.DELETE, "");
+
+            var response = (SubscriptionItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemResponse));
+            response.JsonResponse = responseJson;
+            return response;
+        }
     }
 }
