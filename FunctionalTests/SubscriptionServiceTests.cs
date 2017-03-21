@@ -96,5 +96,13 @@ namespace FunctionalTests
             Assert.IsTrue(response.IsSuccess);
             Assert.AreEqual(1, response.resource.data.Count());
         }
+
+        [Test]
+        public void GetSingleSubscription()
+        {
+            var subscription = CreateBasicSubscription();
+            var response = new Subscriptions().Get(subscription.resource.data._id);
+            Assert.IsTrue(response.IsSuccess);
+        }
     }
 }

@@ -57,6 +57,7 @@ namespace Paydock_dotnet_sdk.Models
             public DateTime last_assessment { get; set; }
             public DateTime next_assessment { get; set; }
             public DateTime? start_date { get; set; }
+            public DateTime? end_date { get; set; }
             public string status { get; set; }
             public bool locked { get; set; }
             public int completed_count { get; set; }
