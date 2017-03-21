@@ -1,14 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Paydock_dotnet_sdk.Models;
 using Paydock_dotnet_sdk.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Paydock_dotnet_sdk.Services
 {
-    public class Notifications
+    public class Notifications : INotifications
     {
         protected IServiceHelper _serviceHelper;
 

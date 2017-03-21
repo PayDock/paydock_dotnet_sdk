@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>PaydockSdk</id>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
     <authors>Paydock</authors>
     <owners>Paydock</owners>
     <licenseUrl>https://github.com/PayDockDev/paydock_dotnet_sdk/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/paydockdev</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net SDK</description>
-    <releaseNotes>Beta release of SDK, implemented full support for all methods on customers and charges</releaseNotes>
+    <releaseNotes>Beta 2 release of SDK, implemented full support for all methods on subscriptions, notifications and tokens</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags></tags>
     <dependencies>
