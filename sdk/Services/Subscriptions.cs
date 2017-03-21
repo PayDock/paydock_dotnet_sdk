@@ -111,7 +111,7 @@ namespace Paydock_dotnet_sdk.Services
         }
 
         /// <summary>
-        /// Deleta a subscription
+        /// Delete a subscription
         /// </summary>
         /// <param name="subscriptionId">id of the subscription</param>
         /// <returns>information on the subscription</returns>

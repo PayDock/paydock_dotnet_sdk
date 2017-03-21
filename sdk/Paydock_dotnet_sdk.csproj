@@ -51,8 +51,9 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerItemResponse.cs" />
     <Compile Include="Models\CustomerItemsResponse.cs" />
-    <Compile Include="Models\NotificationRequest.cs" />
-    <Compile Include="Models\NotificationResponse.cs" />
+    <Compile Include="Models\NotificationTemplateUpdateRequest.cs" />
+    <Compile Include="Models\NotificationTemplateRequest.cs" />
+    <Compile Include="Models\NotificationTemplateResponse.cs" />
     <Compile Include="Models\SubscriptionItemResponse.cs" />
     <Compile Include="Models\SubscriptionSearchRequest.cs" />
     <Compile Include="Models\CustomerUpdateRequest.cs" />

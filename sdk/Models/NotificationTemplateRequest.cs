@@ -17,7 +17,7 @@ namespace Paydock_dotnet_sdk.Models
         card_expiration_warning
     }
 
-    public class NotificationRequest
+    public class NotificationTemplateRequest
     {
         public string body { get; set; }
         public string label { get; set; }

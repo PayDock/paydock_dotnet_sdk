@@ -2,7 +2,7 @@
 
 namespace Paydock_dotnet_sdk.Models
 {
-    public class NotificationResponse : Response
+    public class NotificationTemplateResponse : Response
     {
         public Resource resource { get; set; }
 

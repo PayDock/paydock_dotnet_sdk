@@ -34,12 +34,45 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="request">Notification template data</param>
         /// <returns>Created notification</returns>
         [RequiresConfig]
-        public NotificationResponse AddTemplate(NotificationRequest request)
+        public NotificationTemplateResponse AddTemplate(NotificationTemplateRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             var responseJson = _serviceHelper.CallPaydock("notifications/templates", HttpMethod.POST, requestData);
 
-            var response = (NotificationResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationResponse));
+            var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
+            response.JsonResponse = responseJson;
+            return response;
+
+        }
+
+        /// <summary>
+        /// Update notification template
+        /// </summary>
+        /// <param name="request">Notification template data</param>
+        /// <returns>Updated notification</returns>
+        [RequiresConfig]
+        public NotificationTemplateResponse UpdateTemplate(NotificationTemplateUpdateRequest request)
+        {
+            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var responseJson = _serviceHelper.CallPaydock("notifications/templates/" + request._id, HttpMethod.POST, requestData);
+
+            var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
+            response.JsonResponse = responseJson;
+            return response;
+
+        }
+
+        /// <summary>
+        /// Delete a notification template
+        /// </summary>
+        /// <param name="subscriptionId">id of the notification template</param>
+        /// <returns>information on the notification template</returns>
+        [RequiresConfig]
+        public NotificationTemplateResponse DeleteTemplate(string notificationTemplateId)
+        {
+            var responseJson = _serviceHelper.CallPaydock("notifications/templates/" + notificationTemplateId, HttpMethod.POST, "");
+
+            var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
             response.JsonResponse = responseJson;
             return response;
 
