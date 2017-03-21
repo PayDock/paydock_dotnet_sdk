@@ -29,6 +29,7 @@ namespace Paydock_dotnet_sdk.Services
         /// </summary>
         /// <param name="request">Stores the customer information to add</param>
         /// <returns>details of the created customer</returns>
+        [RequiresConfig]
         public CustomerResponse Add(CustomerRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
@@ -43,6 +44,7 @@ namespace Paydock_dotnet_sdk.Services
         /// Retrieve full list of customers, limited to 1000
         /// </summary>
         /// <returns>list of customers</returns>
+        [RequiresConfig]
         public CustomerItemsResponse Get()
         {
             var responseJson = _serviceHelper.CallPaydock("customers", HttpMethod.GET, "");
@@ -57,6 +59,7 @@ namespace Paydock_dotnet_sdk.Services
         /// </summary>
         /// <param name="request">search paramters for the customers</param>
         /// <returns>list of customers</returns>
+        [RequiresConfig]
         public CustomerItemsResponse Get(CustomerSearchRequest request)
         {
             var url = "customers/";
@@ -80,6 +83,7 @@ namespace Paydock_dotnet_sdk.Services
         /// </summary>
         /// <param name="request">id of customer to return</param>
         /// <returns>customer information</returns>
+        [RequiresConfig]
         public CustomerItemResponse Get(string customerId)
         {
             var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.GET, "");
@@ -94,6 +98,7 @@ namespace Paydock_dotnet_sdk.Services
         /// </summary>
         /// <param name="request">customers details to change</param>
         /// <returns>customer information</returns>
+        [RequiresConfig]
         public CustomerItemResponse Update(CustomerUpdateRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
@@ -109,6 +114,7 @@ namespace Paydock_dotnet_sdk.Services
         /// </summary>
         /// <param name="customerId">id of customer to delete</param>
         /// <returns>customer information</returns>
+        [RequiresConfig]
         public CustomerItemResponse Delete(string customerId)
         {
             var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.DELETE, "");

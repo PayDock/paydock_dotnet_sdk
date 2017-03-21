@@ -29,7 +29,7 @@ namespace FunctionalTests
             {
                 amount = amount,
                 currency = "AUD",
-                customer = new ChargeRequest.Customer
+                customer = new Paydock_dotnet_sdk.Models.Customer
                 {
                     email = customerEmail,
                     payment_source = new PaymentSource
