@@ -13,6 +13,7 @@
     {
         public static Environment Environment { get; private set; }
         public static string SecretKey { get; private set; }
+        public static string PublicKey { get; private set; }
 
         static Config()
         {
@@ -24,10 +25,11 @@
         /// </summary>
         /// <param name="env">Environment to connect to</param>
         /// <param name="secretKey">Secret key for authentication</param>
-        public static void Initialise(Environment env, string secretKey)
+        public static void Initialise(Environment env, string secretKey, string publicKey)
         {
             Environment = env;
             SecretKey = secretKey;
+            PublicKey = publicKey;
         }
 
         /// <summary>

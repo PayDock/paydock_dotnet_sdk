@@ -12,7 +12,7 @@ namespace FunctionalTests
         [SetUp]
         public void Init()
         {
-            Config.Initialise(Paydock_dotnet_sdk.Services.Environment.Sandbox, TestConfig.SecretKey);
+            TestConfig.Init();
         }
 
         [Test]

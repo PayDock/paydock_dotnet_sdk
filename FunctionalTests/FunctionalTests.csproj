@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TokenServiceTests.cs" />
     <Compile Include="SubscriptionServiceTests.cs" />
     <Compile Include="CustomerServiceTests.cs" />
     <Compile Include="ChargesServiceTests.cs" />
