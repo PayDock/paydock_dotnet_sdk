@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using Paydock_dotnet_sdk.Services;
 using Paydock_dotnet_sdk.Models;
+using System;
+
 namespace FunctionalTests
 {
     [TestFixture]
@@ -13,7 +15,7 @@ namespace FunctionalTests
         }
 
         [Test]
-        public void CreateCustomerWithCreditCard()
+        public void CreateSubsription()
         {
             var result = CreateBasicSubscription();
 
@@ -50,6 +52,31 @@ namespace FunctionalTests
             };
 
             return new Subscriptions().Add(request);
+        }
+
+        [Test]
+        public void UpdateSubscription()
+        {
+            var subscription = CreateBasicSubscription();
+
+            var request = new SubscriptionUpdateRequest
+            {
+                _id = subscription.resource.data._id,
+                amount = 21.0M,
+                currency = "AUD",
+                description = "this is a test",
+                schedule = new SubscriptionSchedule
+                {
+                    interval = "month",
+                    frequency = 2,
+                    start_date = DateTime.Now
+                }
+            };
+            var result = new Subscriptions().Update(request);
+
+            Assert.IsTrue(result.IsSuccess);
+            Assert.AreEqual(request.amount, result.resource.data.amount);
+            Assert.AreEqual(request.schedule.frequency, result.resource.data.schedule.frequency);
         }
     }
 }

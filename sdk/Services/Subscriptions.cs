@@ -41,7 +41,21 @@ namespace Paydock_dotnet_sdk.Services
             var response = (SubscriptionResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionResponse));
             response.JsonResponse = responseJson;
             return response;
+        }
 
+        /// <summary>
+        /// Updates a subscription
+        /// </summary>
+        /// <param name="request">Subscription data</param>
+        /// <returns>updated subscription</returns>
+        public SubscriptionResponse Update(SubscriptionUpdateRequest request)
+        {
+            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var responseJson = _serviceHelper.CallPaydock("subscriptions/" + request._id, HttpMethod.POST, requestData);
+
+            var response = (SubscriptionResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionResponse));
+            response.JsonResponse = responseJson;
+            return response;
         }
     }
 }

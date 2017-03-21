@@ -54,8 +54,8 @@ namespace Paydock_dotnet_sdk.Models
         public class Schedule
         {
             public string interval { get; set; }
-            public DateTime start_date { get; set; }
-            public DateTime end_date { get; set; }
+            public DateTime? start_date { get; set; }
+            public DateTime? end_date { get; set; }
             public DateTime next_assessment { get; set; }
             public DateTime first_assessment { get; set; }
             public string status { get; set; }
