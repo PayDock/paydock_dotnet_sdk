@@ -1,5 +1,4 @@
-﻿using System;
-namespace Paydock_dotnet_sdk.Models
+﻿namespace Paydock_dotnet_sdk.Models
 {
     public class GatewayItemsResponse : Response
     {

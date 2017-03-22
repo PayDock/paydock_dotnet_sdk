@@ -94,6 +94,7 @@
     <Compile Include="Services\Gateways.cs" />
     <Compile Include="Services\ICharges.cs" />
     <Compile Include="Services\ICustomers.cs" />
+    <Compile Include="Services\IGateways.cs" />
     <Compile Include="Services\INotifications.cs" />
     <Compile Include="Services\ISubscriptions.cs" />
     <Compile Include="Services\Notifications.cs" />

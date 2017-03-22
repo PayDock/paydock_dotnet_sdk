@@ -4,7 +4,7 @@ using Paydock_dotnet_sdk.Tools;
 
 namespace Paydock_dotnet_sdk.Services
 {
-    public class Gateways
+    public class Gateways : IGateways
     {
         protected IServiceHelper _serviceHelper;
 
