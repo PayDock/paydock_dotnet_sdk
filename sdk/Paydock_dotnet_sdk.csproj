@@ -51,6 +51,9 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerItemResponse.cs" />
     <Compile Include="Models\CustomerItemsResponse.cs" />
+    <Compile Include="Models\GatewayItemResponse.cs" />
+    <Compile Include="Models\GatewayRequest.cs" />
+    <Compile Include="Models\GatewayResponse.cs" />
     <Compile Include="Models\NotificationLogRequest.cs" />
     <Compile Include="Models\NotificationLogsResponse.cs" />
     <Compile Include="Models\NotificationTemplateUpdateRequest.cs" />
@@ -85,8 +88,10 @@
     <Compile Include="Services\Charges.cs" />
     <Compile Include="Services\Config.cs" />
     <Compile Include="Services\Customers.cs" />
+    <Compile Include="Services\Gateways.cs" />
     <Compile Include="Services\ICharges.cs" />
     <Compile Include="Services\ICustomers.cs" />
+    <Compile Include="Services\INotifications.cs" />
     <Compile Include="Services\ISubscriptions.cs" />
     <Compile Include="Services\Notifications.cs" />
     <Compile Include="Services\Subscriptions.cs" />
