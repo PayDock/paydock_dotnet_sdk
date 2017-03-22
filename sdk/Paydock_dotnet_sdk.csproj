@@ -51,7 +51,10 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerItemResponse.cs" />
     <Compile Include="Models\CustomerItemsResponse.cs" />
+    <Compile Include="Models\GatewayData.cs" />
+    <Compile Include="Models\GatewayItemsResponse.cs" />
     <Compile Include="Models\GatewayItemResponse.cs" />
+    <Compile Include="Models\GatewayUpdateRequest.cs" />
     <Compile Include="Models\GatewayRequest.cs" />
     <Compile Include="Models\GatewayResponse.cs" />
     <Compile Include="Models\NotificationLogRequest.cs" />
