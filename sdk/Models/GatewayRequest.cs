@@ -10,6 +10,5 @@
         public string merchant { get; set; }
         public string key { get; set; }
         public string signature { get; set; }
-        // TODO: fix the payway gateway implementation
     }
 }

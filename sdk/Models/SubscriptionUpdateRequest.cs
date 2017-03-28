@@ -7,6 +7,7 @@
         public string currency { get; set; }
         public string reference { get; set; }
         public string description { get; set; }
+        public string payment_source_id { get; set; }
         public SubscriptionSchedule schedule { get; set; }
     }
 }
