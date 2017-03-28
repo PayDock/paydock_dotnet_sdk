@@ -10,8 +10,8 @@ namespace Paydock_dotnet_sdk.Models
         public string name { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        // TODO: populate additional response parameters, there should be more for other gateways
         public string _id { get; set; }
         public string mode { get; set; }
+        public int active_subscriptions { get; set; }
     }
 }
