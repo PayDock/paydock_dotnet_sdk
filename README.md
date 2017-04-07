@@ -69,7 +69,7 @@ try
     var result = Customers().Add(request);
 
     if (!result.IsSuccess) {
-        // handle failed payment
+        // handle failure to create customer
     }
 }
 catch (ResponseException ex)
