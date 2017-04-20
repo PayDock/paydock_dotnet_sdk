@@ -29,5 +29,6 @@ namespace Paydock_dotnet_sdk.Models
         public string account_routing { get; set; }
         public string account_holder_type { get; set; }
         public string account_bank_name { get; set; }
+        public string checkout_token { get; set; }
     }
 }
