@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="NotificationServiceTests.cs" />
     <Compile Include="GatewayServiceTests.cs" />
+    <Compile Include="ExternalCheckoutServiceTests.cs" />
     <Compile Include="TokenServiceTests.cs" />
     <Compile Include="SubscriptionServiceTests.cs" />
     <Compile Include="CustomerServiceTests.cs" />

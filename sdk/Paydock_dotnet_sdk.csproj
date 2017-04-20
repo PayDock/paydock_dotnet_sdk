@@ -51,6 +51,8 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerItemResponse.cs" />
     <Compile Include="Models\CustomerItemsResponse.cs" />
+    <Compile Include="Models\ExternalCheckoutResponse.cs" />
+    <Compile Include="Models\ExternalCheckoutRequest.cs" />
     <Compile Include="Models\GatewayData.cs" />
     <Compile Include="Models\GatewayItemsResponse.cs" />
     <Compile Include="Models\GatewayItemResponse.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Services\ISubscriptions.cs" />
     <Compile Include="Services\Notifications.cs" />
     <Compile Include="Services\Subscriptions.cs" />
+    <Compile Include="Services\ExternalCheckout.cs" />
     <Compile Include="Services\Tokens.cs" />
     <Compile Include="Tools\IServiceHelper.cs" />
     <Compile Include="Tools\RequiresConfigAttribute.cs" />

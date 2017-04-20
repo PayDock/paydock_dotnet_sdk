@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using Paydock_dotnet_sdk.Services;
 using Paydock_dotnet_sdk.Models;
-using System;
-using System.Linq;
 
 namespace FunctionalTests
 {

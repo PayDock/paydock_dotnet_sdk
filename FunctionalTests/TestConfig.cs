@@ -6,6 +6,7 @@ namespace FunctionalTests
     {
         public const string SecretKey = "";
         public const string GatewayId = "";
+        public const string PaypalGatewayId = "";
         public const string PublicKey = "";
 
         public static void Init()
