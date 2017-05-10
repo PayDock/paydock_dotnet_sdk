@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>PaydockSdk</id>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <authors>Paydock</authors>
     <owners>Paydock</owners>
     <licenseUrl>https://github.com/PayDockDev/paydock_dotnet_sdk/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/paydockdev</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net SDK</description>
-    <releaseNotes>1.1.1 release of SDK, fixed missing parameter for Paypal checkout.</releaseNotes>
+    <releaseNotes>1.1.2 added mappings for missing payment information.</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags></tags>
     <dependencies>
