@@ -45,7 +45,6 @@ namespace Paydock_dotnet_sdk.Models
             public string gateway_name { get; set; }
             public string gateway_type { get; set; }
             public string gateway_mode { get; set; }
-            public DateTime updated_at { get; set; }
             public string address_line1 { get; set; }
             public string address_line2 { get; set; }
             public string address_city { get; set; }
@@ -53,12 +52,19 @@ namespace Paydock_dotnet_sdk.Models
             public string address_country { get; set; }
             public string address_postcode { get; set; }
             public string gateway_id { get; set; }
+            public string card_scheme { get; set; }
+            public string card_number_last4 { get; set; }
+            public string card_name { get; set; }
+            public string expire_year { get; set; }
+            public string expire_month { get; set; }
+            public string vault_token { get; set; }
             public string account_name { get; set; }
             public int account_bsb { get; set; }
             public string account_number { get; set; }
             public string ref_token { get; set; }
             public string status { get; set; }
             public DateTime created_at { get; set; }
+            public DateTime updated_at { get; set; }
             public string _id { get; set; }
             public string type { get; set; }
         }

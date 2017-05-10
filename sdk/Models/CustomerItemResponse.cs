@@ -49,6 +49,13 @@ namespace Paydock_dotnet_sdk.Models
             public int expire_year { get; set; }
             public string card_number_last4 { get; set; }
             public string card_scheme { get; set; }
+            public string account_name { get; set; }
+            public string account_number { get; set; }
+            public string account_bsb { get; set; }
+            public string account_routing { get; set; }
+            public string account_type { get; set; }
+            public string account_holder_type { get; set; }
+            public string account_bank_name { get; set; }
             public string ref_token { get; set; }
             public string status { get; set; }
             public DateTime created_at { get; set; }

@@ -33,7 +33,7 @@ namespace Paydock_dotnet_sdk.Models
 
         public class Statistics
         {
-            public int total_collected_amount { get; set; }
+            public decimal total_collected_amount { get; set; }
             public int successful_transactions { get; set; }
         }
         
