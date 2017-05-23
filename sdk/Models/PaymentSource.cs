@@ -7,7 +7,8 @@ namespace Paydock_dotnet_sdk.Models
     {
         card,
         bank_account,
-        bsb
+        bsb,
+        checkout_token
     }
 
     public class PaymentSource
