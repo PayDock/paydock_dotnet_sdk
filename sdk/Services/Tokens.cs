@@ -37,7 +37,7 @@ namespace Paydock_dotnet_sdk.Services
         public TokenResponse Create(TokenRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("payment_sources/tokens?public_key=" + Uri.EscapeUriString(Config.PublicKey), HttpMethod.POST, requestData);
+            var responseJson = _serviceHelper.CallPaydock("payment_sources/tokens?public_key=" + Uri.EscapeUriString(Config.PublicKey), HttpMethod.POST, requestData, true, null);
 
             var response = (TokenResponse)JsonConvert.DeserializeObject(responseJson, typeof(TokenResponse));
             response.JsonResponse = responseJson;

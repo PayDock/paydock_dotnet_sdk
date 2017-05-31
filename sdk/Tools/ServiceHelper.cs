@@ -32,7 +32,6 @@ namespace Paydock_dotnet_sdk.Tools
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             ServicePointManager.DefaultConnectionLimit = 9999;
         }
-
         /// <summary>
         /// Call the API, throws ResponseException on any errors
         /// </summary>
@@ -42,20 +41,36 @@ namespace Paydock_dotnet_sdk.Tools
         /// <returns>the response string</returns>
         public string CallPaydock(string endpoint, HttpMethod method, string json)
         {
+            return CallPaydock(endpoint, method, json, false, null);
+        }
+
+        /// <summary>
+        /// Call the API, throws ResponseException on any errors
+        /// </summary>
+        /// <param name="url">relative URL to call (eg charge or notification/templates)</param>
+        /// <param name="method">HTTP method to call</param>
+        /// <param name="json">Data to send, will be ignored for some HTTP methods</param>
+        /// <param name="excludeSecretKey">Don't send secret key with the request</param>
+        /// <param name="overrideConfigSecretKey">Use a custom secret key rather than the value in shared config</param>
+        /// <returns>the response string</returns>
+        public string CallPaydock(string endpoint, HttpMethod method, string json, bool excludeSecretKey, string overrideConfigSecretKey)
+        {
             var url = Config.BaseUrl() + endpoint;
             var request = HttpWebRequest.Create((string)url);
 
             request.ContentType = "application/json";
-            request.Headers.Add("x-user-secret-key", Config.SecretKey);
+            if (excludeSecretKey)
+            {
+                if (string.IsNullOrEmpty(overrideConfigSecretKey))
+                    request.Headers.Add("x-user-secret-key", Config.SecretKey);
+                else
+                    request.Headers.Add("x-user-secret-key", overrideConfigSecretKey);
+            }
+
             request.Method = method.ToString();
 
             string result = "";
-
-            var webRequest = WebRequest.Create((string)url);
-            webRequest.Method = method.ToString();
-            webRequest.ContentType = "application/json";
-            webRequest.Headers.Add("x-user-secret-key", Config.SecretKey);
-
+            
             if (method == HttpMethod.POST || method == HttpMethod.PUT)
             {
                 using (var stream = request.GetRequestStream())

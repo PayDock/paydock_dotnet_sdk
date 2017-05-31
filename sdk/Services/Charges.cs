@@ -77,6 +77,7 @@ namespace Paydock_dotnet_sdk.Services
             url = url.AppendParameter("search", request.search);
             url = url.AppendParameter("status", request.status);
             url = url.AppendParameter("archived", request.archived);
+            url = url.AppendParameter("transaction_external_id", request.transaction_external_id);
 
             var response = _serviceHelper.CallPaydock(url, HttpMethod.GET, "");
 
