@@ -77,3 +77,43 @@ catch (ResponseException ex)
     // handle possible error
 }
 ```
+
+# Use a different config token per request
+
+In most cases, you'll be looking to use just one PayDock Account. However we support using multiple PayDock account, choosing which one you use when create the service classes.
+
+
+``` C#
+var charge = new ChargeRequest
+{
+    amount = amount,
+    currency = "AUD",
+    customer = new Paydock_dotnet_sdk.Models.Customer
+    {
+        email = customerEmail,
+        payment_source = new PaymentSource
+        {
+            gateway_id = "<your gateway id here>",
+            card_name = "Test Name",
+            card_number = "4111111111111111",
+            card_ccv = "123",
+            expire_month = "10",
+            expire_year = "2020"
+        }
+    }
+};
+
+try
+{
+    Config.Initialise(Environment.Sandbox, "<this is the default secret key>", "<your public key here>");
+    var result = new Charges("<this is a different secret key>").Add(charge);
+
+    if (!result.IsSuccess) {
+        // handle failed payment
+    }
+}
+catch (ResponseException ex)
+{
+    // handle possible error
+}
+```
