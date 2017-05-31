@@ -32,17 +32,7 @@ namespace Paydock_dotnet_sdk.Tools
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             ServicePointManager.DefaultConnectionLimit = 9999;
         }
-        /// <summary>
-        /// Call the API, throws ResponseException on any errors
-        /// </summary>
-        /// <param name="url">relative URL to call (eg charge or notification/templates)</param>
-        /// <param name="method">HTTP method to call</param>
-        /// <param name="json">Data to send, will be ignored for some HTTP methods</param>
-        /// <returns>the response string</returns>
-        public string CallPaydock(string endpoint, HttpMethod method, string json)
-        {
-            return CallPaydock(endpoint, method, json, false, null);
-        }
+
 
         /// <summary>
         /// Call the API, throws ResponseException on any errors
@@ -50,10 +40,10 @@ namespace Paydock_dotnet_sdk.Tools
         /// <param name="url">relative URL to call (eg charge or notification/templates)</param>
         /// <param name="method">HTTP method to call</param>
         /// <param name="json">Data to send, will be ignored for some HTTP methods</param>
-        /// <param name="excludeSecretKey">Don't send secret key with the request</param>
-        /// <param name="overrideConfigSecretKey">Use a custom secret key rather than the value in shared config</param>
+        /// <param name="excludeSecretKey">Don't send secret key with the request, defaults to false</param>
+        /// <param name="overrideConfigSecretKey">Use a custom secret key rather than the value in shared config, defaults to null</param>
         /// <returns>the response string</returns>
-        public string CallPaydock(string endpoint, HttpMethod method, string json, bool excludeSecretKey, string overrideConfigSecretKey)
+        public string CallPaydock(string endpoint, HttpMethod method, string json, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
         {
             var url = Config.BaseUrl() + endpoint;
             var request = HttpWebRequest.Create((string)url);

@@ -2,9 +2,6 @@
 using Paydock_dotnet_sdk.Models;
 using Paydock_dotnet_sdk.Tools;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Paydock_dotnet_sdk.Services
 {
@@ -37,7 +34,7 @@ namespace Paydock_dotnet_sdk.Services
         public TokenResponse Create(TokenRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("payment_sources/tokens?public_key=" + Uri.EscapeUriString(Config.PublicKey), HttpMethod.POST, requestData, true, null);
+            var responseJson = _serviceHelper.CallPaydock("payment_sources/tokens?public_key=" + Uri.EscapeUriString(Config.PublicKey), HttpMethod.POST, requestData, excludeSecretKey: true);
 
             var response = (TokenResponse)JsonConvert.DeserializeObject(responseJson, typeof(TokenResponse));
             response.JsonResponse = responseJson;
