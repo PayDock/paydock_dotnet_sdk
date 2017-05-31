@@ -13,18 +13,7 @@ namespace FunctionalTests
             TestConfig.Init();
         }
 
-        [Test]
-        public void CreateGateway()
-        {
-            var result = AddGateway();
-
-            Assert.IsTrue(result.IsSuccess);
-
-            // clean up
-            new Gateways().Delete(result.resource.data._id);
-        }
-
-        private GatewayResponse AddGateway()
+        private GatewayResponse AddGateway(string overideSecretKey = null)
         {
             var request = new GatewayRequest
             {
@@ -35,35 +24,70 @@ namespace FunctionalTests
                 password = "c865e194d750148b93284c0c026e5f2a"
             };
 
-            return new Gateways().Add(request);
+            if (overideSecretKey != null)
+                return new Gateways(overideSecretKey).Add(request);
+            else
+                return new Gateways().Add(request);
         }
 
-        [Test]
-        public void GetGateway()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void CreateGateway(string overideSecretKey)
         {
-            var result = new Gateways().Get(TestConfig.GatewayId);
+            var result = AddGateway(overideSecretKey);
+
+            Assert.IsTrue(result.IsSuccess);
+
+            // clean up
+            new Gateways().Delete(result.resource.data._id);
+        }
+
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetGateway(string overideSecretKey)
+        {
+            GatewayItemResponse result;
+            if (overideSecretKey != null)
+                result = new Gateways(overideSecretKey).Get(TestConfig.GatewayId);
+            else
+                result = new Gateways().Get(TestConfig.GatewayId);
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void Delete()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void Delete(string overideSecretKey)
         {
-            var newGateway = AddGateway();
-            var result = new Gateways().Delete(newGateway.resource.data._id);
+            var newGateway = AddGateway(overideSecretKey);
+            GatewayItemResponse result;
+
+            if (overideSecretKey != null)
+                result = new Gateways(overideSecretKey).Delete(newGateway.resource.data._id);
+            else
+                result = new Gateways().Delete(newGateway.resource.data._id);
+
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void Get()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void Get(string overideSecretKey)
         {
-            var result = new Gateways().Get();
+            GatewayItemsResponse result;
+
+            if (overideSecretKey != null)
+                result = new Gateways(overideSecretKey).Get();
+            else
+                result = new Gateways().Get();
+
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void Update()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void Update(string overideSecretKey)
         {
-            var newGateway = AddGateway();
+            var newGateway = AddGateway(overideSecretKey);
             var request = new GatewayUpdateRequest
             {
                 _id = newGateway.resource.data._id,
@@ -74,11 +98,18 @@ namespace FunctionalTests
                 password = "c865e194d750148b93284c0c026e5f2a"
             };
 
-            var result = new Gateways().Update(request);
+            GatewayItemResponse result;
+            if (overideSecretKey != null)
+                result = new Gateways(overideSecretKey).Update(request);
+            else
+                result = new Gateways().Update(request);
             Assert.IsTrue(result.IsSuccess);
 
             // clean up
-            new Gateways().Delete(newGateway.resource.data._id);
+            if (overideSecretKey != null)
+                new Gateways(overideSecretKey).Delete(newGateway.resource.data._id);
+            else
+                new Gateways().Delete(newGateway.resource.data._id);
         }
     }
 }

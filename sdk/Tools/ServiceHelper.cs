@@ -49,7 +49,7 @@ namespace Paydock_dotnet_sdk.Tools
             var request = HttpWebRequest.Create((string)url);
 
             request.ContentType = "application/json";
-            if (excludeSecretKey)
+            if (!excludeSecretKey)
             {
                 if (string.IsNullOrEmpty(overrideConfigSecretKey))
                     request.Headers.Add("x-user-secret-key", Config.SecretKey);

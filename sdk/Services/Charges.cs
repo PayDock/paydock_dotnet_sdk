@@ -11,21 +11,27 @@ namespace Paydock_dotnet_sdk.Services
     public class Charges : ICharges
     {
         protected IServiceHelper _serviceHelper;
-        
+        protected string _overrideConfigSecretKey = null;
+
         /// <summary>
         /// Service locator style constructor
+        /// <param name="overrideConfigSecretKey">Use a custom secret key rather than the value in shared config, defaults to null</param>
         /// </summary>
-        public Charges()
+        public Charges(string overrideConfigSecretKey = null)
         {
             _serviceHelper = new ServiceHelper();
+            _overrideConfigSecretKey = overrideConfigSecretKey;
         }
 
         /// <summary>
         /// Dependency injection constructor to enable testing
+        /// <param name="serviceHelper">Service helper class to perform HTTP requests</param>
+        /// <param name="overrideConfigSecretKey">Use a custom secret key rather than the value in shared config, defaults to null</param>
         /// </summary>
-        public Charges(IServiceHelper serviceHelper)
+        public Charges(IServiceHelper serviceHelper, string overrideConfigSecretKey = null)
         {
             _serviceHelper = serviceHelper;
+            _overrideConfigSecretKey = overrideConfigSecretKey;
         }
 
         /// <summary>
@@ -37,7 +43,7 @@ namespace Paydock_dotnet_sdk.Services
         public ChargeResponse Add(ChargeRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("charges", HttpMethod.POST, requestData);
+            var responseJson = _serviceHelper.CallPaydock("charges", HttpMethod.POST, requestData, overrideConfigSecretKey :_overrideConfigSecretKey);
 
             var response = (ChargeResponse) JsonConvert.DeserializeObject(responseJson, typeof(ChargeResponse));
             response.JsonResponse = responseJson;
@@ -51,7 +57,7 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public ChargeItemsResponse Get()
         {
-            var responseJson = _serviceHelper.CallPaydock("charges", HttpMethod.GET, "");
+            var responseJson = _serviceHelper.CallPaydock("charges", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (ChargeItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeItemsResponse));
             response.JsonResponse = responseJson;
@@ -79,7 +85,7 @@ namespace Paydock_dotnet_sdk.Services
             url = url.AppendParameter("archived", request.archived);
             url = url.AppendParameter("transaction_external_id", request.transaction_external_id);
 
-            var response = _serviceHelper.CallPaydock(url, HttpMethod.GET, "");
+            var response = _serviceHelper.CallPaydock(url, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             return (ChargeItemsResponse)JsonConvert.DeserializeObject(response, typeof(ChargeItemsResponse));
         }
@@ -93,7 +99,7 @@ namespace Paydock_dotnet_sdk.Services
         public ChargeItemResponse Get(string chargeId)
         {
             chargeId = Uri.EscapeUriString(chargeId);
-            var responseJson = _serviceHelper.CallPaydock("charges/" + chargeId, HttpMethod.GET, "");
+            var responseJson = _serviceHelper.CallPaydock("charges/" + chargeId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (ChargeItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeItemResponse));
             response.JsonResponse = responseJson;
@@ -111,7 +117,7 @@ namespace Paydock_dotnet_sdk.Services
         {
             chargeId = Uri.EscapeUriString(chargeId);
             var json = string.Format("{{\"amount\" : \"{0}\"}}", amount);
-            var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}/refunds", chargeId), HttpMethod.POST, json);
+            var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}/refunds", chargeId), HttpMethod.POST, json, overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (ChargeRefundResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeRefundResponse));
             response.JsonResponse = responseJson;
@@ -127,7 +133,7 @@ namespace Paydock_dotnet_sdk.Services
         public ChargeRefundResponse Archive(string chargeId)
         {
             chargeId = Uri.EscapeUriString(chargeId);
-            var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}", chargeId), HttpMethod.DELETE, "");
+            var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}", chargeId), HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (ChargeRefundResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeRefundResponse));
             response.JsonResponse = responseJson;

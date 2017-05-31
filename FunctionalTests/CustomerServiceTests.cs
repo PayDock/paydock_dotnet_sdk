@@ -15,15 +15,7 @@ namespace FunctionalTests
             TestConfig.Init();
         }
 
-        [Test]
-        public void CreateCustomerWithCreditCard()
-        {
-            var result = CreateBasicCustomer();
-
-            Assert.IsTrue(result.IsSuccess);
-        }
-
-        private CustomerResponse CreateBasicCustomer(string email = "")
+        private CustomerResponse CreateBasicCustomer(string email = "", string overideSecretKey = null)
         {
             var request = new CustomerRequest
             {
@@ -41,43 +33,76 @@ namespace FunctionalTests
                 }
             };
 
-            return new Customers().Add(request);
+
+            if (overideSecretKey != null)
+                return new Customers(overideSecretKey).Add(request);
+            else
+                return new Customers().Add(request);
         }
 
-        [Test]
-        public void GetCustomers()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void CreateCustomerWithCreditCard(string overideSecretKey)
         {
-            var result = new Customers().Get();
+            var result = CreateBasicCustomer(overideSecretKey: overideSecretKey);
 
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void GetCustomersWithSearch()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetCustomers(string overideSecretKey)
+        {
+            CustomerItemsResponse result;
+            if (overideSecretKey != null)
+                result = new Customers(overideSecretKey).Get();
+            else
+                result = new Customers().Get();
+
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetCustomersWithSearch(string overideSecretKey)
         {
             var email = Guid.NewGuid().ToString() + "@email.com";
-            var customer = CreateBasicCustomer(email);
-            var result = new Customers().Get(new CustomerSearchRequest { search = email });
+            var customer = CreateBasicCustomer(email, overideSecretKey: overideSecretKey);
+            CustomerItemsResponse result;
+            if (overideSecretKey != null)
+                result = new Customers(overideSecretKey).Get(new CustomerSearchRequest { search = email });
+            else
+                result = new Customers().Get(new CustomerSearchRequest { search = email });
 
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual(1, result.resource.data.Count());
         }
 
-        [Test]
-        public void GetSingleCustomer()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetSingleCustomer(string overideSecretKey)
         {
-            var customer = CreateBasicCustomer();
-            var result = new Customers().Get(customer.resource.data._id);
+            var customer = CreateBasicCustomer(overideSecretKey: overideSecretKey);
+            CustomerItemResponse result;
+            if (overideSecretKey != null)
+                result = new Customers(overideSecretKey).Get(customer.resource.data._id);
+            else
+                result = new Customers().Get(customer.resource.data._id);
 
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void GetSingleCustomerWithInvalidId()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetSingleCustomerWithInvalidId(string overideSecretKey)
         {
             try
             {
-                var result = new Customers().Get("invalid_id_string");
+                CustomerItemResponse result;
+                if (overideSecretKey != null)
+                    result = new Customers(overideSecretKey).Get("invalid_id_string");
+                else
+                    result = new Customers().Get("invalid_id_string");
             }
             catch (ResponseException ex)
             {
@@ -87,11 +112,16 @@ namespace FunctionalTests
             Assert.Fail();
         }
 
-        [Test]
-        public void UpdateCustomer()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void UpdateCustomer(string overideSecretKey)
         {
-            var customer = CreateBasicCustomer();
-            var getCustomer = new Customers().Get(customer.resource.data._id);
+            var customer = CreateBasicCustomer(overideSecretKey: overideSecretKey);
+            CustomerItemResponse getCustomer;
+            if (overideSecretKey != null)
+                getCustomer = new Customers(overideSecretKey).Get(customer.resource.data._id);
+            else
+                getCustomer = new Customers().Get(customer.resource.data._id);
 
             var request = new CustomerUpdateRequest
             {
@@ -109,15 +139,24 @@ namespace FunctionalTests
                 }
             };
 
-            var result = new Customers().Update(request);
+            CustomerItemResponse result;
+            if (overideSecretKey != null)
+                result = new Customers(overideSecretKey).Update(request);
+            else
+                result = new Customers().Update(request);
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void DeleteCustomer()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void DeleteCustomer(string overideSecretKey)
         {
-            var customer = CreateBasicCustomer();
-            var result = new Customers().Delete(customer.resource.data._id);
+            var customer = CreateBasicCustomer(overideSecretKey: overideSecretKey);
+            CustomerItemResponse result;
+            if (overideSecretKey != null)
+                result = new Customers(overideSecretKey).Delete(customer.resource.data._id);
+            else
+                result = new Customers().Delete(customer.resource.data._id);
             Assert.IsTrue(result.IsSuccess);
         }
     }

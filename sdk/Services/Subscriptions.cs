@@ -7,21 +7,26 @@ namespace Paydock_dotnet_sdk.Services
     public class Subscriptions : ISubscriptions
     {
         protected IServiceHelper _serviceHelper;
+        protected string _overrideConfigSecretKey = null;
 
         /// <summary>
         /// Service locator style constructor
         /// </summary>
-        public Subscriptions()
+        public Subscriptions(string overrideConfigSecretKey = null)
         {
             _serviceHelper = new ServiceHelper();
+            _overrideConfigSecretKey = overrideConfigSecretKey;
         }
 
         /// <summary>
         /// Dependency injection constructor to enable testing
+        /// <param name="serviceHelper">Service helper class to perform HTTP requests</param>
+        /// <param name="overrideConfigSecretKey">Use a custom secret key rather than the value in shared config, defaults to null</param>
         /// </summary>
-        public Subscriptions(IServiceHelper serviceHelper)
+        public Subscriptions(IServiceHelper serviceHelper, string overrideConfigSecretKey = null)
         {
             _serviceHelper = serviceHelper;
+            _overrideConfigSecretKey = overrideConfigSecretKey;
         }
 
         /// <summary>
@@ -33,7 +38,7 @@ namespace Paydock_dotnet_sdk.Services
         public SubscriptionResponse Add(SubscriptionRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("subscriptions", HttpMethod.POST, requestData);
+            var responseJson = _serviceHelper.CallPaydock("subscriptions", HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (SubscriptionResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionResponse));
             response.JsonResponse = responseJson;
@@ -49,7 +54,7 @@ namespace Paydock_dotnet_sdk.Services
         public SubscriptionResponse Update(SubscriptionUpdateRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("subscriptions/" + request._id, HttpMethod.POST, requestData);
+            var responseJson = _serviceHelper.CallPaydock("subscriptions/" + request._id, HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (SubscriptionResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionResponse));
             response.JsonResponse = responseJson;
@@ -63,7 +68,7 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public SubscriptionItemsResponse Get()
         {
-            var responseJson = _serviceHelper.CallPaydock("subscriptions", HttpMethod.GET, "");
+            var responseJson = _serviceHelper.CallPaydock("subscriptions", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (SubscriptionItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemsResponse));
             response.JsonResponse = responseJson;
@@ -88,7 +93,7 @@ namespace Paydock_dotnet_sdk.Services
             url = url.AppendParameter("gateway_id", request.gateway_id);
             url = url.AppendParameter("status", request.status);
 
-            var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "");
+            var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (SubscriptionItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemsResponse));
             response.JsonResponse = responseJson;
@@ -103,7 +108,7 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public SubscriptionItemResponse Get(string subscriptionId)
         {
-            var responseJson = _serviceHelper.CallPaydock("subscriptions/" + subscriptionId, HttpMethod.GET, "");
+            var responseJson = _serviceHelper.CallPaydock("subscriptions/" + subscriptionId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (SubscriptionItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemResponse));
             response.JsonResponse = responseJson;
@@ -117,7 +122,7 @@ namespace Paydock_dotnet_sdk.Services
         /// <returns>information on the subscription</returns>
         public SubscriptionItemResponse Delete(string subscriptionId)
         {
-            var responseJson = _serviceHelper.CallPaydock("subscriptions/" + subscriptionId, HttpMethod.DELETE, "");
+            var responseJson = _serviceHelper.CallPaydock("subscriptions/" + subscriptionId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (SubscriptionItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemResponse));
             response.JsonResponse = responseJson;

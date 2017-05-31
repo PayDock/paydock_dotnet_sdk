@@ -13,8 +13,9 @@ namespace FunctionalTests
             TestConfig.Init();
         }
 
-        [Test]
-        public void CreateToken()
+        [TestCase(TestConfig.OveridePublicKey)]
+        [TestCase(null)]
+        public void CreateToken(string overidePublicKey)
         {
             var request = new TokenRequest
             {
@@ -26,7 +27,11 @@ namespace FunctionalTests
                 expire_year = "2020"
             };
 
-            var result = new Tokens().Create(request);
+            TokenResponse result;
+            if (overidePublicKey != null)
+                result = new Tokens(overidePublicKey).Create(request);
+            else
+                result = new Tokens().Create(request);
 
             Assert.IsTrue(result.IsSuccess);
         }

@@ -15,21 +15,13 @@ namespace FunctionalTests
             TestConfig.Init();
         }
 
-        [Test]
-        public void SimpleCharge()
-        {
-            var result = CreateBasicCharge(10.1M, TestConfig.GatewayId);
-
-            Assert.IsTrue(result.IsSuccess);
-        }
-
-        private ChargeResponse CreateBasicCharge(decimal amount, string gatewayId, string customerEmail = "")
+        private ChargeResponse CreateBasicCharge(decimal amount, string gatewayId, string customerEmail = "", string overideSecretKey = null)
         {
             var charge = new ChargeRequest
             {
                 amount = amount,
                 currency = "AUD",
-                customer = new Paydock_dotnet_sdk.Models.Customer
+                customer = new Customer
                 {
                     email = customerEmail,
                     payment_source = new PaymentSource
@@ -44,42 +36,74 @@ namespace FunctionalTests
                 }
             };
 
-            return new Charges().Add(charge);
+            if (overideSecretKey != null)
+                return new Charges(overideSecretKey).Add(charge);
+            else
+                return new Charges().Add(charge);
         }
 
-
-        [Test]
-        public void GetCharges()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void SimpleCharge(string overideSecretKey)
         {
-            CreateBasicCharge(5, TestConfig.GatewayId);
-            var result = new Charges().Get();
+            var result = CreateBasicCharge(10.1M, TestConfig.GatewayId, overideSecretKey: overideSecretKey);
+
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void GetChargesWithSearch()
+
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetCharges(string overideSecretKey)
+        {
+            CreateBasicCharge(5, TestConfig.GatewayId, overideSecretKey : overideSecretKey);
+            ChargeItemsResponse result;
+            if (overideSecretKey != null)
+                result = new Charges(overideSecretKey).Get();
+            else
+                result = new Charges().Get();
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetChargesWithSearch(string overideSecretKey)
         {
             var reference = Guid.NewGuid().ToString();
-            CreateBasicCharge(6, TestConfig.GatewayId, reference);
-            var result = new Charges().Get(new ChargeSearchRequest { gateway_id = TestConfig.GatewayId, search = reference });
+            CreateBasicCharge(6, TestConfig.GatewayId, reference, overideSecretKey: overideSecretKey);
+            ChargeItemsResponse result;
+            if (overideSecretKey != null)
+                result = new Charges(overideSecretKey).Get(new ChargeSearchRequest { gateway_id = TestConfig.GatewayId, search = reference });
+            else
+                result = new Charges().Get(new ChargeSearchRequest { gateway_id = TestConfig.GatewayId, search = reference });
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual(1, result.resource.data.Count());
         }
 
-        [Test]
-        public void GetSingleCharge()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetSingleCharge(string overideSecretKey)
         {
-            var charge = CreateBasicCharge(6, TestConfig.GatewayId);
-            var result = new Charges().Get(charge.resource.data._id);
+            var charge = CreateBasicCharge(6, TestConfig.GatewayId, overideSecretKey: overideSecretKey);
+            ChargeItemResponse result;
+            if (overideSecretKey != null)
+                result = new Charges(overideSecretKey).Get(charge.resource.data._id);
+            else
+                result = new Charges(overideSecretKey).Get(charge.resource.data._id);
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void GetSingleChargeWithInvalidId()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetSingleChargeWithInvalidId(string overideSecretKey)
         {
             try
             {
-                var result = new Charges().Get("invalid_id_string");
+                ChargeItemResponse result;
+                if (overideSecretKey != null)
+                    result = new Charges(overideSecretKey).Get("invalid_id_string");
+                else
+                    result = new Charges().Get("invalid_id_string");
             }
             catch (ResponseException ex)
             {
@@ -89,21 +113,31 @@ namespace FunctionalTests
             Assert.Fail();
         }
 
-        [Test]
-        public void Refund()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void Refund(string overideSecretKey)
         {
             // NOTE: depending on the gateway, refunds may fail if transactions have not settled
-            var charge = CreateBasicCharge(7, TestConfig.GatewayId);
-            var result = new Charges().Refund(charge.resource.data._id, 7);
+            var charge = CreateBasicCharge(7, TestConfig.GatewayId, overideSecretKey: overideSecretKey);
+            ChargeRefundResponse result;
+            if (overideSecretKey != null)
+                result = new Charges(overideSecretKey).Refund(charge.resource.data._id, 7);
+            else
+                result = new Charges().Refund(charge.resource.data._id, 7);
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
         [Ignore("unable to test this easily with current test gateway")]
-        public void Archive()
+        public void Archive(string overideSecretKey)
         {
-            var charge = CreateBasicCharge(8, TestConfig.GatewayId);
-            var result = new Charges().Archive(charge.resource.data._id);
+            var charge = CreateBasicCharge(8, TestConfig.GatewayId, overideSecretKey: overideSecretKey);
+            ChargeRefundResponse result;
+            if (overideSecretKey != null)
+                result = new Charges(overideSecretKey).Archive(charge.resource.data._id);
+            else
+                result = new Charges().Archive(charge.resource.data._id);
             Assert.IsTrue(result.IsSuccess);
         }
     }

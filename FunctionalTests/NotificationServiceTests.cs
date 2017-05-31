@@ -15,14 +15,7 @@ namespace FunctionalTests
             TestConfig.Init();
         }
 
-        [Test]
-        public void AddTemplate()
-        {
-            var result = CreateBasicNotificationTemplate();
-            Assert.IsTrue(result.IsSuccess);
-        }
-
-        private NotificationTemplateResponse CreateBasicNotificationTemplate()
+        private NotificationTemplateResponse CreateBasicNotificationTemplate(string overideSecretKey = null)
         {
             var template = new NotificationTemplateRequest
             {
@@ -31,14 +24,40 @@ namespace FunctionalTests
                 notification_event = NotificationEvent.card_expiration_warning,
                 html = true
             };
-            var result = new Notifications().AddTemplate(template);
-            return result;
+            if (overideSecretKey != null)
+                return new Notifications(overideSecretKey).AddTemplate(template);
+            else
+                return new Notifications().AddTemplate(template);
         }
 
-        [Test]
-        public void UpdateTemplate()
+        private NotificationTriggerResponse CreateBasicNotificationTrigger(string templateId, string overideSecretKey = null)
         {
-            var template = CreateBasicNotificationTemplate();
+            var template = new NotificationTriggerRequest
+            {
+                type = NotificationTriggerType.email,
+                destination = "email@email.com",
+                template_id = templateId,
+                eventTrigger = NotificationEvent.card_expiration_warning
+            };
+            if (overideSecretKey != null)
+                return new Notifications(overideSecretKey).AddTrigger(template);
+            else
+                return new Notifications().AddTrigger(template);
+        }
+
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void AddTemplate(string overideSecretKey)
+        {
+            var result = CreateBasicNotificationTemplate(overideSecretKey);
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void UpdateTemplate(string overideSecretKey)
+        {
+            var template = CreateBasicNotificationTemplate(overideSecretKey);
 
             var updateTemplate = new NotificationTemplateUpdateRequest
             {
@@ -49,80 +68,94 @@ namespace FunctionalTests
                 html = true
             };
 
-            var result = new Notifications().UpdateTemplate(updateTemplate);
+            NotificationTemplateResponse result;
+            if (overideSecretKey != null)
+                result = new Notifications(overideSecretKey).UpdateTemplate(updateTemplate);
+            else
+                result = new Notifications().UpdateTemplate(updateTemplate);
             Assert.AreEqual(updateTemplate.body, result.resource.data.body);
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void DeleteTemplate()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void DeleteTemplate(string overideSecretKey)
         {
-            var template = CreateBasicNotificationTemplate();
+            var template = CreateBasicNotificationTemplate(overideSecretKey);
 
-            var result = new Notifications().DeleteTemplate(template.resource.data._id);
+            NotificationTemplateResponse result;
+            if (overideSecretKey != null)
+                result = new Notifications(overideSecretKey).DeleteTemplate(template.resource.data._id);
+            else
+                result = new Notifications().DeleteTemplate(template.resource.data._id);
             Assert.IsTrue(result.IsSuccess);
         }
 
-        private NotificationTriggerResponse CreateBasicNotificationTrigger(string templateId)
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void AddTrigger(string overideSecretKey)
         {
-            var template = new NotificationTriggerRequest
-            {
-                type = NotificationTriggerType.email,
-                destination = "email@email.com",
-                template_id = templateId,
-                eventTrigger = NotificationEvent.card_expiration_warning
-            };
-            var result = new Notifications().AddTrigger(template);
-            return result;
-        }
-
-        [Test]
-        public void AddTrigger()
-        {
-            var template = CreateBasicNotificationTemplate();
-            var result = CreateBasicNotificationTrigger(template.resource.data._id);
+            var template = CreateBasicNotificationTemplate(overideSecretKey);
+            var result = CreateBasicNotificationTrigger(template.resource.data._id, overideSecretKey);
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void GetTriggers()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetTriggers(string overideSecretKey)
         {
-            var template = CreateBasicNotificationTemplate();
-            var trigger = CreateBasicNotificationTrigger(template.resource.data._id);
-            var result = new Notifications().GetTriggers();
+            var template = CreateBasicNotificationTemplate(overideSecretKey);
+            var trigger = CreateBasicNotificationTrigger(template.resource.data._id, overideSecretKey);
+            NotificationTriggerItemsResponse result;
+            if (overideSecretKey != null)
+                result = new Notifications(overideSecretKey).GetTriggers();
+            else
+                result = new Notifications().GetTriggers();
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void GetSingleTrigger()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetSingleTrigger(string overideSecretKey)
         {
-            var template = CreateBasicNotificationTemplate();
-            var trigger = CreateBasicNotificationTrigger(template.resource.data._id);
-            var result = new Notifications().GetTrigger(trigger.resource.data._id);
+            var template = CreateBasicNotificationTemplate(overideSecretKey);
+            var trigger = CreateBasicNotificationTrigger(template.resource.data._id, overideSecretKey);
+            NotificationTriggerResponse result;
+            if (overideSecretKey != null)
+                result = new Notifications(overideSecretKey).GetTrigger(trigger.resource.data._id);
+            else
+                result = new Notifications().GetTrigger(trigger.resource.data._id);
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void DeleteTrigger()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void DeleteTrigger(string overideSecretKey)
         {
-            var template = CreateBasicNotificationTemplate();
-            var trigger = CreateBasicNotificationTrigger(template.resource.data._id);
-            var result = new Notifications().DeleteTrigger(trigger.resource.data._id);
+            var template = CreateBasicNotificationTemplate(overideSecretKey);
+            var trigger = CreateBasicNotificationTrigger(template.resource.data._id, overideSecretKey);
+            NotificationTriggerResponse result;
+            if (overideSecretKey != null)
+                result = new Notifications(overideSecretKey).DeleteTrigger(trigger.resource.data._id);
+            else
+                result = new Notifications().DeleteTrigger(trigger.resource.data._id);
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void GetLogs()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetLogs(string overideSecretKey)
         {
-            var result = new Notifications().GetLogs(new NotificationLogRequest());
+            var result = new Notifications(overideSecretKey).GetLogs(new NotificationLogRequest());
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [Test]
-        public void DeleteLog()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void DeleteLog(string overideSecretKey)
         {
-            var logs = new Notifications().GetLogs(new NotificationLogRequest());
-            var result = new Notifications().DeleteLog(logs.resource.data.First()._id);
+            var logs = new Notifications(overideSecretKey).GetLogs(new NotificationLogRequest());
+            var result = new Notifications(overideSecretKey).DeleteLog(logs.resource.data.First()._id);
             Assert.IsTrue(result.IsSuccess);
         }
     }

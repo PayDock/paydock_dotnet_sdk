@@ -8,21 +8,26 @@ namespace Paydock_dotnet_sdk.Services
     public class Tokens
     {
         protected IServiceHelper _serviceHelper;
+        protected string _overrideConfigPublicKey = null;
 
         /// <summary>
         /// Service locator style constructor
         /// </summary>
-        public Tokens()
+        public Tokens(string overrideConfigPublicKey = null)
         {
             _serviceHelper = new ServiceHelper();
+            _overrideConfigPublicKey = overrideConfigPublicKey;
         }
 
         /// <summary>
         /// Dependency injection constructor to enable testing
+        /// <param name="serviceHelper">Service helper class to perform HTTP requests</param>
+        /// <param name="overrideConfigSecretKey">Use a custom public key rather than the value in shared config, defaults to null</param>
         /// </summary>
-        public Tokens(IServiceHelper serviceHelper)
+        public Tokens(IServiceHelper serviceHelper, string overrideConfigPublicKey = null)
         {
             _serviceHelper = serviceHelper;
+            _overrideConfigPublicKey = overrideConfigPublicKey;
         }
 
         /// <summary>
@@ -34,7 +39,7 @@ namespace Paydock_dotnet_sdk.Services
         public TokenResponse Create(TokenRequest request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("payment_sources/tokens?public_key=" + Uri.EscapeUriString(Config.PublicKey), HttpMethod.POST, requestData, excludeSecretKey: true);
+            var responseJson = _serviceHelper.CallPaydock("payment_sources/tokens?public_key=" + Uri.EscapeUriString(Config.PublicKey), HttpMethod.POST, requestData, excludeSecretKey: true, overrideConfigSecretKey: _overrideConfigPublicKey);
 
             var response = (TokenResponse)JsonConvert.DeserializeObject(responseJson, typeof(TokenResponse));
             response.JsonResponse = responseJson;

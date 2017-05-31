@@ -15,15 +15,7 @@ namespace FunctionalTests
             TestConfig.Init();
         }
 
-        [Test]
-        public void CreateSubscription()
-        {
-            var result = CreateBasicSubscription();
-
-            Assert.IsTrue(result.IsSuccess);
-        }
-
-        private SubscriptionResponse CreateBasicSubscription()
+        private SubscriptionResponse CreateBasicSubscription(string overideSecretKey = null)
         {
             var request = new SubscriptionRequest
             {
@@ -52,13 +44,26 @@ namespace FunctionalTests
                 }
             };
 
-            return new Subscriptions().Add(request);
+            if (overideSecretKey != null)
+                return new Subscriptions(overideSecretKey).Add(request);
+            else
+                return new Subscriptions().Add(request);
         }
 
-        [Test]
-        public void UpdateSubscription()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void CreateSubscription(string overideSecretKey)
         {
-            var subscription = CreateBasicSubscription();
+            var result = CreateBasicSubscription(overideSecretKey);
+
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void UpdateSubscription(string overideSecretKey)
+        {
+            var subscription = CreateBasicSubscription(overideSecretKey);
 
             var request = new SubscriptionUpdateRequest
             {
@@ -73,43 +78,69 @@ namespace FunctionalTests
                     start_date = DateTime.Now
                 }
             };
-            var result = new Subscriptions().Update(request);
+
+            SubscriptionResponse result;
+            if (overideSecretKey != null)
+                result = new Subscriptions(overideSecretKey).Update(request);
+            else
+                result = new Subscriptions().Update(request);
 
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual(request.amount, result.resource.data.amount);
             Assert.AreEqual(request.schedule.frequency, result.resource.data.schedule.frequency);
         }
 
-        [Test]
-        public void GetSubscriptions()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetSubscriptions(string overideSecretKey)
         {
-            var subscription = CreateBasicSubscription();
-            var response = new Subscriptions().Get();
+            var subscription = CreateBasicSubscription(overideSecretKey);
+            SubscriptionItemsResponse response;
+            if (overideSecretKey != null)
+                response = new Subscriptions(overideSecretKey).Get();
+            else
+                response = new Subscriptions().Get();
             Assert.IsTrue(response.IsSuccess);
         }
 
-        [Test]
-        public void GetSubscriptionsWithSearch()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetSubscriptionsWithSearch(string overideSecretKey)
         {
-            var subscription = CreateBasicSubscription();
-            var response = new Subscriptions().Get(new SubscriptionSearchRequest { customer_id = subscription.resource.data.customer.customer_id });
+            var subscription = CreateBasicSubscription(overideSecretKey);
+            var request = new SubscriptionSearchRequest { customer_id = subscription.resource.data.customer.customer_id };
+            SubscriptionItemsResponse response;
+            if (overideSecretKey != null)
+                response = new Subscriptions(overideSecretKey).Get(request);
+            else
+                response = new Subscriptions().Get(request);
             Assert.IsTrue(response.IsSuccess);
             Assert.AreEqual(1, response.resource.data.Count());
         }
 
-        [Test]
-        public void GetSingleSubscription()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void GetSingleSubscription(string overideSecretKey)
         {
-            var subscription = CreateBasicSubscription();
-            var response = new Subscriptions().Get(subscription.resource.data._id);
+            var subscription = CreateBasicSubscription(overideSecretKey);
+            SubscriptionItemResponse response;
+            if (overideSecretKey != null)
+                response = new Subscriptions(overideSecretKey).Get(subscription.resource.data._id);
+            else
+                response = new Subscriptions().Get(subscription.resource.data._id);
             Assert.IsTrue(response.IsSuccess);
         }
 
-        [Test]
-        public void DeleteSubscription()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void DeleteSubscription(string overideSecretKey)
         {
-            var subscription = CreateBasicSubscription();
-            var response = new Subscriptions().Delete(subscription.resource.data._id);
+            var subscription = CreateBasicSubscription(overideSecretKey);
+            SubscriptionItemResponse response;
+            if (overideSecretKey != null)
+                response = new Subscriptions(overideSecretKey).Delete(subscription.resource.data._id);
+            else
+                response = new Subscriptions().Delete(subscription.resource.data._id);
             Assert.IsTrue(response.IsSuccess);
         }
     }

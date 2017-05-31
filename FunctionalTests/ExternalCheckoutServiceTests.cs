@@ -12,8 +12,9 @@ namespace FunctionalTests
             TestConfig.Init();
         }
 
-        [Test]
-        public void CreateLink()
+        [TestCase(TestConfig.OverideSecretKey)]
+        [TestCase(null)]
+        public void CreateLink(string overideSecretKey)
         {
             var request = new ExternalCheckoutRequest
             {
@@ -24,7 +25,11 @@ namespace FunctionalTests
                 error_redirect_url = "http://failure.com"
             };
 
-            var result = new ExternalCheckout().Create(request);
+            ExternalCheckoutResponse result;
+            if (overideSecretKey != null)
+                result = new ExternalCheckout(overideSecretKey).Create(request);
+            else
+                result = new ExternalCheckout().Create(request);
 
             Assert.IsTrue(result.IsSuccess);
         }
