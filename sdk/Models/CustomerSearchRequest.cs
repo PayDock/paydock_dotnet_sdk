@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Paydock_dotnet_sdk.Models
+﻿namespace Paydock_dotnet_sdk.Models
 {
     public class CustomerSearchRequest
     {
@@ -11,5 +9,6 @@ namespace Paydock_dotnet_sdk.Models
         public string sortdirection { get; set; }
         public string gateway_id { get; set; }
         public bool? archived { get; set; }
-    }
+		public string reference { get; set; }
+	}
 }

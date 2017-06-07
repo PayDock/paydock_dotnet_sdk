@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>PaydockSdk</id>
-    <version>1.1.4</version>
+    <version>1.1.5</version>
     <authors>Paydock</authors>
     <owners>Paydock</owners>
     <licenseUrl>https://github.com/PayDockDev/paydock_dotnet_sdk/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/paydockdev</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net SDK</description>
-    <releaseNotes>1.1.4 added support for using more than one paydock account at the same time.</releaseNotes>
+    <releaseNotes>1.1.5 added support for querying customer by reference.</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags></tags>
     <dependencies>

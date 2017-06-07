@@ -76,8 +76,9 @@ namespace Paydock_dotnet_sdk.Services
             url = url.AppendParameter("sortdirection", request.sortdirection);
             url = url.AppendParameter("gateway_id", request.gateway_id);
             url = url.AppendParameter("archived", request.archived);
+			url = url.AppendParameter("reference", request.reference);
 
-            var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
+			var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (CustomerItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemsResponse));
             response.JsonResponse = responseJson;
