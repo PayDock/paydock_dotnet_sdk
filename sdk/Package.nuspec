@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>PaydockSdk</id>
-    <version>1.1.6</version>
+    <version>1.1.7</version>
     <authors>Paydock</authors>
     <owners>Paydock</owners>
     <licenseUrl>https://github.com/PayDockDev/paydock_dotnet_sdk/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/paydockdev</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net SDK</description>
-    <releaseNotes>1.1.6 corrected payment and subscription by customer_id</releaseNotes>
+    <releaseNotes>1.1.7 added extra parameter for charge against non-default customer payment source</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags></tags>
     <dependencies>
