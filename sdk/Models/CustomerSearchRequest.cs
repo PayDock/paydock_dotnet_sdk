@@ -10,5 +10,6 @@
         public string gateway_id { get; set; }
         public bool? archived { get; set; }
 		public string reference { get; set; }
+		public string payment_source_id { get; set; }
 	}
 }

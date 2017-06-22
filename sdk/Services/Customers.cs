@@ -77,6 +77,7 @@ namespace Paydock_dotnet_sdk.Services
             url = url.AppendParameter("gateway_id", request.gateway_id);
             url = url.AppendParameter("archived", request.archived);
 			url = url.AppendParameter("reference", request.reference);
+			url = url.AppendParameter("payment_source_id", request.payment_source_id);
 
 			var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
