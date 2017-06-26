@@ -58,8 +58,9 @@ namespace Paydock_dotnet_sdk.Tools
             }
 
             request.Method = method.ToString();
+			request.Timeout = Config.Timeout;
 
-            string result = "";
+			string result = "";
             
             if (method == HttpMethod.POST || method == HttpMethod.PUT)
             {
