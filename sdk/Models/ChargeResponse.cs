@@ -43,7 +43,13 @@ namespace Paydock_dotnet_sdk.Models
         public class Payment_Source
         {
             public string type { get; set; }
-            public string card_name { get; set; }
+			public string account_name { get; set; }
+			public string account_bsb { get; set; }
+			public string account_number { get; set; }
+			public string account_routing { get; set; }
+			public string account_holder_type { get; set; }
+			public string account_bank_name { get; set; }
+			public string card_name { get; set; }
             public string card_number_last4 { get; set; }
             public int expire_month { get; set; }
             public int expire_year { get; set; }
@@ -52,7 +58,9 @@ namespace Paydock_dotnet_sdk.Models
             public string card_scheme { get; set; }
             public string gateway_name { get; set; }
             public string gateway_type { get; set; }
-        }
+			public string checkout_holder { get; set; }
+			public string checkout_email { get; set; }
+		}
 
         public class Transaction
         {
