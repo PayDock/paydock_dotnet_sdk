@@ -8,7 +8,7 @@ namespace Paydock_dotnet_sdk.Models
         card,
         bank_account,
         bsb,
-        checkout_token
+        checkout
     }
 
     public class PaymentSource
@@ -33,5 +33,7 @@ namespace Paydock_dotnet_sdk.Models
         public string address_country { get; set; }
         public string address_city { get; set; }
         public string address_postcode { get; set; }
+		public string checkout_holder { get; set; }
+		public string checkout_email { get; set; }
     }
 }
