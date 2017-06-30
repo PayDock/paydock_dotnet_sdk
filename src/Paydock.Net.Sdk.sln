@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paydock.Net.Sdk", "main\Paydock.Net.Sdk\Paydock.Net.Sdk.csproj", "{9C6EB8BB-36A1-4881-AB5A-BB7D08E6A0C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paydock.Net.Sdk.Functional.Tests", "test\Paydock.Net.Sdk.Functional.Tests\Paydock.Net.Sdk.Functional.Tests.csproj", "{5CEC6144-C1D9-4A3C-AEC1-630D5DD7B3BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paydock.Net.Sdk.Unit.Tests", "test\Paydock.Net.Sdk.Unit.Tests\Paydock.Net.Sdk.Unit.Tests.csproj", "{BE1A7681-C4F8-4CC6-8F1B-B2B4E24B3D3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D963AE60-8F9D-4B7C-988F-DDC52338E50D}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.config = .nuget\NuGet.config
+		.nuget\nuget.exe = .nuget\nuget.exe
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "main", "main", "{419A2F7C-AEE3-4EF0-8507-4E3400D999A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{596474F1-99A4-4EEE-902B-5196FF2CC1C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C6EB8BB-36A1-4881-AB5A-BB7D08E6A0C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C6EB8BB-36A1-4881-AB5A-BB7D08E6A0C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C6EB8BB-36A1-4881-AB5A-BB7D08E6A0C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C6EB8BB-36A1-4881-AB5A-BB7D08E6A0C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CEC6144-C1D9-4A3C-AEC1-630D5DD7B3BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CEC6144-C1D9-4A3C-AEC1-630D5DD7B3BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CEC6144-C1D9-4A3C-AEC1-630D5DD7B3BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CEC6144-C1D9-4A3C-AEC1-630D5DD7B3BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE1A7681-C4F8-4CC6-8F1B-B2B4E24B3D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE1A7681-C4F8-4CC6-8F1B-B2B4E24B3D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE1A7681-C4F8-4CC6-8F1B-B2B4E24B3D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE1A7681-C4F8-4CC6-8F1B-B2B4E24B3D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9C6EB8BB-36A1-4881-AB5A-BB7D08E6A0C9} = {419A2F7C-AEE3-4EF0-8507-4E3400D999A2}
+		{5CEC6144-C1D9-4A3C-AEC1-630D5DD7B3BA} = {596474F1-99A4-4EEE-902B-5196FF2CC1C8}
+		{BE1A7681-C4F8-4CC6-8F1B-B2B4E24B3D3B} = {596474F1-99A4-4EEE-902B-5196FF2CC1C8}
+	EndGlobalSection
+EndGlobal
