@@ -1,4 +1,6 @@
-﻿namespace Paydock_dotnet_sdk.Models
+﻿using System.Collections.Generic;
+
+namespace Paydock_dotnet_sdk.Models
 {
     public class CustomerRequest
     {
@@ -8,6 +10,7 @@
         public string email { get; set; }
         public string phone { get; set; }
         public string reference { get; set; }
-        public PaymentSource payment_source { get; set; }
+		public Dictionary<string, string> meta { get; set; }
+		public PaymentSource payment_source { get; set; }
     }
 }

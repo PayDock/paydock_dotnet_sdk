@@ -14,6 +14,7 @@ namespace Paydock_dotnet_sdk.Models
         public DateTime? end_date { get; set; }
         public decimal? end_amount_after { get; set; }
         public decimal? end_amount_before { get; set; }
-        public int? end_transactions { get; set; }
+		public decimal? end_amount_total { get; set; }
+		public int? end_transactions { get; set; }
     }
 }
