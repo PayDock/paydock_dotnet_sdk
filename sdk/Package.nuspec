@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/paydockdev</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net SDK</description>
-    <releaseNotes>1.1.12 corrected mapping for some fields</releaseNotes>
+    <releaseNotes>1.1.13 added additional response parameter of query token</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags></tags>
     <dependencies>

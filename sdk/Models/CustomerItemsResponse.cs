@@ -10,7 +10,8 @@ namespace Paydock_dotnet_sdk.Models
         {
             public string type { get; set; }
             public Data[] data { get; set; }
-        }
+			public string query_token { get; set; }
+		}
 
         public class Data
         {
