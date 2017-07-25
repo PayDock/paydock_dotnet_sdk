@@ -1,8 +1,9 @@
 ﻿namespace Paydock_dotnet_sdk.Models
 {
     public class CustomerSearchRequest
-    {
-        public int? skip { get; set; }
+	{
+		public int? id { get; set; }
+		public int? skip { get; set; }
         public int? limit { get; set; }
         public string search { get; set; }
         public string sortkey { get; set; }
