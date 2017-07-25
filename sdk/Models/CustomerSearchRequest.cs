@@ -2,7 +2,7 @@
 {
     public class CustomerSearchRequest
 	{
-		public int? id { get; set; }
+		public string id { get; set; }
 		public int? skip { get; set; }
         public int? limit { get; set; }
         public string search { get; set; }
