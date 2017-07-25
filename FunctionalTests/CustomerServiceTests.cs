@@ -76,9 +76,25 @@ namespace FunctionalTests
 
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual(1, result.resource.data.Count());
-        }
+		}
 
-        [TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(null)]
+		public void GetCustomersWithSearchById(string overideSecretKey)
+		{
+			var email = Guid.NewGuid().ToString() + "@email.com";
+			var customer = CreateBasicCustomer(email, overideSecretKey: overideSecretKey);
+			CustomerItemsResponse result;
+			if (overideSecretKey != null)
+				result = new Customers(overideSecretKey).Get(new CustomerSearchRequest { id = customer.resource.data._id });
+			else
+				result = new Customers().Get(new CustomerSearchRequest { id = customer.resource.data._id });
+
+			Assert.IsTrue(result.IsSuccess);
+			Assert.AreEqual(1, result.resource.data.Count());
+		}
+
+		[TestCase(TestConfig.OverideSecretKey)]
         [TestCase(null)]
         public void GetSingleCustomer(string overideSecretKey)
         {

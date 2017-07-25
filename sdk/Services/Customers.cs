@@ -69,7 +69,8 @@ namespace Paydock_dotnet_sdk.Services
         public CustomerItemsResponse Get(CustomerSearchRequest request)
         {
             var url = "customers/";
-            url = url.AppendParameter("skip", request.skip);
+			url = url.AppendParameter("id", request.id);
+			url = url.AppendParameter("skip", request.skip);
             url = url.AppendParameter("limit", request.limit);
             url = url.AppendParameter("search", request.search);
             url = url.AppendParameter("sortkey", request.sortkey);
