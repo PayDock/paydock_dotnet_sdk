@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <ApplicationIcon />
+    <OutputTypeEx>library</OutputTypeEx>
+    <StartupObject />
+    <RootNamespace>Paydock_dotnet_sdk</RootNamespace>
+    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <FileVersion>0.0.1.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\sdk\Models\ChargeItemResponse.cs" Link="Models\ChargeItemResponse.cs" />
+    <Compile Include="..\sdk\Models\ChargeItemsResponse.cs" Link="Models\ChargeItemsResponse.cs" />
+    <Compile Include="..\sdk\Models\ChargeRefundRequest.cs" Link="Models\ChargeRefundRequest.cs" />
+    <Compile Include="..\sdk\Models\ChargeRefundResponse.cs" Link="Models\ChargeRefundResponse.cs" />
+    <Compile Include="..\sdk\Models\ChargeRequest.cs" Link="Models\ChargeRequest.cs" />
+    <Compile Include="..\sdk\Models\ChargeResponse.cs" Link="Models\ChargeResponse.cs" />
+    <Compile Include="..\sdk\Models\ChargeSearchRequest.cs" Link="Models\ChargeSearchRequest.cs" />
+    <Compile Include="..\sdk\Models\Customer.cs" Link="Models\Customer.cs" />
+    <Compile Include="..\sdk\Models\CustomerItemResponse.cs" Link="Models\CustomerItemResponse.cs" />
+    <Compile Include="..\sdk\Models\CustomerItemsResponse.cs" Link="Models\CustomerItemsResponse.cs" />
+    <Compile Include="..\sdk\Models\CustomerRequest.cs" Link="Models\CustomerRequest.cs" />
+    <Compile Include="..\sdk\Models\CustomerResponse.cs" Link="Models\CustomerResponse.cs" />
+    <Compile Include="..\sdk\Models\CustomerSearchRequest.cs" Link="Models\CustomerSearchRequest.cs" />
+    <Compile Include="..\sdk\Models\CustomerUpdateRequest.cs" Link="Models\CustomerUpdateRequest.cs" />
+    <Compile Include="..\sdk\Models\ErrorResponse.cs" Link="Models\ErrorResponse.cs" />
+    <Compile Include="..\sdk\Models\ExternalCheckoutRequest.cs" Link="Models\ExternalCheckoutRequest.cs" />
+    <Compile Include="..\sdk\Models\ExternalCheckoutResponse.cs" Link="Models\ExternalCheckoutResponse.cs" />
+    <Compile Include="..\sdk\Models\GatewayData.cs" Link="Models\GatewayData.cs" />
+    <Compile Include="..\sdk\Models\GatewayItemResponse.cs" Link="Models\GatewayItemResponse.cs" />
+    <Compile Include="..\sdk\Models\GatewayItemsResponse.cs" Link="Models\GatewayItemsResponse.cs" />
+    <Compile Include="..\sdk\Models\GatewayRequest.cs" Link="Models\GatewayRequest.cs" />
+    <Compile Include="..\sdk\Models\GatewayResponse.cs" Link="Models\GatewayResponse.cs" />
+    <Compile Include="..\sdk\Models\GatewayUpdateRequest.cs" Link="Models\GatewayUpdateRequest.cs" />
+    <Compile Include="..\sdk\Models\NotificationLogRequest.cs" Link="Models\NotificationLogRequest.cs" />
+    <Compile Include="..\sdk\Models\NotificationLogsResponse.cs" Link="Models\NotificationLogsResponse.cs" />
+    <Compile Include="..\sdk\Models\NotificationTemplateRequest.cs" Link="Models\NotificationTemplateRequest.cs" />
+    <Compile Include="..\sdk\Models\NotificationTemplateResponse.cs" Link="Models\NotificationTemplateResponse.cs" />
+    <Compile Include="..\sdk\Models\NotificationTemplateUpdateRequest.cs" Link="Models\NotificationTemplateUpdateRequest.cs" />
+    <Compile Include="..\sdk\Models\NotificationTriggerData.cs" Link="Models\NotificationTriggerData.cs" />
+    <Compile Include="..\sdk\Models\NotificationTriggerItemsResponse.cs" Link="Models\NotificationTriggerItemsResponse.cs" />
+    <Compile Include="..\sdk\Models\NotificationTriggerRequest.cs" Link="Models\NotificationTriggerRequest.cs" />
+    <Compile Include="..\sdk\Models\NotificationTriggerResponse.cs" Link="Models\NotificationTriggerResponse.cs" />
+    <Compile Include="..\sdk\Models\PaymentSource.cs" Link="Models\PaymentSource.cs" />
+    <Compile Include="..\sdk\Models\Response.cs" Link="Models\Response.cs" />
+    <Compile Include="..\sdk\Models\ResponseException.cs" Link="Models\ResponseException.cs" />
+    <Compile Include="..\sdk\Models\SubscriptionItemResponse.cs" Link="Models\SubscriptionItemResponse.cs" />
+    <Compile Include="..\sdk\Models\SubscriptionItemsResponse.cs" Link="Models\SubscriptionItemsResponse.cs" />
+    <Compile Include="..\sdk\Models\SubscriptionRequest.cs" Link="Models\SubscriptionRequest.cs" />
+    <Compile Include="..\sdk\Models\SubscriptionResponse.cs" Link="Models\SubscriptionResponse.cs" />
+    <Compile Include="..\sdk\Models\SubscriptionSchedule.cs" Link="Models\SubscriptionSchedule.cs" />
+    <Compile Include="..\sdk\Models\SubscriptionSearchRequest.cs" Link="Models\SubscriptionSearchRequest.cs" />
+    <Compile Include="..\sdk\Models\SubscriptionUpdateRequest.cs" Link="Models\SubscriptionUpdateRequest.cs" />
+    <Compile Include="..\sdk\Models\TokenRequest.cs" Link="Models\TokenRequest.cs" />
+    <Compile Include="..\sdk\Models\TokenResponse.cs" Link="Models\TokenResponse.cs" />
+    <Compile Include="..\sdk\Services\Config.cs" Link="Services\Config.cs" />
+    <Compile Include="..\sdk\Tools\RequiresConfigAttribute.cs" Link="Tools\RequiresConfigAttribute.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="System.ValueTuple" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+</Project>
