@@ -8,22 +8,30 @@ namespace Paydock_dotnet_sdk.Services
 {
     public class ServiceHelper : IServiceHelper
 	{
-		//public async Task<T> Get<T>(string url, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
-		//{
+		public async Task<T> Get<T>(string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
+		{
+			var requestResult = BuildRequest(HttpMethod.Get, endpoint, null, excludeSecretKey, overrideConfigSecretKey);
 
-		//}
+			var response = await requestResult.httpClient.SendAsync(requestResult.httpRequest);
+			return await ProcessResponse<T>(response);
+		}
 
-		//public async Task<T> Put<T, R>(R request, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
-		//{
+		public async Task<T> Put<T, R>(R request, string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
+		{
+			var json = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+			var requestResult = BuildRequest(HttpMethod.Post, endpoint, json, excludeSecretKey, overrideConfigSecretKey);
 
-		//}
+			var response = await requestResult.httpClient.SendAsync(requestResult.httpRequest);
+			return await ProcessResponse<T>(response);
+		}
 
-		//public async Task<T> Delete<T, R>(string url, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
-		//{
+		public async Task<T> Delete<T>(string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
+		{
+			var requestResult = BuildRequest(HttpMethod.Delete, endpoint, null, excludeSecretKey, overrideConfigSecretKey);
 
-		//}
-		
-		// TODO: implement remainder of HTTP methods
+			var response = await requestResult.httpClient.SendAsync(requestResult.httpRequest);
+			return await ProcessResponse<T>(response);
+		}
 
 		public async Task<T> Post<T, R>(R request, string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
 		{
@@ -31,6 +39,11 @@ namespace Paydock_dotnet_sdk.Services
 			var requestResult = BuildRequest(HttpMethod.Post, endpoint, json, excludeSecretKey, overrideConfigSecretKey);
 
 			var response = await requestResult.httpClient.SendAsync(requestResult.httpRequest);
+			return await ProcessResponse<T>(response);
+		}
+
+		private static async Task<T> ProcessResponse<T>(HttpResponseMessage response)
+		{
 			var responseString = await response.Content.ReadAsStringAsync();
 
 			if (!response.IsSuccessStatusCode)

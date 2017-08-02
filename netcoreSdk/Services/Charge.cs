@@ -1,9 +1,6 @@
 ﻿using Paydock_dotnet_sdk.Models;
-using Paydock_dotnet_sdk.Services;
 using Paydock_dotnet_sdk.Tools;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Paydock_dotnet_sdk.Services
@@ -44,6 +41,76 @@ namespace Paydock_dotnet_sdk.Services
 		public async Task<ChargeResponse> Add(ChargeRequest request)
 		{
 			return await _serviceHelper.Post<ChargeResponse, ChargeRequest>(request, "charges", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+		/// <summary>
+		/// Retrieve full list of charges, limited to 1000
+		/// </summary>
+		/// <returns>List of charges</returns>
+		[RequiresConfig]
+		public async Task<ChargeItemsResponse> Get()
+		{
+			return await _serviceHelper.Get<ChargeItemsResponse>("charges", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Retrieve a filtered list of charges, limited to 1000
+		/// </summary>
+		/// <param name="request">filter parameters</param>
+		/// <returns>List of charges</returns>
+		[RequiresConfig]
+		public async Task<ChargeItemsResponse> Get(ChargeSearchRequest request)
+		{
+			var url = "charges/";
+			url = url.AppendParameter("skip", request.skip);
+			url = url.AppendParameter("limit", request.limit);
+			url = url.AppendParameter("subscription_id", request.subscription_id);
+			url = url.AppendParameter("gateway_id", request.gateway_id);
+			url = url.AppendParameter("company_id", request.company_id);
+			url = url.AppendParameter("created_at.from", request.created_at_from);
+			url = url.AppendParameter("created_at.to", request.created_at_to);
+			url = url.AppendParameter("search", request.search);
+			url = url.AppendParameter("status", request.status);
+			url = url.AppendParameter("archived", request.archived);
+			url = url.AppendParameter("transaction_external_id", request.transaction_external_id);
+
+			return await _serviceHelper.Get<ChargeItemsResponse>(url, overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Retrive a single charge
+		/// </summary>
+		/// <param name="chargeId">id of the charge to retreive</param>
+		/// <returns>charge data</returns>
+		[RequiresConfig]
+		public async Task<ChargeItemResponse> Get(string chargeId)
+		{
+			return await _serviceHelper.Get<ChargeItemResponse>("charges/" + chargeId, overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Refund a transaction
+		/// </summary>
+		/// <param name="chargeId">id of the charge to refund</param>
+		/// <param name="amount">amount to refund, can be used to issue partial refunds</param>
+		/// <returns>information on the transaction</returns>
+		[RequiresConfig]
+		public async Task<ChargeRefundResponse> Refund(string chargeId, decimal amount)
+		{
+			chargeId = Uri.EscapeUriString(chargeId);
+			var json = string.Format("{{\"amount\" : \"{0}\"}}", amount);
+			return await _serviceHelper.Get<ChargeRefundResponse>(string.Format("charges/{0}/refunds", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Archive a transaction
+		/// </summary>
+		/// <param name="chargeId">id of the charge to archive</param>
+		/// <returns>information on the transaction</returns>
+		[RequiresConfig]
+		public async Task<ChargeRefundResponse> Archive(string chargeId)
+		{
+			chargeId = Uri.EscapeUriString(chargeId);
+			return await _serviceHelper.Delete<ChargeRefundResponse>(string.Format("charges/{0}", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 	}
 }
