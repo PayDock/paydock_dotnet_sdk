@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Paydock_dotnet_sdk.Models;
 using Paydock_dotnet_sdk.Tools;
+using System;
 
 namespace Paydock_dotnet_sdk.Services
 {
@@ -94,8 +95,9 @@ namespace Paydock_dotnet_sdk.Services
         /// <returns>customer information</returns>
         [RequiresConfig]
         public CustomerItemResponse Get(string customerId)
-        {
-            var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
+		{
+			customerId = Uri.EscapeUriString(customerId);
+			var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (CustomerItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemResponse));
             response.JsonResponse = responseJson;
@@ -109,9 +111,10 @@ namespace Paydock_dotnet_sdk.Services
         /// <returns>customer information</returns>
         [RequiresConfig]
         public CustomerItemResponse Update(CustomerUpdateRequest request)
-        {
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("customers/" + request.customer_id, HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
+		{
+			var customerId = Uri.EscapeUriString(request.customer_id);
+			var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (CustomerItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemResponse));
             response.JsonResponse = responseJson;
@@ -125,8 +128,9 @@ namespace Paydock_dotnet_sdk.Services
         /// <returns>customer information</returns>
         [RequiresConfig]
         public CustomerItemResponse Delete(string customerId)
-        {
-            var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
+		{
+			customerId = Uri.EscapeUriString(customerId);
+			var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (CustomerItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemResponse));
             response.JsonResponse = responseJson;
