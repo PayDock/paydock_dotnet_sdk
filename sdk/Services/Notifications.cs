@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Paydock_dotnet_sdk.Models;
 using Paydock_dotnet_sdk.Tools;
+using System;
 
 namespace Paydock_dotnet_sdk.Services
 {
@@ -53,9 +54,10 @@ namespace Paydock_dotnet_sdk.Services
         /// <returns>Updated notification</returns>
         [RequiresConfig]
         public NotificationTemplateResponse UpdateTemplate(NotificationTemplateUpdateRequest request)
-        {
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("notifications/templates/" + request._id, HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
+		{
+			var templateId = Uri.EscapeUriString(request._id);
+			var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var responseJson = _serviceHelper.CallPaydock("notifications/templates/" + templateId, HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
             response.JsonResponse = responseJson;
@@ -70,8 +72,9 @@ namespace Paydock_dotnet_sdk.Services
         /// <returns>information on the notification template</returns>
         [RequiresConfig]
         public NotificationTemplateResponse DeleteTemplate(string notificationTemplateId)
-        {
-            var responseJson = _serviceHelper.CallPaydock("notifications/templates/" + notificationTemplateId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
+		{
+			notificationTemplateId = Uri.EscapeUriString(notificationTemplateId);
+			var responseJson = _serviceHelper.CallPaydock("notifications/templates/" + notificationTemplateId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
             response.JsonResponse = responseJson;
@@ -115,8 +118,9 @@ namespace Paydock_dotnet_sdk.Services
         /// <returns>notification trigger</returns>
         [RequiresConfig]
         public NotificationTriggerResponse GetTrigger(string notificationTriggerId)
-        {
-            var responseJson = _serviceHelper.CallPaydock("notifications/" + notificationTriggerId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
+		{
+			notificationTriggerId = Uri.EscapeUriString(notificationTriggerId);
+			var responseJson = _serviceHelper.CallPaydock("notifications/" + notificationTriggerId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
             response.JsonResponse = responseJson;
@@ -130,8 +134,9 @@ namespace Paydock_dotnet_sdk.Services
         /// <returns>notification trigger</returns>
         [RequiresConfig]
         public NotificationTriggerResponse DeleteTrigger(string notificationTriggerId)
-        {
-            var responseJson = _serviceHelper.CallPaydock("notifications/" + notificationTriggerId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
+		{
+			notificationTriggerId = Uri.EscapeUriString(notificationTriggerId);
+			var responseJson = _serviceHelper.CallPaydock("notifications/" + notificationTriggerId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
             response.JsonResponse = responseJson;
@@ -170,8 +175,9 @@ namespace Paydock_dotnet_sdk.Services
         /// <returns>notification trigger</returns>
         [RequiresConfig]
         public NotificationTriggerResponse DeleteLog(string notificationLogId)
-        {
-            var responseJson = _serviceHelper.CallPaydock("notifications/logs/" + notificationLogId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
+		{
+			notificationLogId = Uri.EscapeUriString(notificationLogId);
+			var responseJson = _serviceHelper.CallPaydock("notifications/logs/" + notificationLogId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
             response.JsonResponse = responseJson;
