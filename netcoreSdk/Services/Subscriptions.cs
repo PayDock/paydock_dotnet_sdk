@@ -2,11 +2,12 @@
 using Paydock_dotnet_sdk.Models;
 using Paydock_dotnet_sdk.Tools;
 using System;
+using System.Threading.Tasks;
 
 namespace Paydock_dotnet_sdk.Services
 {
     public class Subscriptions : ISubscriptions
-    {
+	{
         protected IServiceHelper _serviceHelper;
         protected string _overrideConfigSecretKey = null;
 
@@ -36,14 +37,9 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="request">Subscription data</param>
         /// <returns>created subscription</returns>
         [RequiresConfig]
-        public SubscriptionResponse Add(SubscriptionRequest request)
-        {
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("subscriptions", HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
-
-            var response = (SubscriptionResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionResponse));
-            response.JsonResponse = responseJson;
-            return response;
+        public async Task<SubscriptionResponse> Add(SubscriptionRequest request)
+		{
+			return await _serviceHelper.Post<SubscriptionResponse, SubscriptionRequest>(request, "subscriptions", overrideConfigSecretKey: _overrideConfigSecretKey);
         }
 
         /// <summary>
@@ -52,15 +48,10 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="request">Subscription data</param>
         /// <returns>updated subscription</returns>
         [RequiresConfig]
-        public SubscriptionResponse Update(SubscriptionUpdateRequest request)
+        public async Task<SubscriptionResponse> Update(SubscriptionUpdateRequest request)
 		{
 			var subscriptionId = Uri.EscapeUriString(request._id);
-			var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("subscriptions/" + subscriptionId, HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
-
-            var response = (SubscriptionResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionResponse));
-            response.JsonResponse = responseJson;
-            return response;
+			return await _serviceHelper.Post<SubscriptionResponse, SubscriptionUpdateRequest>(request, "subscriptions/" + subscriptionId, overrideConfigSecretKey: _overrideConfigSecretKey);
         }
 
         /// <summary>
@@ -68,13 +59,9 @@ namespace Paydock_dotnet_sdk.Services
         /// </summary>
         /// <returns>Subscription items</returns>
         [RequiresConfig]
-        public SubscriptionItemsResponse Get()
-        {
-            var responseJson = _serviceHelper.CallPaydock("subscriptions", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
-
-            var response = (SubscriptionItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemsResponse));
-            response.JsonResponse = responseJson;
-            return response;
+        public async Task<SubscriptionItemsResponse> Get()
+		{
+			return await _serviceHelper.Get<SubscriptionItemsResponse>("subscriptions", overrideConfigSecretKey: _overrideConfigSecretKey);
         }
 
         /// <summary>
@@ -83,7 +70,7 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="request">search paramters for the subscriptions</param>
         /// <returns>list of subscriptions</returns>
         [RequiresConfig]
-        public SubscriptionItemsResponse Get(SubscriptionSearchRequest request)
+        public async Task<SubscriptionItemsResponse> Get(SubscriptionSearchRequest request)
         {
             var url = "subscriptions/";
             url = url.AppendParameter("skip", request.skip);
@@ -95,11 +82,7 @@ namespace Paydock_dotnet_sdk.Services
             url = url.AppendParameter("gateway_id", request.gateway_id);
             url = url.AppendParameter("status", request.status);
 
-            var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
-
-            var response = (SubscriptionItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemsResponse));
-            response.JsonResponse = responseJson;
-            return response;
+			return await _serviceHelper.Get<SubscriptionItemsResponse>(url, overrideConfigSecretKey: _overrideConfigSecretKey);
         }
 
         /// <summary>
@@ -108,14 +91,10 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="request">id of subscription to return</param>
         /// <returns>subscription information</returns>
         [RequiresConfig]
-        public SubscriptionItemResponse Get(string subscriptionId)
+        public async Task<SubscriptionItemResponse> Get(string subscriptionId)
 		{
 			subscriptionId = Uri.EscapeUriString(subscriptionId);
-			var responseJson = _serviceHelper.CallPaydock("subscriptions/" + subscriptionId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
-
-            var response = (SubscriptionItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemResponse));
-            response.JsonResponse = responseJson;
-            return response;
+			return await _serviceHelper.Get<SubscriptionItemResponse>("subscriptions/" + subscriptionId, overrideConfigSecretKey: _overrideConfigSecretKey);
         }
 
         /// <summary>
@@ -123,14 +102,10 @@ namespace Paydock_dotnet_sdk.Services
         /// </summary>
         /// <param name="subscriptionId">id of the subscription</param>
         /// <returns>information on the subscription</returns>
-        public SubscriptionItemResponse Delete(string subscriptionId)
+        public async Task<SubscriptionItemResponse> Delete(string subscriptionId)
 		{
 			subscriptionId = Uri.EscapeUriString(subscriptionId);
-			var responseJson = _serviceHelper.CallPaydock("subscriptions/" + subscriptionId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
-
-            var response = (SubscriptionItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemResponse));
-            response.JsonResponse = responseJson;
-            return response;
+			return await _serviceHelper.Delete<SubscriptionItemResponse>("subscriptions/" + subscriptionId, overrideConfigSecretKey: _overrideConfigSecretKey);
         }
     }
 }
