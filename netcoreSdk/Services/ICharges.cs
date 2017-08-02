@@ -6,5 +6,10 @@ namespace Paydock_dotnet_sdk.Services
 	public interface ICharges
 	{
 		Task<ChargeResponse> Add(ChargeRequest request);
+		Task<ChargeRefundResponse> Archive(string chargeId);
+		Task<ChargeItemsResponse> Get();
+		Task<ChargeItemsResponse> Get(ChargeSearchRequest request);
+		Task<ChargeItemResponse> Get(string chargeId);
+		Task<ChargeRefundResponse> Refund(string chargeId, decimal amount);
 	}
 }
