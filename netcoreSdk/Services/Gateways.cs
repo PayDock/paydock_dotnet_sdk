@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
-using Paydock_dotnet_sdk.Models;
+﻿using Paydock_dotnet_sdk.Models;
 using Paydock_dotnet_sdk.Tools;
 using System;
+using System.Threading.Tasks;
 
 namespace Paydock_dotnet_sdk.Services
 {
     public class Gateways : IGateways
-    {
+	{
         protected IServiceHelper _serviceHelper;
         protected string _overrideConfigSecretKey = null;
 
@@ -38,14 +38,9 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="request">details of the gateway</param>
         /// <returns>gateway data</returns>
         [RequiresConfig]
-        public GatewayResponse Add(GatewayRequest request)
-        {
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("gateways", HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
-
-            var response = (GatewayResponse)JsonConvert.DeserializeObject(responseJson, typeof(GatewayResponse));
-            response.JsonResponse = responseJson;
-            return response;
+        public async Task<GatewayResponse> Add(GatewayRequest request)
+		{
+			return await _serviceHelper.Post<GatewayResponse, GatewayRequest>(request, "gateways", overrideConfigSecretKey: _overrideConfigSecretKey);
         }
 
 
@@ -55,14 +50,10 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="gatewayid">id of the gateway</param>
         /// <returns>gateway data</returns>
         [RequiresConfig]
-        public GatewayItemResponse Get(string gatewayid)
+        public async Task<GatewayItemResponse> Get(string gatewayid)
 		{
 			gatewayid = Uri.EscapeUriString(gatewayid);
-			var responseJson = _serviceHelper.CallPaydock("gateways/" + gatewayid, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
-
-            var response = (GatewayItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(GatewayItemResponse));
-            response.JsonResponse = responseJson;
-            return response;
+			return await _serviceHelper.Get<GatewayItemResponse>("gateways/" + gatewayid, overrideConfigSecretKey: _overrideConfigSecretKey);
         }
 
         /// <summary>
@@ -71,14 +62,10 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="gatewayid">id of the gateway</param>
         /// <returns>gateway data</returns>
         [RequiresConfig]
-        public GatewayItemResponse Delete(string gatewayid)
+        public async Task<GatewayItemResponse> Delete(string gatewayid)
 		{
 			gatewayid = Uri.EscapeUriString(gatewayid);
-			var responseJson = _serviceHelper.CallPaydock("gateways/" + gatewayid, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
-
-            var response = (GatewayItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(GatewayItemResponse));
-            response.JsonResponse = responseJson;
-            return response;
+			return await _serviceHelper.Delete<GatewayItemResponse>("gateways/" + gatewayid, overrideConfigSecretKey: _overrideConfigSecretKey);
         }
 
         /// <summary>
@@ -87,15 +74,10 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="request">details of the gateway</param>
         /// <returns>gateway data</returns>
         [RequiresConfig]
-        public GatewayItemResponse Update(GatewayUpdateRequest request)
+        public async Task<GatewayItemResponse> Update(GatewayUpdateRequest request)
 		{
 			var gatewayid = Uri.EscapeUriString(request._id);
-			var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var responseJson = _serviceHelper.CallPaydock("gateways/" + gatewayid, HttpMethod.PUT, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
-
-            var response = (GatewayItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(GatewayItemResponse));
-            response.JsonResponse = responseJson;
-            return response;
+			return await _serviceHelper.Put<GatewayItemResponse, GatewayUpdateRequest>(request, "gateways/" + gatewayid, overrideConfigSecretKey: _overrideConfigSecretKey);
         }
 
         /// <summary>
@@ -103,13 +85,9 @@ namespace Paydock_dotnet_sdk.Services
         /// </summary>
         /// <returns>list of gateway data</returns>
         [RequiresConfig]
-        public GatewayItemsResponse Get()
-        {
-            var responseJson = _serviceHelper.CallPaydock("gateways", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
-
-            var response = (GatewayItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(GatewayItemsResponse));
-            response.JsonResponse = responseJson;
-            return response;
+        public async Task<GatewayItemsResponse> Get()
+		{
+			return await _serviceHelper.Get<GatewayItemsResponse>("gateways", overrideConfigSecretKey: _overrideConfigSecretKey);
         }
     }
 }

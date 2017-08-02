@@ -19,7 +19,7 @@ namespace Paydock_dotnet_sdk.Services
 		public async Task<T> Put<T, R>(R request, string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
 		{
 			var json = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-			var requestResult = BuildRequest(HttpMethod.Post, endpoint, json, excludeSecretKey, overrideConfigSecretKey);
+			var requestResult = BuildRequest(HttpMethod.Put, endpoint, json, excludeSecretKey, overrideConfigSecretKey);
 
 			var response = await requestResult.httpClient.SendAsync(requestResult.httpRequest);
 			return await ProcessResponse<T>(response);
