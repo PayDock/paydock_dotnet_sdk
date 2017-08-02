@@ -17,22 +17,7 @@ namespace FunctionalTests
 
         private CustomerResponse CreateBasicCustomer(string email = "", string overideSecretKey = null)
         {
-            var request = new CustomerRequest
-            {
-                first_name = "john",
-                last_name = "smith",
-                email = email,
-                payment_source = new PaymentSource
-                {
-                    gateway_id = TestConfig.GatewayId,
-                    card_name = "John Smith",
-                    card_number = "4111111111111111",
-                    card_ccv = "123",
-                    expire_month = "10",
-                    expire_year = "2020"
-                }
-            };
-
+			var request = RequestFactory.CreateCustomerRequest(email);
 
             if (overideSecretKey != null)
                 return new Customers(overideSecretKey).Add(request);

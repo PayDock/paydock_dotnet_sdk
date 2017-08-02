@@ -17,13 +17,7 @@ namespace FunctionalTests
 
         private NotificationTemplateResponse CreateBasicNotificationTemplate(string overideSecretKey = null)
         {
-            var template = new NotificationTemplateRequest
-            {
-                body = "body",
-                label = "test",
-                notification_event = NotificationEvent.card_expiration_warning,
-                html = true
-            };
+			var template = RequestFactory.CreateNotificationTemplateRequest();
             if (overideSecretKey != null)
                 return new Notifications(overideSecretKey).AddTemplate(template);
             else
@@ -32,14 +26,8 @@ namespace FunctionalTests
 
         private NotificationTriggerResponse CreateBasicNotificationTrigger(string templateId, string overideSecretKey = null)
         {
-            var template = new NotificationTriggerRequest
-            {
-                type = NotificationTriggerType.email,
-                destination = "email@email.com",
-                template_id = templateId,
-                eventTrigger = NotificationEvent.card_expiration_warning
-            };
-            if (overideSecretKey != null)
+            var template = RequestFactory.CreateNotificationTriggerRequest(templateId);
+			if (overideSecretKey != null)
                 return new Notifications(overideSecretKey).AddTrigger(template);
             else
                 return new Notifications().AddTrigger(template);

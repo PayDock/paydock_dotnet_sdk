@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdk", "netcoreSdk\Sdk.csproj", "{EAC3420F-D0D8-431B-85AD-CB341F2841FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalTests", "netcoreSdkFunctionalTests\FunctionalTests.csproj", "{AC8393C5-E185-4932-A095-3AC9DAE82F2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalTests", "netcoreSdkFunctionalTests\FunctionalTests.csproj", "{AC8393C5-E185-4932-A095-3AC9DAE82F2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -98,27 +98,9 @@ namespace Paydock_dotnet_sdk.Tools
         {
             using (var reader = new StreamReader(exception.Response.GetResponseStream()))
             {
-                var result = reader.ReadToEnd();
-                dynamic obj = JsonConvert.DeserializeObject<ExpandoObject>(result, new ExpandoObjectConverter());
-                var errorResponse = new ErrorResponse()
-                {
-                    Status = Convert.ToInt32(obj.status),
-                    ExtendedInformation = obj,
-                    JsonResponse = result
-                };
-
-                var json = JObject.Parse(result);
-                if (json["error"]["message"].Count() == 0)
-                {
-                    errorResponse.ErrorMessage = (string)json["error"]["message"];
-                }
-                else if (json["error"]["message"]["message"].Count() == 0)
-                {
-                    errorResponse.ErrorMessage = (string)json["error"]["message"]["message"];
-                }
-                
-                throw new ResponseException(errorResponse, exception.Status.ToString());
-            }
+				var result = reader.ReadToEnd();
+				ResponseExceptionFactory.CreateResponseException(result);
+			}
         }
     }
 }

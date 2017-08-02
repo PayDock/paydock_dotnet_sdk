@@ -17,26 +17,9 @@ namespace FunctionalTests
 
         private ChargeResponse CreateBasicCharge(decimal amount, string gatewayId, string customerEmail = "", string overideSecretKey = null)
         {
-            var charge = new ChargeRequest
-            {
-                amount = amount,
-                currency = "AUD",
-                customer = new Customer
-                {
-                    email = customerEmail,
-                    payment_source = new PaymentSource
-                    {
-                        gateway_id = gatewayId,
-                        card_name = "Test Name",
-                        card_number = "4111111111111111",
-                        card_ccv = "123",
-                        expire_month = "10",
-                        expire_year = "2020"
-                    }
-                }
-            };
+			var charge = RequestFactory.CreateChargeRequest(amount, gatewayId, customerEmail);
 
-            if (overideSecretKey != null)
+			if (overideSecretKey != null)
                 return new Charges(overideSecretKey).Add(charge);
             else
                 return new Charges().Add(charge);

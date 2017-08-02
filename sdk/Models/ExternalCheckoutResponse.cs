@@ -18,7 +18,5 @@
             public string mode { get; set; }
             public string token { get; set; }
         }
-
-
     }
 }

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Paydock_dotnet_sdk.Tools;
 
 namespace Paydock_dotnet_sdk.Services
 {
@@ -22,7 +23,6 @@ namespace Paydock_dotnet_sdk.Services
 
 		//}
 		
-		// TODO: add error handling
 		// TODO: implement remainder of HTTP methods
 
 		public async Task<T> Post<T, R>(R request, string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
@@ -32,6 +32,10 @@ namespace Paydock_dotnet_sdk.Services
 
 			var response = await requestResult.httpClient.SendAsync(requestResult.httpRequest);
 			var responseString = await response.Content.ReadAsStringAsync();
+
+			if (!response.IsSuccessStatusCode)
+				ResponseExceptionFactory.CreateResponseException(responseString);
+
 			return JsonConvert.DeserializeObject<T>(responseString);
 		}
 

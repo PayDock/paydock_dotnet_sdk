@@ -16,16 +16,9 @@ namespace FunctionalTests
         [TestCase(null)]
         public void CreateLink(string overideSecretKey)
         {
-            var request = new ExternalCheckoutRequest
-            {
-                gateway_id = TestConfig.PaypalGatewayId,
-                mode = "test",
-                type = "paypal",
-                success_redirect_url = "http://success.com",
-                error_redirect_url = "http://failure.com"
-            };
+			var request = RequestFactory.CreateExternalCheckoutRequest();
 
-            ExternalCheckoutResponse result;
+			ExternalCheckoutResponse result;
             if (overideSecretKey != null)
                 result = new ExternalCheckout(overideSecretKey).Create(request);
             else

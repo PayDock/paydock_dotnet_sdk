@@ -15,14 +15,7 @@ namespace FunctionalTests
 
         private GatewayResponse AddGateway(string overideSecretKey = null)
         {
-            var request = new GatewayRequest
-            {
-                type = "Brain",
-                name = "BraintreeTesting",
-                merchant = "r7pcwvkbkgjfzk99",
-                username = "n8nktcb42fy8ttgt",
-                password = "c865e194d750148b93284c0c026e5f2a"
-            };
+			var request = RequestFactory.CreateGatewayRequest();
 
             if (overideSecretKey != null)
                 return new Gateways(overideSecretKey).Add(request);
