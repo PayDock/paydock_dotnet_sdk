@@ -4,8 +4,8 @@ using Paydock_dotnet_sdk.Tools;
 
 namespace Paydock_dotnet_sdk.Services
 {
-    public class ExternalCheckout
-    {
+    public class ExternalCheckout : IExternalCheckout
+	{
         protected IServiceHelper _serviceHelper;
         protected string _overrideConfigSecretKey = null;
 

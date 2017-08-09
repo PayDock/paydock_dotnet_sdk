@@ -5,8 +5,8 @@ using System;
 
 namespace Paydock_dotnet_sdk.Services
 {
-    public class Tokens
-    {
+    public class Tokens : ITokens
+	{
         protected IServiceHelper _serviceHelper;
         protected string _overrideConfigPublicKey = null;
 

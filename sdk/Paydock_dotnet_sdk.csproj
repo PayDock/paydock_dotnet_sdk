@@ -109,9 +109,11 @@
     <Compile Include="Services\Gateways.cs" />
     <Compile Include="Services\ICharges.cs" />
     <Compile Include="Services\ICustomers.cs" />
+    <Compile Include="Services\IExternalCheckout.cs" />
     <Compile Include="Services\IGateways.cs" />
     <Compile Include="Services\INotifications.cs" />
     <Compile Include="Services\ISubscriptions.cs" />
+    <Compile Include="Services\ITokens.cs" />
     <Compile Include="Services\Notifications.cs" />
     <Compile Include="Services\Subscriptions.cs" />
     <Compile Include="Services\ExternalCheckout.cs" />
