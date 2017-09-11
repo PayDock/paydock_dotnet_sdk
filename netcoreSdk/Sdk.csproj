@@ -64,6 +64,9 @@
     <Compile Include="..\sdk\Models\SubscriptionUpdateRequest.cs" Link="Models\SubscriptionUpdateRequest.cs" />
     <Compile Include="..\sdk\Models\TokenRequest.cs" Link="Models\TokenRequest.cs" />
     <Compile Include="..\sdk\Models\TokenResponse.cs" Link="Models\TokenResponse.cs" />
+    <Compile Include="..\sdk\Models\Webhooks\CardExpiration.cs" Link="Models\Webhooks\CardExpiration.cs" />
+    <Compile Include="..\sdk\Models\Webhooks\SubscriptionWebhook.cs" Link="Models\Webhooks\SubscriptionWebhook.cs" />
+    <Compile Include="..\sdk\Models\Webhooks\TransactionWebhook.cs" Link="Models\Webhooks\TransactionWebhook.cs" />
     <Compile Include="..\sdk\Services\Config.cs" Link="Services\Config.cs" />
     <Compile Include="..\sdk\Tools\RequiresConfigAttribute.cs" Link="Tools\RequiresConfigAttribute.cs" />
     <Compile Include="..\sdk\Tools\UrlExtensionMethods.cs" Link="Tools\UrlExtensionMethods.cs" />
@@ -75,7 +78,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="Models\Webhooks\" />
   </ItemGroup>
 
   <ItemGroup>

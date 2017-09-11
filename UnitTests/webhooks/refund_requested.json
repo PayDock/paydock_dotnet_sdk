@@ -1,0 +1,68 @@
+﻿{
+    "event": "refund_requested",
+    "data": {
+			"_id": "589dae7c1958cb42532f248a",
+        "created_at": "2017-02-10T12:13:48.034Z",
+        "updated_at": "2017-02-10T12:16:53.495Z",
+        "company_id": "5584018a27b2cf0b1e4f1a6c",
+        "user_id": "5584018a27b2cf0b1e4f1a6b",
+        "amount": 111,
+        "currency": "AUD",
+        "subscription_id": "589dae7aa6c87450a798348e",
+        "__v": 3,
+        "external_id": "ch_A5ovQPHUOTprV7",
+        "transactions": [
+            {
+                "created_at": "2017-02-10T12:13:48.029Z",
+                "amount": 111,
+                "currency": "AUD",
+                "_id": "589dae7c1958cb42532f248b",
+                "status": "complete",
+                "type": "sale"
+
+			},
+            {
+                "pended_at": "2017-02-11T12:16:53.509Z",
+                "created_at": "2017-02-10T12:16:51.582Z",
+                "amount": 111,
+                "currency": "AUD",
+                "_id": "589daf33a6c87450a7983491",
+                "status": "requested",
+                "type": "refund"
+            }
+        ],
+        "one_off": false,
+        "archived": false,
+        "customer": {
+            "customer_id": "589dae78a6c87450a798348b",
+            "first_name": "Test",
+            "last_name": "Test",
+            "email": "test@test.com",
+            "phone": "+61000000000",
+            "payment_source": {
+                "type": "card",
+                "card_name": "Test Test",
+                "card_number_last4": "4444",
+                "card_scheme": "mastercard",
+                "expire_month": 1,
+                "expire_year": 2019,
+                "address_line1": "Test address",
+                "address_line2": "Test address",
+                "address_city": "Sydney",
+                "address_postcode": "111",
+                "address_country": "AU",
+                "gateway_id": "56a8ab12d6bd4e7d628576aa"
+            }
+        },
+        "status": "refund_requested",
+        "transaction": {
+            "pended_at": "2017-02-11T12:16:53.509Z",
+            "created_at": "2017-02-10T12:16:51.582Z",
+            "amount": 111,
+            "currency": "AUD",
+            "_id": "589daf33a6c87450a7983491",
+            "status": "requested",
+            "type": "refund"
+        }
+    }
+}

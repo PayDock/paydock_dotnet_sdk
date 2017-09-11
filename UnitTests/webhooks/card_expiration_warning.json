@@ -1,0 +1,47 @@
+﻿{
+    "event": "card_expiration_warning",
+    "data": {
+			"_id": "589db4311958cb42532f24a3",
+        "created_at": "2017-02-10T12:38:11.385Z",
+        "updated_at": "2017-02-10T12:38:11.385Z",
+        "status": "active",
+        "default_source": "589db4331958cb42532f24a4",
+        "company_id": "5584018a27b2cf0b1e4f1a6c",
+        "user_id": "5584018a27b2cf0b1e4f1a6b",
+        "first_name": "Test",
+        "last_name": "Test",
+        "email": "test@test.com",
+        "statistics": {
+				"total_collected_amount": 5555,
+            "successful_transactions": 1,
+            "currency": {
+					"AUD": {
+						"total_amount": 5555,
+                    "count": 1
+	
+				}
+				}
+			},
+        "payment_source": {
+				"updated_at": "2017-02-10T12:38:11.384Z",
+            "vault_token": "f5900584-9ced-4b36-9b3a-5e8976d03d11",
+            "address_country": "AU",
+            "address_line1": "Test address",
+            "address_line2": "Test address",
+            "address_city": "Sydney",
+            "address_postcode": "111",
+            "gateway_id": "56b22bc45a9cb7517bdb1079",
+            "card_name": "Test Test",
+            "expire_month": 3,
+            "expire_year": 2017,
+            "card_number_last4": "4444",
+            "card_scheme": "mastercard",
+            "ref_token": "cus_A5pJfU1O30AJsj",
+            "status": "active",
+            "created_at": "2017-02-10T12:38:11.125Z",
+            "_id": "589db4331958cb42532f24a4",
+            "type": "card"
+
+		}
+	}
+}

@@ -101,6 +101,8 @@
     <Compile Include="Models\SubscriptionSchedule.cs" />
     <Compile Include="Models\TokenRequest.cs" />
     <Compile Include="Models\TokenResponse.cs" />
+    <Compile Include="Models\Webhooks\CardExpiration.cs" />
+    <Compile Include="Models\Webhooks\SubscriptionWebhook.cs" />
     <Compile Include="Models\Webhooks\TransactionWebhook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ChargeRequest.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="Services\INotifications.cs" />
     <Compile Include="Services\ISubscriptions.cs" />
     <Compile Include="Services\ITokens.cs" />
+    <Compile Include="Services\IWebhook.cs" />
     <Compile Include="Services\Notifications.cs" />
     <Compile Include="Services\Subscriptions.cs" />
     <Compile Include="Services\ExternalCheckout.cs" />
