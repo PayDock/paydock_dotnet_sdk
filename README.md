@@ -117,3 +117,16 @@ catch (ResponseException ex)
     // handle possible error
 }
 ```
+
+# Parsing a webhook
+
+Webhooks are POSTed to the URL, once you've captured the payload, you can parse this:
+
+
+``` C#
+// transaction webhook
+var tran = (new Webhook()).ParseTransaction(tranJson);
+
+// subscription webhook
+var subscription = (new Webhook()).ParseSubscription(subscriptionJson);
+```
