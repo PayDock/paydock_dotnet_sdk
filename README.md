@@ -72,7 +72,7 @@ var customer = new CustomerRequest
 try
 {
     Config.Initialise(Environment.Sandbox, "<your secret key here>", "<your public key here>");
-    var result = await new Customers().Add(request);
+    var result = new Customers().Add(request);
 
     if (!result.IsSuccess) {
         // handle failure to create customer
@@ -112,7 +112,7 @@ var charge = new ChargeRequest
 try
 {
     Config.Initialise(Environment.Sandbox, "<this is the default secret key>", "<your public key here>");
-    var result = await new Charges("<this is a different secret key>").Add(charge);
+    var result = new Charges("<this is a different secret key>").Add(charge);
 
     if (!result.IsSuccess) {
         // handle failed payment
@@ -178,7 +178,7 @@ var charge = new ChargeRequest
 try
 {
     Config.Initialise(Environment.Sandbox, "<your secret key here>", "<your public key here>");
-    var result = new Charges().Add(charge);
+    var result = await new Charges().Add(charge);
 
     if (!result.IsSuccess) {
         // handle failed payment
@@ -213,7 +213,7 @@ var customer = new CustomerRequest
 try
 {
     Config.Initialise(Environment.Sandbox, "<your secret key here>", "<your public key here>");
-    var result = Customers().Add(request);
+    var result = await Customers().Add(request);
 
     if (!result.IsSuccess) {
         // handle failure to create customer
@@ -253,7 +253,7 @@ var charge = new ChargeRequest
 try
 {
     Config.Initialise(Environment.Sandbox, "<this is the default secret key>", "<your public key here>");
-    var result = new Charges("<this is a different secret key>").Add(charge);
+    var result = await new Charges("<this is a different secret key>").Add(charge);
 
     if (!result.IsSuccess) {
         // handle failed payment
