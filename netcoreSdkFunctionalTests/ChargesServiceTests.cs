@@ -110,6 +110,25 @@ namespace FunctionalTests
 			Assert.IsTrue(result.IsSuccess);
 		}
 
+		[TestCase]
+		public async Task TestTimeout()
+		{
+			try
+			{
+				Config.TimeoutMilliseconds = 1;
+				var result = await CreateBasicCharge(10.1M, TestConfig.GatewayId);
+			}
+			catch (ResponseException ex)
+			{
+				Assert.IsTrue(ex.ErrorResponse.Status == 408);
+				Assert.IsTrue(ex.ErrorResponse.ErrorMessage == "Request Timeout");
+				TestConfig.Init();
+				return;
+			}
+			TestConfig.Init();
+			Assert.Fail();
+		}
+
 		[TestCase(TestConfig.OverideSecretKey)]
 		[TestCase(null)]
 		[Ignore("unable to test this easily with current test gateway")]

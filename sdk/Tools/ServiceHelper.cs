@@ -58,7 +58,7 @@ namespace Paydock_dotnet_sdk.Tools
             }
 
             request.Method = method.ToString();
-			request.Timeout = Config.Timeout;
+			request.Timeout = Config.TimeoutMilliseconds;
 
 			string result = "";
             
@@ -96,6 +96,11 @@ namespace Paydock_dotnet_sdk.Tools
         /// <param name="exception">Exception to convert</param>
         private void ConvertException(WebException exception)
         {
+			if (exception.Response == null)
+			{
+				ResponseExceptionFactory.CreateTimeoutException();
+			}
+
             using (var reader = new StreamReader(exception.Response.GetResponseStream()))
             {
 				var result = reader.ReadToEnd();

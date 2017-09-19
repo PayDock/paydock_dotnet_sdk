@@ -15,9 +15,10 @@ namespace FunctionalTests
             TestConfig.Init();
         }
 
-        private ChargeResponse CreateBasicCharge(decimal amount, string gatewayId, string customerEmail = "", string overideSecretKey = null)
+        private ChargeResponse CreateBasicCharge(decimal amount, string gatewayId, string customerEmail = "", string overideSecretKey = null, string reference = null)
         {
 			var charge = RequestFactory.CreateChargeRequest(amount, gatewayId, customerEmail);
+			charge.reference = reference;
 
 			if (overideSecretKey != null)
                 return new Charges(overideSecretKey).Add(charge);
@@ -53,12 +54,12 @@ namespace FunctionalTests
         public void GetChargesWithSearch(string overideSecretKey)
         {
             var reference = Guid.NewGuid().ToString();
-            CreateBasicCharge(6, TestConfig.GatewayId, reference, overideSecretKey: overideSecretKey);
+            CreateBasicCharge(6, TestConfig.GatewayId, overideSecretKey: overideSecretKey, reference: reference);
             ChargeItemsResponse result;
             if (overideSecretKey != null)
-                result = new Charges(overideSecretKey).Get(new ChargeSearchRequest { gateway_id = TestConfig.GatewayId, search = reference });
+                result = new Charges(overideSecretKey).Get(new ChargeSearchRequest { gateway_id = TestConfig.GatewayId, transaction_external_id = reference });
             else
-                result = new Charges().Get(new ChargeSearchRequest { gateway_id = TestConfig.GatewayId, search = reference });
+                result = new Charges().Get(new ChargeSearchRequest { gateway_id = TestConfig.GatewayId, transaction_external_id = reference });
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual(1, result.resource.data.Count());
         }
@@ -109,8 +110,27 @@ namespace FunctionalTests
                 result = new Charges().Refund(charge.resource.data._id, 7);
             Assert.IsTrue(result.IsSuccess);
         }
+		
+		[TestCase]
+		public void TestTimeout()
+		{
+			try
+			{
+				Config.TimeoutMilliseconds = 1;
+				var result = CreateBasicCharge(10.1M, TestConfig.GatewayId);
+			}
+			catch (ResponseException ex)
+			{
+				Assert.IsTrue(ex.ErrorResponse.Status == 408);
+				Assert.IsTrue(ex.ErrorResponse.ErrorMessage == "Request Timeout");
+				TestConfig.Init();
+				return;
+			}
+			TestConfig.Init();
+			Assert.Fail();
+		}
 
-        [TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(TestConfig.OverideSecretKey)]
         [TestCase(null)]
         [Ignore("unable to test this easily with current test gateway")]
         public void Archive(string overideSecretKey)

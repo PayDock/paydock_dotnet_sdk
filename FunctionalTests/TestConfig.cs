@@ -13,7 +13,7 @@ namespace FunctionalTests
 
         public static void Init()
         {
-            Config.Initialise(Environment.Sandbox, SecretKey, PublicKey);
-        }
+            Config.Initialise(Environment.Sandbox, SecretKey, PublicKey, 60000);
+		}
     }
 }

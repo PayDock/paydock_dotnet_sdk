@@ -12,7 +12,7 @@ namespace Paydock_dotnet_sdk.Services
 		{
 			var requestResult = BuildRequest(HttpMethod.Get, endpoint, null, excludeSecretKey, overrideConfigSecretKey);
 
-			var response = await requestResult.httpClient.SendAsync(requestResult.httpRequest);
+			var response = await SendRequest(requestResult.httpClient, requestResult.httpRequest);
 			return await ProcessResponse<T>(response);
 		}
 
@@ -21,7 +21,7 @@ namespace Paydock_dotnet_sdk.Services
 			var json = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 			var requestResult = BuildRequest(HttpMethod.Put, endpoint, json, excludeSecretKey, overrideConfigSecretKey);
 
-			var response = await requestResult.httpClient.SendAsync(requestResult.httpRequest);
+			var response = await SendRequest(requestResult.httpClient, requestResult.httpRequest);
 			return await ProcessResponse<T>(response);
 		}
 
@@ -29,7 +29,7 @@ namespace Paydock_dotnet_sdk.Services
 		{
 			var requestResult = BuildRequest(HttpMethod.Delete, endpoint, null, excludeSecretKey, overrideConfigSecretKey);
 
-			var response = await requestResult.httpClient.SendAsync(requestResult.httpRequest);
+			var response = await SendRequest(requestResult.httpClient, requestResult.httpRequest);
 			return await ProcessResponse<T>(response);
 		}
 
@@ -38,8 +38,23 @@ namespace Paydock_dotnet_sdk.Services
 			var json = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 			var requestResult = BuildRequest(HttpMethod.Post, endpoint, json, excludeSecretKey, overrideConfigSecretKey);
 
-			var response = await requestResult.httpClient.SendAsync(requestResult.httpRequest);
+			var response = await SendRequest(requestResult.httpClient, requestResult.httpRequest);
 			return await ProcessResponse<T>(response);
+		}
+
+		private static async Task<HttpResponseMessage> SendRequest(HttpClient httpClient, HttpRequestMessage request)
+		{
+			try
+			{
+				return await httpClient.SendAsync(request);
+			}
+			// handle timeouts
+			catch (TaskCanceledException)
+			{
+				ResponseExceptionFactory.CreateTimeoutException();
+			}
+
+			return null;
 		}
 
 		private static async Task<T> ProcessResponse<T>(HttpResponseMessage response)
@@ -62,6 +77,7 @@ namespace Paydock_dotnet_sdk.Services
 				RequestUri = new Uri(Config.BaseUrl() + endpoint),
 				Method = method
 			};
+			httpClient.Timeout = new TimeSpan(0, 0, 0, 0, Config.TimeoutMilliseconds);
 
 			// body
 			if (jsonBody != null)

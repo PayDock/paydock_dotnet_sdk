@@ -32,5 +32,16 @@ namespace Paydock_dotnet_sdk.Tools
 
 			throw new ResponseException(errorResponse, errorResponse.Status.ToString());
 		}
+
+		public static void CreateTimeoutException()
+		{
+			var errorResponse = new ErrorResponse()
+			{
+				Status = Convert.ToInt32(408),
+				JsonResponse = "",
+				ErrorMessage = "Request Timeout"
+			};
+			throw new ResponseException(errorResponse, errorResponse.Status.ToString());
+		}
 	}
 }

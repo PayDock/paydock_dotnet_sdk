@@ -14,12 +14,12 @@
         public static Environment Environment { get; private set; }
         public static string SecretKey { get; private set; }
         public static string PublicKey { get; private set; }
-		public static int Timeout { get; private set; }
+		public static int TimeoutMilliseconds { get; set; }
 
 		static Config()
         {
             Environment = Environment.Sandbox;
-			Timeout = 60000;
+			TimeoutMilliseconds = 60000;
 
 		}
 
@@ -29,13 +29,14 @@
 		/// <param name="env">Environment to connect to</param>
 		/// <param name="secretKey">Secret key for authentication</param>
 		/// <param name="publicKey">Public key for authentication</param>
-		/// <param name="timeout">timeout for calls to the API</param>
-		public static void Initialise(Environment env, string secretKey, string publicKey, int timeout = 60000)
+		/// <param name="timeoutMilliseconds">timeout for calls to the API</param>
+		public static void Initialise(Environment env, string secretKey, string publicKey, int timeoutMilliseconds = 60000)
         {
             Environment = env;
             SecretKey = secretKey;
             PublicKey = publicKey;
-        }
+			TimeoutMilliseconds = timeoutMilliseconds;
+		}
 
         /// <summary>
         /// Base address for the API, based on environment

@@ -12,6 +12,7 @@
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>C:\Users\davidcameron\Documents\GitHub\paydock_dotnet_sdk\sdk\paydock.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>Paydock_dotnet_sdk</AssemblyName>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -69,6 +70,7 @@
     <Compile Include="..\sdk\Models\Webhooks\TransactionWebhook.cs" Link="Models\Webhooks\TransactionWebhook.cs" />
     <Compile Include="..\sdk\Services\Config.cs" Link="Services\Config.cs" />
     <Compile Include="..\sdk\Tools\RequiresConfigAttribute.cs" Link="Tools\RequiresConfigAttribute.cs" />
+    <Compile Include="..\sdk\Tools\ResponseExceptionFactory.cs" Link="Tools\ResponseExceptionFactory.cs" />
     <Compile Include="..\sdk\Tools\UrlExtensionMethods.cs" Link="Tools\UrlExtensionMethods.cs" />
   </ItemGroup>
 
