@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="Models\ChargeItemResponse.cs" />
     <Compile Include="Models\ChargeItemsResponse.cs" />
+    <Compile Include="Models\ChargeRequestStripeConnect.cs" />
+    <Compile Include="Models\ChargeRequestBase.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerItemResponse.cs" />
     <Compile Include="Models\CustomerItemsResponse.cs" />

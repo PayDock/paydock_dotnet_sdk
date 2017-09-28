@@ -40,7 +40,7 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="request">Charge data</param>
         /// <returns>Charge response</returns>
         [RequiresConfig]
-        public ChargeResponse Add(ChargeRequest request)
+        public ChargeResponse Add(ChargeRequestBase request)
         {
             var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             var responseJson = _serviceHelper.CallPaydock("charges", HttpMethod.POST, requestData, overrideConfigSecretKey :_overrideConfigSecretKey);

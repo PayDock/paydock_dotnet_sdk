@@ -38,9 +38,9 @@ namespace Paydock_dotnet_sdk.Services
 		/// <param name="request">Charge data</param>
 		/// <returns>Charge response</returns>
 		[RequiresConfig]
-		public async Task<ChargeResponse> Add(ChargeRequest request)
+		public async Task<ChargeResponse> Add(ChargeRequestBase request)
 		{
-			return await _serviceHelper.Post<ChargeResponse, ChargeRequest>(request, "charges", overrideConfigSecretKey: _overrideConfigSecretKey);
+			return await _serviceHelper.Post<ChargeResponse, ChargeRequestBase>(request, "charges", overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 		/// <summary>
 		/// Retrieve full list of charges, limited to 1000

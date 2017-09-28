@@ -4,7 +4,7 @@ namespace Paydock_dotnet_sdk.Services
 {
     public interface ICharges
     {
-        ChargeResponse Add(ChargeRequest request);
+        ChargeResponse Add(ChargeRequestBase request);
         ChargeItemsResponse Get();
         ChargeItemResponse Get(string chargeId);
         ChargeItemsResponse Get(ChargeSearchRequest request);

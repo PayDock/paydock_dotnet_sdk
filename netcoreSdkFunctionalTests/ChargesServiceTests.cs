@@ -142,5 +142,39 @@ namespace FunctionalTests
 				result = await new Charges().Archive(charge.resource.data._id);
 			Assert.IsTrue(result.IsSuccess);
 		}
+
+		[TestCase]
+		public async Task CreateStripeConnectCharge()
+		{
+			var charge = new ChargeRequestStripeConnect
+			{
+				amount = 200.1M,
+				currency = "AUD",
+				customer = new Customer
+				{
+					payment_source = new PaymentSource
+					{
+						gateway_id = TestConfig.GatewayId,
+						card_name = "Test Name",
+						card_number = "4111111111111111",
+						card_ccv = "123",
+						expire_month = "10",
+						expire_year = "2020"
+					}
+				},
+				meta = new MetaData
+				{
+					stripe_transfer_group = "group_id",
+					stripe_transfer = new Transfer[] {
+						new Transfer { amount = 100, currency = "AUD", destination = "stripe_account_id" },
+						new Transfer { amount = 30, currency = "AUD", destination = "stripe_account_id2" }
+					}
+				}
+			};
+
+			var result = await new Charges().Add(charge);
+
+			Assert.IsTrue(result.IsSuccess);
+		}
 	}
 }

@@ -24,9 +24,9 @@ namespace FunctionalTests
                 return new Charges(overideSecretKey).Add(charge);
             else
                 return new Charges().Add(charge);
-        }
+		}
 
-        [TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(TestConfig.OverideSecretKey)]
         [TestCase(null)]
         public void SimpleCharge(string overideSecretKey)
         {
@@ -142,6 +142,40 @@ namespace FunctionalTests
             else
                 result = new Charges().Archive(charge.resource.data._id);
             Assert.IsTrue(result.IsSuccess);
-        }
-    }
+		}
+
+		[TestCase]
+		public void CreateStripeConnectCharge()
+		{
+			var charge = new ChargeRequestStripeConnect
+			{
+				amount = 200.1M,
+				currency = "AUD",
+				customer = new Customer
+				{
+					payment_source = new PaymentSource
+					{
+						gateway_id = TestConfig.GatewayId,
+						card_name = "Test Name",
+						card_number = "4111111111111111",
+						card_ccv = "123",
+						expire_month = "10",
+						expire_year = "2020"
+					}
+				},
+				meta = new MetaData
+				{
+					stripe_transfer_group = "group_id",
+					stripe_transfer = new Transfer[] {
+						new Transfer { amount = 100, currency = "AUD", destination = "stripe_account_id" },
+						new Transfer { amount = 30, currency = "AUD", destination = "stripe_account_id2" }
+					}
+				}
+			};
+
+			var result = new Charges().Add(charge);
+
+			Assert.IsTrue(result.IsSuccess);
+		}
+	}
 }

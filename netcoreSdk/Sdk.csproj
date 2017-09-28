@@ -7,12 +7,12 @@
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
     <RootNamespace>Paydock_dotnet_sdk</RootNamespace>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>1.1.2.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>C:\Users\davidcameron\Documents\GitHub\paydock_dotnet_sdk\sdk\paydock.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>Paydock_dotnet_sdk</AssemblyName>
-    <Version>1.1.0</Version>
+    <Version>1.1.2</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -26,6 +26,8 @@
     <Compile Include="..\sdk\Models\ChargeRefundRequest.cs" Link="Models\ChargeRefundRequest.cs" />
     <Compile Include="..\sdk\Models\ChargeRefundResponse.cs" Link="Models\ChargeRefundResponse.cs" />
     <Compile Include="..\sdk\Models\ChargeRequest.cs" Link="Models\ChargeRequest.cs" />
+    <Compile Include="..\sdk\Models\ChargeRequestBase.cs" Link="Models\ChargeRequestBase.cs" />
+    <Compile Include="..\sdk\Models\ChargeRequestStripeConnect.cs" Link="Models\ChargeRequestStripeConnect.cs" />
     <Compile Include="..\sdk\Models\ChargeResponse.cs" Link="Models\ChargeResponse.cs" />
     <Compile Include="..\sdk\Models\ChargeSearchRequest.cs" Link="Models\ChargeSearchRequest.cs" />
     <Compile Include="..\sdk\Models\Customer.cs" Link="Models\Customer.cs" />

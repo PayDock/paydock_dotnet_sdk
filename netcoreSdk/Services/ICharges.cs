@@ -5,7 +5,7 @@ namespace Paydock_dotnet_sdk.Services
 {
 	public interface ICharges
 	{
-		Task<ChargeResponse> Add(ChargeRequest request);
+		Task<ChargeResponse> Add(ChargeRequestBase request);
 		Task<ChargeRefundResponse> Archive(string chargeId);
 		Task<ChargeItemsResponse> Get();
 		Task<ChargeItemsResponse> Get(ChargeSearchRequest request);
