@@ -38,8 +38,12 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public async Task<TokenResponse> Create(TokenRequest request)
 		{
-			var url = "payment_sources/tokens?public_key=" + Uri.EscapeUriString(Config.PublicKey);
-			return await _serviceHelper.Post<TokenResponse, TokenRequest>(request, url, excludeSecretKey: true, overrideConfigSecretKey: _overrideConfigPublicKey);
+			var publicKey = Config.PublicKey;
+			if (!string.IsNullOrEmpty(_overrideConfigPublicKey))
+				publicKey = _overrideConfigPublicKey;
+
+			var url = "payment_sources/tokens?public_key=" + Uri.EscapeUriString(publicKey);
+			return await _serviceHelper.Post<TokenResponse, TokenRequest>(request, url, excludeSecretKey: true);
         }
     }
 }
