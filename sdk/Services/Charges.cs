@@ -72,7 +72,14 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public ChargeItemsResponse Get(ChargeSearchRequest request)
         {
-            var url = "charges/";
+			if (string.IsNullOrEmpty(request.reference)) 
+			{
+#pragma warning disable 0612
+				request.reference = request.transaction_external_id;
+#pragma warning restore 0612
+			}
+
+			var url = "charges/";
             url = url.AppendParameter("skip", request.skip);
             url = url.AppendParameter("limit", request.limit);
             url = url.AppendParameter("subscription_id", request.subscription_id);
@@ -83,9 +90,9 @@ namespace Paydock_dotnet_sdk.Services
             url = url.AppendParameter("search", request.search);
             url = url.AppendParameter("status", request.status);
             url = url.AppendParameter("archived", request.archived);
-            url = url.AppendParameter("transaction_external_id", request.transaction_external_id);
+			url = url.AppendParameter("reference", request.reference);
 
-            var response = _serviceHelper.CallPaydock(url, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
+			var response = _serviceHelper.CallPaydock(url, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
             return (ChargeItemsResponse)JsonConvert.DeserializeObject(response, typeof(ChargeItemsResponse));
         }

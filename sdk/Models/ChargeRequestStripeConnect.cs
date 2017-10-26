@@ -3,7 +3,7 @@
     public class ChargeRequestStripeConnect : ChargeRequestBase
 	{
 		public MetaData meta;
-		public Transfer[] transfer;
+		public Transfer transfer;
 	}
 
 	public class MetaData
