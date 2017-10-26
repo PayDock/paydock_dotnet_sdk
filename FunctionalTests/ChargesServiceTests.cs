@@ -144,31 +144,10 @@ namespace FunctionalTests
 			Assert.IsTrue(result.IsSuccess);
 		}
 
-		private ChargeRequestStripeConnect CreateBasicStripeConnectCharge()
-		{
-			return new ChargeRequestStripeConnect
-			{
-				amount = 200.1M,
-				currency = "AUD",
-				customer = new Customer
-				{
-					payment_source = new PaymentSource
-					{
-						gateway_id = TestConfig.GatewayId,
-						card_name = "Test Name",
-						card_number = "4111111111111111",
-						card_ccv = "123",
-						expire_month = "10",
-						expire_year = "2020"
-					}
-				}
-			};
-		}
-
 		[TestCase]
 		public void CreateStripeConnectChargeWithTransfer()
 		{
-			var charge = CreateBasicStripeConnectCharge();
+			var charge = RequestFactory.CreateBasicStripeConnectCharge();
 			charge.transfer = new Transfer
 			{
 				stripe_transfer_group = "group_id",
@@ -186,7 +165,7 @@ namespace FunctionalTests
 		[TestCase]
 		public void CreateStripeConnectDirectCharge()
 		{
-			var charge = CreateBasicStripeConnectCharge();
+			var charge = RequestFactory.CreateBasicStripeConnectCharge();
 			charge.meta = new MetaData
 			{
 				stripe_direct_account_id = "stripe_account_id",
@@ -201,7 +180,7 @@ namespace FunctionalTests
 		[TestCase]
 		public void CreateStripeConnectDestinationCharge()
 		{
-			var charge = CreateBasicStripeConnectCharge();
+			var charge = RequestFactory.CreateBasicStripeConnectCharge();
 			charge.meta = new MetaData
 			{
 				stripe_direct_account_id = "stripe_account_id",

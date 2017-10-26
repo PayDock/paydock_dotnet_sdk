@@ -144,32 +144,46 @@ namespace FunctionalTests
 		}
 
 		[TestCase]
-		public async Task CreateStripeConnectCharge()
+		public async Task CreateStripeConnectChargeWithTransfer()
 		{
-			var charge = new ChargeRequestStripeConnect
+			var charge = RequestFactory.CreateBasicStripeConnectCharge();
+			charge.transfer = new Transfer
 			{
-				amount = 200.1M,
-				currency = "AUD",
-				customer = new Customer
-				{
-					payment_source = new PaymentSource
-					{
-						gateway_id = TestConfig.GatewayId,
-						card_name = "Test Name",
-						card_number = "4111111111111111",
-						card_ccv = "123",
-						expire_month = "10",
-						expire_year = "2020"
+				stripe_transfer_group = "group_id",
+				items = new Transfer.TransferItems[] {
+						new Transfer.TransferItems { amount = 100, currency = "AUD", destination = "stripe_account_id" },
+						new Transfer.TransferItems { amount = 30, currency = "AUD", destination = "stripe_account_id2" }
 					}
-				},
-				meta = new MetaData
-				{
-					stripe_transfer_group = "group_id",
-					stripe_transfer = new Transfer[] {
-						new Transfer { amount = 100, currency = "AUD", destination = "stripe_account_id" },
-						new Transfer { amount = 30, currency = "AUD", destination = "stripe_account_id2" }
-					}
-				}
+			};
+			
+			var result = await new Charges().Add(charge);
+
+			Assert.IsTrue(result.IsSuccess);
+		}
+
+		[TestCase]
+		public async Task CreateStripeConnectDirectCharge()
+		{
+			var charge = RequestFactory.CreateBasicStripeConnectCharge();
+			charge.meta = new MetaData
+			{
+				stripe_direct_account_id = "stripe_account_id",
+				stripe_application_fee = 2M
+			};
+
+			var result = await new Charges().Add(charge);
+
+			Assert.IsTrue(result.IsSuccess);
+		}
+
+		[TestCase]
+		public async Task CreateStripeConnectDestinationCharge()
+		{
+			var charge = RequestFactory.CreateBasicStripeConnectCharge();
+			charge.meta = new MetaData
+			{
+				stripe_direct_account_id = "stripe_account_id",
+				stripe_application_fee = 2M
 			};
 
 			var result = await new Charges().Add(charge);
