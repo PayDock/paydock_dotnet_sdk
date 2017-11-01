@@ -6,8 +6,8 @@ namespace Paydock_dotnet_sdk.Models
     {
         public ErrorResponse ErrorResponse { get; private set; }
 
-        public ResponseException(ErrorResponse errorResponse, string error)
-            : base(error)
+        public ResponseException(ErrorResponse errorResponse, string error, Exception innerException = null)
+            : base(error, innerException)
         {
             this.ErrorResponse = errorResponse;
         }

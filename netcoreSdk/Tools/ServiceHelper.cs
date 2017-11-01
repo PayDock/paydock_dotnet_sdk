@@ -62,7 +62,7 @@ namespace Paydock_dotnet_sdk.Services
 			var responseString = await response.Content.ReadAsStringAsync();
 
 			if (!response.IsSuccessStatusCode)
-				ResponseExceptionFactory.CreateResponseException(responseString);
+				ResponseExceptionFactory.CreateResponseException(responseString, null);
 
 			return JsonConvert.DeserializeObject<T>(responseString);
 		}

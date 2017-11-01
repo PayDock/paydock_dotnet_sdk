@@ -10,7 +10,7 @@ namespace Paydock_dotnet_sdk.Tools
 {
 	public static class ResponseExceptionFactory
 	{
-		public static void CreateResponseException(string result)
+		public static void CreateResponseException(string result, Exception innerException)
 		{
 			dynamic obj = JsonConvert.DeserializeObject<ExpandoObject>(result, new ExpandoObjectConverter());
 			var errorResponse = new ErrorResponse()
@@ -30,7 +30,7 @@ namespace Paydock_dotnet_sdk.Tools
 				errorResponse.ErrorMessage = (string)json["error"]["message"]["message"];
 			}
 
-			throw new ResponseException(errorResponse, errorResponse.Status.ToString());
+			throw new ResponseException(errorResponse, errorResponse.Status.ToString(), innerException);
 		}
 
 		public static void CreateTimeoutException()

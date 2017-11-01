@@ -104,7 +104,7 @@ namespace Paydock_dotnet_sdk.Tools
             using (var reader = new StreamReader(exception.Response.GetResponseStream()))
             {
 				var result = reader.ReadToEnd();
-				ResponseExceptionFactory.CreateResponseException(result);
+				ResponseExceptionFactory.CreateResponseException(result, exception);
 			}
         }
     }
