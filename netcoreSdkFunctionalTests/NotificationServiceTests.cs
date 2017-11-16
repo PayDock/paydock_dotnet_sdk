@@ -44,6 +44,32 @@ namespace FunctionalTests
 
 		[TestCase(TestConfig.OverideSecretKey)]
 		[TestCase(null)]
+		public async Task GetTemplates(string overideSecretKey)
+		{
+			NotificationTemplateItemsResponse result;
+			if (overideSecretKey != null)
+				result = await new Notifications(overideSecretKey).GetTemplates();
+			else
+				result = await new Notifications().GetTemplates();
+			Assert.IsTrue(result.IsSuccess);
+		}
+
+		[TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(null)]
+		public async Task GetTemplate(string overideSecretKey)
+		{
+			var template = await CreateBasicNotificationTemplate(overideSecretKey);
+
+			NotificationTemplateResponse result;
+			if (overideSecretKey != null)
+				result = await new Notifications(overideSecretKey).GetTemplate(template.resource.data._id);
+			else
+				result = await new Notifications().GetTemplate(template.resource.data._id);
+			Assert.IsTrue(result.IsSuccess);
+		}
+
+		[TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(null)]
 		public async Task UpdateTemplate(string overideSecretKey)
 		{
 			var template = await CreateBasicNotificationTemplate(overideSecretKey);

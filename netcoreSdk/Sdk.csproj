@@ -49,6 +49,7 @@
     <Compile Include="..\sdk\Models\GatewayUpdateRequest.cs" Link="Models\GatewayUpdateRequest.cs" />
     <Compile Include="..\sdk\Models\NotificationLogRequest.cs" Link="Models\NotificationLogRequest.cs" />
     <Compile Include="..\sdk\Models\NotificationLogsResponse.cs" Link="Models\NotificationLogsResponse.cs" />
+    <Compile Include="..\sdk\Models\NotificationTemplateItemsResponse.cs" Link="Models\NotificationTemplateItemsResponse.cs" />
     <Compile Include="..\sdk\Models\NotificationTemplateRequest.cs" Link="Models\NotificationTemplateRequest.cs" />
     <Compile Include="..\sdk\Models\NotificationTemplateResponse.cs" Link="Models\NotificationTemplateResponse.cs" />
     <Compile Include="..\sdk\Models\NotificationTemplateUpdateRequest.cs" Link="Models\NotificationTemplateUpdateRequest.cs" />

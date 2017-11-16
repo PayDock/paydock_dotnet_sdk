@@ -66,6 +66,29 @@ namespace Paydock_dotnet_sdk.Services
 		}
 
 		/// <summary>
+		/// Delete a notification template
+		/// </summary>
+		/// <param name="subscriptionId">id of the notification template</param>
+		/// <returns>information on the notification template</returns>
+		[RequiresConfig]
+		public async Task<NotificationTemplateResponse> GetTemplate(string notificationTemplateId)
+		{
+			notificationTemplateId = Uri.EscapeUriString(notificationTemplateId);
+			return await _serviceHelper.Get<NotificationTemplateResponse>("notifications/templates/" + notificationTemplateId, overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Delete a notification template
+		/// </summary>
+		/// <param name="subscriptionId">id of the notification template</param>
+		/// <returns>information on the notification template</returns>
+		[RequiresConfig]
+		public async Task<NotificationTemplateItemsResponse> GetTemplates()
+		{
+			return await _serviceHelper.Get<NotificationTemplateItemsResponse>("notifications/templates", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
 		/// Creates a notification trigger
 		/// </summary>
 		/// <param name="request">data to create the trigger</param>
