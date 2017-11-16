@@ -76,6 +76,7 @@
     <Compile Include="Models\GatewayResponse.cs" />
     <Compile Include="Models\NotificationLogRequest.cs" />
     <Compile Include="Models\NotificationLogsResponse.cs" />
+    <Compile Include="Models\NotificationTemplateItemsResponse.cs" />
     <Compile Include="Models\NotificationTemplateUpdateRequest.cs" />
     <Compile Include="Models\NotificationTemplateRequest.cs" />
     <Compile Include="Models\NotificationTemplateResponse.cs" />

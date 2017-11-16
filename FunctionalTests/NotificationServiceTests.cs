@@ -65,7 +65,37 @@ namespace FunctionalTests
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(null)]
+		public void GetTemplates(string overideSecretKey)
+		{
+			var template = CreateBasicNotificationTemplate(overideSecretKey);
+
+			NotificationTemplateItemsResponse result;
+			if (overideSecretKey != null)
+				result = new Notifications(overideSecretKey).GetTemplates();
+			else
+				result = new Notifications().GetTemplates();
+
+			Assert.IsTrue(result.IsSuccess);
+		}
+
+		[TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(null)]
+		public void GetTemplate(string overideSecretKey)
+		{
+			var template = CreateBasicNotificationTemplate(overideSecretKey);
+
+			NotificationTemplateResponse result;
+			if (overideSecretKey != null)
+				result = new Notifications(overideSecretKey).GetTemplate(template.resource.data._id);
+			else
+				result = new Notifications().GetTemplate(template.resource.data._id);
+
+			Assert.IsTrue(result.IsSuccess);
+		}
+
+		[TestCase(TestConfig.OverideSecretKey)]
         [TestCase(null)]
         public void DeleteTemplate(string overideSecretKey)
         {

@@ -44,7 +44,6 @@ namespace Paydock_dotnet_sdk.Services
             var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
             response.JsonResponse = responseJson;
             return response;
-
         }
 
         /// <summary>
@@ -63,14 +62,44 @@ namespace Paydock_dotnet_sdk.Services
             response.JsonResponse = responseJson;
             return response;
 
-        }
+		}
 
-        /// <summary>
-        /// Delete a notification template
-        /// </summary>
-        /// <param name="subscriptionId">id of the notification template</param>
-        /// <returns>information on the notification template</returns>
-        [RequiresConfig]
+		/// <summary>
+		/// returns all notification templates, limited to 1000
+		/// </summary>
+		/// <returns>notification triggers</returns>
+		[RequiresConfig]
+		public NotificationTemplateItemsResponse GetTemplates()
+		{
+			var responseJson = _serviceHelper.CallPaydock("notifications/templates", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
+
+			var response = (NotificationTemplateItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateItemsResponse));
+			response.JsonResponse = responseJson;
+			return response;
+		}
+
+		/// <summary>
+		/// returns a single notification trigger
+		/// </summary>
+		/// <param name="notificationTriggerId">id for the trigger</param>
+		/// <returns>notification trigger</returns>
+		[RequiresConfig]
+		public NotificationTemplateResponse GetTemplate(string notificationTemplateId)
+		{
+			notificationTemplateId = Uri.EscapeUriString(notificationTemplateId);
+			var responseJson = _serviceHelper.CallPaydock("notifications/templates/" + notificationTemplateId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
+
+			var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
+			response.JsonResponse = responseJson;
+			return response;
+		}
+
+		/// <summary>
+		/// Delete a notification template
+		/// </summary>
+		/// <param name="subscriptionId">id of the notification template</param>
+		/// <returns>information on the notification template</returns>
+		[RequiresConfig]
         public NotificationTemplateResponse DeleteTemplate(string notificationTemplateId)
 		{
 			notificationTemplateId = Uri.EscapeUriString(notificationTemplateId);
