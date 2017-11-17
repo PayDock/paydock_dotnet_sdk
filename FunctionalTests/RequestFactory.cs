@@ -141,5 +141,16 @@ namespace FunctionalTests
 				}
 			};
 		}
+
+		public static VaultRequest CreateVaultRequest()
+		{
+			return new VaultRequest
+			{
+				card_name = "John Smith",
+				card_number = "4111111111111111",
+				expire_month = "10",
+				expire_year = "2020"
+			};
+		}
 	}
 }

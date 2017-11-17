@@ -69,6 +69,9 @@
     <Compile Include="..\sdk\Models\SubscriptionUpdateRequest.cs" Link="Models\SubscriptionUpdateRequest.cs" />
     <Compile Include="..\sdk\Models\TokenRequest.cs" Link="Models\TokenRequest.cs" />
     <Compile Include="..\sdk\Models\TokenResponse.cs" Link="Models\TokenResponse.cs" />
+    <Compile Include="..\sdk\Models\VaultItemsResponse.cs" Link="Models\VaultItemsResponse.cs" />
+    <Compile Include="..\sdk\Models\VaultRequest.cs" Link="Models\VaultRequest.cs" />
+    <Compile Include="..\sdk\Models\VaultResponse.cs" Link="Models\VaultResponse.cs" />
     <Compile Include="..\sdk\Models\Webhooks\CardExpiration.cs" Link="Models\Webhooks\CardExpiration.cs" />
     <Compile Include="..\sdk\Models\Webhooks\SubscriptionWebhook.cs" Link="Models\Webhooks\SubscriptionWebhook.cs" />
     <Compile Include="..\sdk\Models\Webhooks\TransactionWebhook.cs" Link="Models\Webhooks\TransactionWebhook.cs" />

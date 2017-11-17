@@ -8,8 +8,8 @@ namespace Paydock_dotnet_sdk.Services
     /// <summary>
     /// Provides abstraction over the /charges endpoint for the APU
     /// </summary>
-    public class Vault
-    {
+    public class Vault : IVault
+	{
         protected IServiceHelper _serviceHelper;
         protected string _overrideConfigSecretKey = null;
 

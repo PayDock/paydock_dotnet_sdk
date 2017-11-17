@@ -15,14 +15,8 @@ namespace FunctionalTests
 
 		private VaultResponse CreateBasicToken(string overrideSecretKey)
 		{
-			var request = new VaultRequest
-			{
-				card_name = "John Smith",
-				card_number = "4111111111111111",
-				expire_month = "10",
-				expire_year = "2020"
-			};
-			
+			var request = RequestFactory.CreateVaultRequest();
+
 			if (overrideSecretKey != null)
 				return new Vault(overrideSecretKey).CreateToken(request);
 			else

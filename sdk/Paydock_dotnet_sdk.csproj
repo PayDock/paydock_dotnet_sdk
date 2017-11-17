@@ -112,6 +112,7 @@
     <Compile Include="Models\Webhooks\TransactionWebhook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ChargeRequest.cs" />
+    <Compile Include="Services\IVault.cs" />
     <Compile Include="Services\Vault.cs" />
     <Compile Include="Services\Charges.cs" />
     <Compile Include="Services\Config.cs" />
