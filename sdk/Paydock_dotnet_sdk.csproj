@@ -104,11 +104,15 @@
     <Compile Include="Models\SubscriptionSchedule.cs" />
     <Compile Include="Models\TokenRequest.cs" />
     <Compile Include="Models\TokenResponse.cs" />
+    <Compile Include="Models\VaultItemsResponse.cs" />
+    <Compile Include="Models\VaultResponse.cs" />
+    <Compile Include="Models\VaultRequest.cs" />
     <Compile Include="Models\Webhooks\CardExpiration.cs" />
     <Compile Include="Models\Webhooks\SubscriptionWebhook.cs" />
     <Compile Include="Models\Webhooks\TransactionWebhook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\ChargeRequest.cs" />
+    <Compile Include="Services\Vault.cs" />
     <Compile Include="Services\Charges.cs" />
     <Compile Include="Services\Config.cs" />
     <Compile Include="Services\Customers.cs" />
