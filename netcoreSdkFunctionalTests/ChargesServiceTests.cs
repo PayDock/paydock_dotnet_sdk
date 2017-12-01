@@ -15,15 +15,20 @@ namespace FunctionalTests
 		{
 			TestConfig.Init();
 		}
+
+		private Charges CreateSvc(string overideSecretKey)
+		{
+			if (overideSecretKey != null)
+				return new Charges(overideSecretKey);
+			else
+				return new Charges();
+		}
 		
 		private async Task<ChargeResponse> CreateBasicCharge(decimal amount, string gatewayId, string customerEmail = "", string overideSecretKey = null)
 		{
 			var charge = RequestFactory.CreateChargeRequest(amount, gatewayId, customerEmail);
 
-			if (overideSecretKey != null)
-				return await new Charges(overideSecretKey).Add(charge);
-			else
-				return await new Charges().Add(charge);
+			return await CreateSvc(overideSecretKey).Add(charge);
 		}
 
 		[TestCase(TestConfig.OverideSecretKey)]
@@ -41,10 +46,7 @@ namespace FunctionalTests
 		{
 			await CreateBasicCharge(5, TestConfig.GatewayId, overideSecretKey: overideSecretKey);
 			ChargeItemsResponse result;
-			if (overideSecretKey != null)
-				result = await new Charges(overideSecretKey).Get();
-			else
-				result = await new Charges().Get();
+			result = await CreateSvc(overideSecretKey).Get();
 			Assert.IsTrue(result.IsSuccess);
 		}
 
@@ -55,10 +57,7 @@ namespace FunctionalTests
 			var reference = Guid.NewGuid().ToString();
 			await CreateBasicCharge(6, TestConfig.GatewayId, reference, overideSecretKey: overideSecretKey);
 			ChargeItemsResponse result;
-			if (overideSecretKey != null)
-				result = await new Charges(overideSecretKey).Get(new ChargeSearchRequest { gateway_id = TestConfig.GatewayId, search = reference });
-			else
-				result = await new Charges().Get(new ChargeSearchRequest { gateway_id = TestConfig.GatewayId, search = reference });
+			result = await CreateSvc(overideSecretKey).Get(new ChargeSearchRequest { gateway_id = TestConfig.GatewayId, search = reference });
 			Assert.IsTrue(result.IsSuccess);
 			Assert.AreEqual(1, result.resource.data.Count());
 		}
@@ -69,10 +68,7 @@ namespace FunctionalTests
 		{
 			var charge = await CreateBasicCharge(6, TestConfig.GatewayId, overideSecretKey: overideSecretKey);
 			ChargeItemResponse result;
-			if (overideSecretKey != null)
-				result = await new Charges(overideSecretKey).Get(charge.resource.data._id);
-			else
-				result = await new Charges(overideSecretKey).Get(charge.resource.data._id);
+			result = await CreateSvc(overideSecretKey).Get(charge.resource.data._id);
 			Assert.IsTrue(result.IsSuccess);
 		}
 
@@ -82,11 +78,7 @@ namespace FunctionalTests
 		{
 			try
 			{
-				ChargeItemResponse result;
-				if (overideSecretKey != null)
-					result = await new Charges(overideSecretKey).Get("invalid_id_string");
-				else
-					result = await new Charges().Get("invalid_id_string");
+				ChargeItemResponse result = await CreateSvc(overideSecretKey).Get("invalid_id_string");
 			}
 			catch (ResponseException ex)
 			{
@@ -103,10 +95,7 @@ namespace FunctionalTests
 			// NOTE: depending on the gateway, refunds may fail if transactions have not settled
 			var charge = await CreateBasicCharge(7, TestConfig.GatewayId, overideSecretKey: overideSecretKey);
 			ChargeRefundResponse result;
-			if (overideSecretKey != null)
-				result = await new Charges(overideSecretKey).Refund(charge.resource.data._id, 7);
-			else
-				result = await new Charges().Refund(charge.resource.data._id, 7);
+			result = await CreateSvc(overideSecretKey).Refund(charge.resource.data._id, 7);
 			Assert.IsTrue(result.IsSuccess);
 		}
 
@@ -136,15 +125,13 @@ namespace FunctionalTests
 		{
 			var charge = await CreateBasicCharge(8, TestConfig.GatewayId, overideSecretKey: overideSecretKey);
 			ChargeRefundResponse result;
-			if (overideSecretKey != null)
-				result = await new Charges(overideSecretKey).Archive(charge.resource.data._id);
-			else
-				result = await new Charges().Archive(charge.resource.data._id);
+			result = await CreateSvc(overideSecretKey).Archive(charge.resource.data._id);
 			Assert.IsTrue(result.IsSuccess);
 		}
 
-		[TestCase]
-		public async Task CreateStripeConnectChargeWithTransfer()
+		[TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(null)]
+		public async Task CreateStripeConnectChargeWithTransfer(string overideSecretKey)
 		{
 			var charge = RequestFactory.CreateBasicStripeConnectCharge();
 			charge.transfer = new Transfer
@@ -156,13 +143,14 @@ namespace FunctionalTests
 					}
 			};
 			
-			var result = await new Charges().Add(charge);
+			var result = await CreateSvc(overideSecretKey).Add(charge);
 
 			Assert.IsTrue(result.IsSuccess);
 		}
 
-		[TestCase]
-		public async Task CreateStripeConnectDirectCharge()
+		[TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(null)]
+		public async Task CreateStripeConnectDirectCharge(string overideSecretKey)
 		{
 			var charge = RequestFactory.CreateBasicStripeConnectCharge();
 			charge.meta = new MetaData
@@ -171,13 +159,14 @@ namespace FunctionalTests
 				stripe_application_fee = 2M
 			};
 
-			var result = await new Charges().Add(charge);
+			var result = await CreateSvc(overideSecretKey).Add(charge);
 
 			Assert.IsTrue(result.IsSuccess);
 		}
 
-		[TestCase]
-		public async Task CreateStripeConnectDestinationCharge()
+		[TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(null)]
+		public async Task CreateStripeConnectDestinationCharge(string overideSecretKey)
 		{
 			var charge = RequestFactory.CreateBasicStripeConnectCharge();
 			charge.meta = new MetaData
@@ -186,9 +175,50 @@ namespace FunctionalTests
 				stripe_application_fee = 2M
 			};
 
-			var result = await new Charges().Add(charge);
+			var result = await CreateSvc(overideSecretKey).Add(charge);
 
 			Assert.IsTrue(result.IsSuccess);
+		}
+
+		[TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(null)]
+		public async Task CreateAuthoriseCharge(string overideSecretKey)
+		{
+			var charge = RequestFactory.CreateChargeRequest(20M, TestConfig.AuthoriseGatewayId);
+
+			var result = await CreateSvc(overideSecretKey).Authorise(charge);
+
+			Assert.IsTrue(result.IsSuccess);
+		}
+
+		[TestCase(TestConfig.OverideSecretKey, null)]
+		[TestCase(null, null)]
+		[TestCase(null, 10)]
+		public async Task AuthoriseAndCaptureCharge(string overideSecretKey, decimal? amount)
+		{
+			var svc = CreateSvc(overideSecretKey);
+			var charge = RequestFactory.CreateChargeRequest(20M, TestConfig.AuthoriseGatewayId);
+
+			var chargeResponse = await svc.Authorise(charge);
+
+			var authoriseResponse = await svc.Capture(chargeResponse.resource.data._id, amount);
+
+			Assert.IsTrue(authoriseResponse.IsSuccess);
+		}
+
+		[TestCase(TestConfig.OverideSecretKey, null)]
+		[TestCase(null, null)]
+		[TestCase(null, 10)]
+		public async Task AuthoriseAndCancelCharge(string overideSecretKey, decimal? amount)
+		{
+			var svc = CreateSvc(overideSecretKey);
+			var charge = RequestFactory.CreateChargeRequest(20M, TestConfig.AuthoriseGatewayId);
+
+			var chargeResponse = await svc.Authorise(charge);
+
+			var cancelAuthoriseResponse = await svc.CancelAuthorisation(chargeResponse.resource.data._id);
+
+			Assert.IsTrue(cancelAuthoriseResponse.IsSuccess);
 		}
 	}
 }

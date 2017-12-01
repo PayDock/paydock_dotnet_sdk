@@ -61,11 +61,14 @@ namespace Paydock_dotnet_sdk.Tools
 			request.Timeout = Config.TimeoutMilliseconds;
 
 			string result = "";
-            
+
             if (method == HttpMethod.POST || method == HttpMethod.PUT)
             {
                 using (var stream = request.GetRequestStream())
                 {
+					if (json is null)
+						json = "";
+
                     var data = Encoding.UTF8.GetBytes(json);
                     stream.Write(data, 0, json.Length);
                 }

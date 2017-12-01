@@ -2,6 +2,7 @@
 using Paydock_dotnet_sdk.Models;
 using Newtonsoft.Json;
 using Paydock_dotnet_sdk.Tools;
+using Newtonsoft.Json.Linq;
 
 namespace Paydock_dotnet_sdk.Services
 {
@@ -48,13 +49,67 @@ namespace Paydock_dotnet_sdk.Services
             var response = (ChargeResponse) JsonConvert.DeserializeObject(responseJson, typeof(ChargeResponse));
             response.JsonResponse = responseJson;
             return response;
-        }
+		}
 
-        /// <summary>
-        /// Retrieve full list of charges, limited to 1000
-        /// </summary>
-        /// <returns>List of charges</returns>
-        [RequiresConfig]
+		/// <summary>
+		/// Add an authorise charge
+		/// </summary>
+		/// <param name="request">Charge data</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public ChargeResponse Authorise(ChargeRequestBase request)
+		{
+			var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+			var responseJson = _serviceHelper.CallPaydock("charges?capture=false", HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
+
+			var response = (ChargeResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeResponse));
+			response.JsonResponse = responseJson;
+			return response;
+		}
+
+		/// <summary>
+		/// Capture a previously authorised charge
+		/// </summary>
+		/// <param name="chargeId">id for the charge to capture</param>
+		/// <param name="amount">amount to capture</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public ChargeResponse Capture(string chargeId, decimal? amount = null)
+		{
+			string requestData =  null;
+			if (amount.HasValue)
+			{
+				requestData = new JObject(new JProperty("amount", amount.Value.ToString())).ToString();
+			}
+			chargeId = Uri.EscapeUriString(chargeId);
+			var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}/capture", chargeId), HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
+
+			var response = (ChargeResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeResponse));
+			response.JsonResponse = responseJson;
+			return response;
+		}
+
+		/// <summary>
+		/// cancel a previously authorised charge
+		/// </summary>
+		/// <param name="chargeId">id for the charge to capture</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public ChargeResponse CancelAuthorisation(string chargeId)
+		{
+			chargeId = Uri.EscapeUriString(chargeId);
+			var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}/capture", chargeId), HttpMethod.DELETE, null, overrideConfigSecretKey: _overrideConfigSecretKey);
+
+			var response = (ChargeResponse)JsonConvert.DeserializeObject(responseJson, typeof(ChargeResponse));
+			response.JsonResponse = responseJson;
+			return response;
+		}
+
+		/// <summary>
+		/// Retrieve full list of charges, limited to 1000
+		/// </summary>
+		/// <returns>List of charges</returns>
+		[RequiresConfig]
         public ChargeItemsResponse Get()
         {
             var responseJson = _serviceHelper.CallPaydock("charges", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
@@ -123,6 +178,7 @@ namespace Paydock_dotnet_sdk.Services
         public ChargeRefundResponse Refund(string chargeId, decimal amount)
         {
             chargeId = Uri.EscapeUriString(chargeId);
+			// TODO: clean this up
             var json = string.Format("{{\"amount\" : \"{0}\"}}", amount);
             var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}/refunds", chargeId), HttpMethod.POST, json, overrideConfigSecretKey: _overrideConfigSecretKey);
 

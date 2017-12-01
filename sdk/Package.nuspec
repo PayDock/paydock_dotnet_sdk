@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>PaydockSdk</id>
-    <version>1.1.23</version>
+    <version>1.1.24</version>
     <authors>Paydock</authors>
     <owners>Paydock</owners>
     <licenseUrl>https://github.com/PayDockDev/paydock_dotnet_sdk/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/PayDockDev/paydock_dotnet_sdk</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net SDK</description>
-    <releaseNotes>1.1.23 Added support for Vault</releaseNotes>
+    <releaseNotes>1.1.24 Added support for authorise and capture</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags></tags>
     <dependencies>

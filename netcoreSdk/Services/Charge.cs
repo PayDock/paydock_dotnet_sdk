@@ -31,7 +31,6 @@ namespace Paydock_dotnet_sdk.Services
 			_overrideConfigSecretKey = overrideConfigSecretKey;
 		}
 
-
 		/// <summary>
 		/// Add a charge
 		/// </summary>
@@ -42,6 +41,49 @@ namespace Paydock_dotnet_sdk.Services
 		{
 			return await _serviceHelper.Post<ChargeResponse, ChargeRequestBase>(request, "charges", overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
+
+		/// <summary>
+		/// Authorise a charge
+		/// </summary>
+		/// <param name="request">Charge data</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> Authorise(ChargeRequestBase request)
+		{
+			return await _serviceHelper.Post<ChargeResponse, ChargeRequestBase>(request, "charges?capture=false", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Capture a charge
+		/// </summary>
+		/// <param name="chargeId">id for the charge to capture</param>
+		/// <param name="amount">amount to capture</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> Capture(string chargeId, decimal? amount)
+		{
+			object requestData = null;
+			if (amount.HasValue)
+			{
+				requestData = new { amount = amount.Value };
+			}
+
+			chargeId = Uri.EscapeUriString(chargeId);
+			return await _serviceHelper.Post<ChargeResponse, object>(requestData, string.Format("charges/{0}/capture", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// cancel a previously authorised charge
+		/// </summary>
+		/// <param name="chargeId">id for the charge to capture</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> CancelAuthorisation(string chargeId)
+		{
+			chargeId = Uri.EscapeUriString(chargeId);
+			return await _serviceHelper.Delete<ChargeResponse>(string.Format("charges/{0}/capture", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
 		/// <summary>
 		/// Retrieve full list of charges, limited to 1000
 		/// </summary>
@@ -60,6 +102,13 @@ namespace Paydock_dotnet_sdk.Services
 		[RequiresConfig]
 		public async Task<ChargeItemsResponse> Get(ChargeSearchRequest request)
 		{
+			if (string.IsNullOrEmpty(request.reference))
+			{
+#pragma warning disable 0612
+				request.reference = request.transaction_external_id;
+#pragma warning restore 0612
+			}
+
 			var url = "charges/";
 			url = url.AppendParameter("skip", request.skip);
 			url = url.AppendParameter("limit", request.limit);
@@ -71,7 +120,7 @@ namespace Paydock_dotnet_sdk.Services
 			url = url.AppendParameter("search", request.search);
 			url = url.AppendParameter("status", request.status);
 			url = url.AppendParameter("archived", request.archived);
-			url = url.AppendParameter("transaction_external_id", request.transaction_external_id);
+			url = url.AppendParameter("reference", request.reference);
 
 			return await _serviceHelper.Get<ChargeItemsResponse>(url, overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
@@ -84,7 +133,8 @@ namespace Paydock_dotnet_sdk.Services
 		[RequiresConfig]
 		public async Task<ChargeItemResponse> Get(string chargeId)
 		{
-			return await _serviceHelper.Get<ChargeItemResponse>("charges/" + chargeId, overrideConfigSecretKey: _overrideConfigSecretKey);
+			chargeId = Uri.EscapeUriString(chargeId);
+			return await _serviceHelper.Get<ChargeItemResponse>(string.Format("charges/{0}", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 
 		/// <summary>
@@ -97,8 +147,9 @@ namespace Paydock_dotnet_sdk.Services
 		public async Task<ChargeRefundResponse> Refund(string chargeId, decimal amount)
 		{
 			chargeId = Uri.EscapeUriString(chargeId);
-			var json = string.Format("{{\"amount\" : \"{0}\"}}", amount);
-			return await _serviceHelper.Get<ChargeRefundResponse>(string.Format("charges/{0}/refunds", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+			object requestData = new { amount = amount };
+
+			return await _serviceHelper.Post<ChargeRefundResponse, object>(requestData, string.Format("charges/{0}/refunds", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 
 		/// <summary>
