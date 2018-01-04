@@ -1,12 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.IO;
-using System.Dynamic;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json;
-using Paydock_dotnet_sdk.Models;
-using Newtonsoft.Json.Linq;
 using System.Text;
 using Paydock_dotnet_sdk.Services;
 
@@ -66,7 +59,7 @@ namespace Paydock_dotnet_sdk.Tools
             {
                 using (var stream = request.GetRequestStream())
                 {
-					if (json is null)
+					if (json == null)
 						json = "";
 
                     var data = Encoding.UTF8.GetBytes(json);
