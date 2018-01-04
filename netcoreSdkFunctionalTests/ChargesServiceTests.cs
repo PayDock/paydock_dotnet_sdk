@@ -82,7 +82,7 @@ namespace FunctionalTests
 			}
 			catch (ResponseException ex)
 			{
-				Assert.IsTrue(ex.ErrorResponse.Status == 404);
+				Assert.AreEqual(404, ex.ErrorResponse.Status);
 				return;
 			}
 			Assert.Fail();
