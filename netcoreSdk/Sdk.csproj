@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
@@ -12,7 +12,7 @@
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>C:\Users\davidcameron\Documents\GitHub\paydock_dotnet_sdk\sdk\paydock.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>Paydock_dotnet_sdk</AssemblyName>
-    <Version>1.1.7</Version>
+    <Version>1.1.8</Version>
     <Description>Paydock .Net Core SDK</Description>
   </PropertyGroup>
 
