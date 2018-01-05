@@ -6,7 +6,7 @@ namespace Paydock_dotnet_sdk.Services
 	{
 		public T Parse<T>(string postData)
 		{
-			return JsonConvert.DeserializeObject<T>(postData);
+			return JsonConvert.DeserializeObject<T>(postData, new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
 		}
 	}
 }

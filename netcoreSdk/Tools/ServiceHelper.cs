@@ -47,7 +47,7 @@ namespace Paydock_dotnet_sdk.Services
 			if (data == null)
 				return null;
 
-			return JsonConvert.SerializeObject(data, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+			return JsonConvert.SerializeObject(data, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, DateTimeZoneHandling = DateTimeZoneHandling.Utc });
 		}
 
 		private static async Task<HttpResponseMessage> SendRequest(HttpClient httpClient, HttpRequestMessage request)
@@ -72,7 +72,7 @@ namespace Paydock_dotnet_sdk.Services
 			if (!response.IsSuccessStatusCode)
 				ResponseExceptionFactory.CreateResponseException(responseString, null);
 
-			return JsonConvert.DeserializeObject<T>(responseString);
+			return JsonConvert.DeserializeObject<T>(responseString, new JsonSerializerSettings { DateTimeZoneHandling = DateTimeZoneHandling.Utc });
 		}
 
 		private (HttpRequestMessage httpRequest, HttpClient httpClient) BuildRequest(HttpMethod method, string endpoint, string jsonBody = null,

@@ -39,10 +39,10 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public CustomerResponse Add(CustomerRequest request)
         {
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var requestData = SerializeHelper.Serialize(request);
             var responseJson = _serviceHelper.CallPaydock("customers", HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (CustomerResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerResponse));
+			var response = SerializeHelper.Deserialize<CustomerResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -56,7 +56,7 @@ namespace Paydock_dotnet_sdk.Services
         {
             var responseJson = _serviceHelper.CallPaydock("customers", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (CustomerItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemsResponse));
+			var response = SerializeHelper.Deserialize<CustomerItemsResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -83,7 +83,7 @@ namespace Paydock_dotnet_sdk.Services
 
 			var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (CustomerItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemsResponse));
+			var response = SerializeHelper.Deserialize<CustomerItemsResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -99,7 +99,7 @@ namespace Paydock_dotnet_sdk.Services
 			customerId = Uri.EscapeUriString(customerId);
 			var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (CustomerItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemResponse));
+			var response = SerializeHelper.Deserialize<CustomerItemResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -113,10 +113,10 @@ namespace Paydock_dotnet_sdk.Services
         public CustomerItemResponse Update(CustomerUpdateRequest request)
 		{
 			var customerId = Uri.EscapeUriString(request.customer_id);
-			var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+			var requestData = SerializeHelper.Serialize(request);
             var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (CustomerItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemResponse));
+			var response = SerializeHelper.Deserialize<CustomerItemResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -132,7 +132,7 @@ namespace Paydock_dotnet_sdk.Services
 			customerId = Uri.EscapeUriString(customerId);
 			var responseJson = _serviceHelper.CallPaydock("customers/" + customerId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (CustomerItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(CustomerItemResponse));
+			var response = SerializeHelper.Deserialize<CustomerItemResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }

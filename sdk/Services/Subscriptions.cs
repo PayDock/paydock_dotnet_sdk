@@ -38,10 +38,10 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public SubscriptionResponse Add(SubscriptionRequest request)
         {
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var requestData = SerializeHelper.Serialize(request);
             var responseJson = _serviceHelper.CallPaydock("subscriptions", HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (SubscriptionResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionResponse));
+			var response = SerializeHelper.Deserialize<SubscriptionResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -55,10 +55,10 @@ namespace Paydock_dotnet_sdk.Services
         public SubscriptionResponse Update(SubscriptionUpdateRequest request)
 		{
 			var subscriptionId = Uri.EscapeUriString(request._id);
-			var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+			var requestData = SerializeHelper.Serialize(request);
             var responseJson = _serviceHelper.CallPaydock("subscriptions/" + subscriptionId, HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (SubscriptionResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionResponse));
+			var response = SerializeHelper.Deserialize<SubscriptionResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -72,7 +72,7 @@ namespace Paydock_dotnet_sdk.Services
         {
             var responseJson = _serviceHelper.CallPaydock("subscriptions", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (SubscriptionItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemsResponse));
+			var response = SerializeHelper.Deserialize<SubscriptionItemsResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -97,7 +97,7 @@ namespace Paydock_dotnet_sdk.Services
 
             var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (SubscriptionItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemsResponse));
+			var response = SerializeHelper.Deserialize<SubscriptionItemsResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -113,7 +113,7 @@ namespace Paydock_dotnet_sdk.Services
 			subscriptionId = Uri.EscapeUriString(subscriptionId);
 			var responseJson = _serviceHelper.CallPaydock("subscriptions/" + subscriptionId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (SubscriptionItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemResponse));
+			var response = SerializeHelper.Deserialize<SubscriptionItemResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -128,7 +128,7 @@ namespace Paydock_dotnet_sdk.Services
 			subscriptionId = Uri.EscapeUriString(subscriptionId);
 			var responseJson = _serviceHelper.CallPaydock("subscriptions/" + subscriptionId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (SubscriptionItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(SubscriptionItemResponse));
+			var response = SerializeHelper.Deserialize<SubscriptionItemResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }

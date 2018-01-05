@@ -38,10 +38,10 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public NotificationTemplateResponse AddTemplate(NotificationTemplateRequest request)
         {
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var requestData = SerializeHelper.Serialize(request);
             var responseJson = _serviceHelper.CallPaydock("notifications/templates", HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
+			var response = SerializeHelper.Deserialize<NotificationTemplateResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -55,10 +55,10 @@ namespace Paydock_dotnet_sdk.Services
         public NotificationTemplateResponse UpdateTemplate(NotificationTemplateUpdateRequest request)
 		{
 			var templateId = Uri.EscapeUriString(request._id);
-			var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+			var requestData = SerializeHelper.Serialize(request);
             var responseJson = _serviceHelper.CallPaydock("notifications/templates/" + templateId, HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
+			var response = SerializeHelper.Deserialize<NotificationTemplateResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
 
@@ -73,7 +73,7 @@ namespace Paydock_dotnet_sdk.Services
 		{
 			var responseJson = _serviceHelper.CallPaydock("notifications/templates", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-			var response = (NotificationTemplateItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateItemsResponse));
+			var response = SerializeHelper.Deserialize<NotificationTemplateItemsResponse>(responseJson);
 			response.JsonResponse = responseJson;
 			return response;
 		}
@@ -89,7 +89,7 @@ namespace Paydock_dotnet_sdk.Services
 			notificationTemplateId = Uri.EscapeUriString(notificationTemplateId);
 			var responseJson = _serviceHelper.CallPaydock("notifications/templates/" + notificationTemplateId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-			var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
+			var response = SerializeHelper.Deserialize<NotificationTemplateResponse>(responseJson);
 			response.JsonResponse = responseJson;
 			return response;
 		}
@@ -105,7 +105,7 @@ namespace Paydock_dotnet_sdk.Services
 			notificationTemplateId = Uri.EscapeUriString(notificationTemplateId);
 			var responseJson = _serviceHelper.CallPaydock("notifications/templates/" + notificationTemplateId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (NotificationTemplateResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTemplateResponse));
+			var response = SerializeHelper.Deserialize<NotificationTemplateResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -118,10 +118,10 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public NotificationTriggerResponse AddTrigger(NotificationTriggerRequest request)
         {
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var requestData = SerializeHelper.Serialize(request);
             var responseJson = _serviceHelper.CallPaydock("notifications", HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
+			var response = SerializeHelper.Deserialize<NotificationTriggerResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -135,7 +135,7 @@ namespace Paydock_dotnet_sdk.Services
         {
             var responseJson = _serviceHelper.CallPaydock("notifications", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (NotificationTriggerItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerItemsResponse));
+			var response = SerializeHelper.Deserialize<NotificationTriggerItemsResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -151,7 +151,7 @@ namespace Paydock_dotnet_sdk.Services
 			notificationTriggerId = Uri.EscapeUriString(notificationTriggerId);
 			var responseJson = _serviceHelper.CallPaydock("notifications/" + notificationTriggerId, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
+			var response = SerializeHelper.Deserialize<NotificationTriggerResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -167,7 +167,7 @@ namespace Paydock_dotnet_sdk.Services
 			notificationTriggerId = Uri.EscapeUriString(notificationTriggerId);
 			var responseJson = _serviceHelper.CallPaydock("notifications/" + notificationTriggerId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
+			var response = SerializeHelper.Deserialize<NotificationTriggerResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -192,7 +192,7 @@ namespace Paydock_dotnet_sdk.Services
 
             var responseJson = _serviceHelper.CallPaydock(url, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (NotificationLogsResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationLogsResponse));
+			var response = SerializeHelper.Deserialize<NotificationLogsResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -208,7 +208,7 @@ namespace Paydock_dotnet_sdk.Services
 			notificationLogId = Uri.EscapeUriString(notificationLogId);
 			var responseJson = _serviceHelper.CallPaydock("notifications/logs/" + notificationLogId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (NotificationTriggerResponse)JsonConvert.DeserializeObject(responseJson, typeof(NotificationTriggerResponse));
+			var response = SerializeHelper.Deserialize<NotificationTriggerResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }

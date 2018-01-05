@@ -40,10 +40,10 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public GatewayResponse Add(GatewayRequest request)
         {
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var requestData = SerializeHelper.Serialize(request);
             var responseJson = _serviceHelper.CallPaydock("gateways", HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (GatewayResponse)JsonConvert.DeserializeObject(responseJson, typeof(GatewayResponse));
+			var response = SerializeHelper.Deserialize<GatewayResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -60,7 +60,7 @@ namespace Paydock_dotnet_sdk.Services
 			gatewayid = Uri.EscapeUriString(gatewayid);
 			var responseJson = _serviceHelper.CallPaydock("gateways/" + gatewayid, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (GatewayItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(GatewayItemResponse));
+			var response = SerializeHelper.Deserialize<GatewayItemResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -76,7 +76,7 @@ namespace Paydock_dotnet_sdk.Services
 			gatewayid = Uri.EscapeUriString(gatewayid);
 			var responseJson = _serviceHelper.CallPaydock("gateways/" + gatewayid, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (GatewayItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(GatewayItemResponse));
+			var response = SerializeHelper.Deserialize<GatewayItemResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -90,10 +90,10 @@ namespace Paydock_dotnet_sdk.Services
         public GatewayItemResponse Update(GatewayUpdateRequest request)
 		{
 			var gatewayid = Uri.EscapeUriString(request._id);
-			var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+			var requestData = SerializeHelper.Serialize(request);
             var responseJson = _serviceHelper.CallPaydock("gateways/" + gatewayid, HttpMethod.PUT, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (GatewayItemResponse)JsonConvert.DeserializeObject(responseJson, typeof(GatewayItemResponse));
+			var response = SerializeHelper.Deserialize<GatewayItemResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }
@@ -107,7 +107,7 @@ namespace Paydock_dotnet_sdk.Services
         {
             var responseJson = _serviceHelper.CallPaydock("gateways", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (GatewayItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(GatewayItemsResponse));
+			var response = SerializeHelper.Deserialize<GatewayItemsResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
         }

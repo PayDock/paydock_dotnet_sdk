@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Paydock_dotnet_sdk.Models.Webhooks;
+using Paydock_dotnet_sdk.Tools;
 
 namespace Paydock_dotnet_sdk.Services
 {
@@ -7,22 +8,22 @@ namespace Paydock_dotnet_sdk.Services
 	{
 		public TransactionWebhook ParseTransaction(string postData)
 		{
-			return (TransactionWebhook)JsonConvert.DeserializeObject(postData, typeof(TransactionWebhook));
+			return SerializeHelper.Deserialize<TransactionWebhook>(postData);
 		}
 
 		public SubscriptionWebhook ParseSubscription(string postData)
 		{
-			return (SubscriptionWebhook)JsonConvert.DeserializeObject(postData, typeof(SubscriptionWebhook));
+			return SerializeHelper.Deserialize<SubscriptionWebhook>(postData);
 		}
 
 		public TransactionWebhook ParseRefund(string postData)
 		{
-			return (TransactionWebhook)JsonConvert.DeserializeObject(postData, typeof(TransactionWebhook));
+			return SerializeHelper.Deserialize<TransactionWebhook>(postData);
 		}
 
 		public CardExpirationWebhook ParseCardExpiry(string postData)
 		{
-			return (CardExpirationWebhook)JsonConvert.DeserializeObject(postData, typeof(CardExpirationWebhook));
+			return SerializeHelper.Deserialize<CardExpirationWebhook>(postData);
 		}
 	}
 }

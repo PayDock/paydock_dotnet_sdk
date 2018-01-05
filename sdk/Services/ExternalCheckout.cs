@@ -38,10 +38,10 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public ExternalCheckoutResponse Create(ExternalCheckoutRequest request)
         {
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var requestData = SerializeHelper.Serialize(request);
             var responseJson = _serviceHelper.CallPaydock("payment_sources/external_checkout", HttpMethod.POST, requestData, overrideConfigSecretKey: _overrideConfigSecretKey);
 
-            var response = (ExternalCheckoutResponse)JsonConvert.DeserializeObject(responseJson, typeof(ExternalCheckoutResponse));
+			var response = SerializeHelper.Deserialize<ExternalCheckoutResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
 

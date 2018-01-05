@@ -42,10 +42,10 @@ namespace Paydock_dotnet_sdk.Services
         [RequiresConfig]
         public VaultResponse CreateToken(VaultRequest request)
         {
-            var requestData = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var requestData = SerializeHelper.Serialize(request);
             var responseJson = _serviceHelper.CallPaydock("vault/payment_sources", HttpMethod.POST, requestData, overrideConfigSecretKey :_overrideConfigSecretKey);
 
-            var response = (VaultResponse) JsonConvert.DeserializeObject(responseJson, typeof(VaultResponse));
+			var response = SerializeHelper.Deserialize<VaultResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
 		}
@@ -62,7 +62,7 @@ namespace Paydock_dotnet_sdk.Services
 
 			var responseJson = _serviceHelper.CallPaydock("vault/payment_sources/" + vaultToken, HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-			var response = (VaultResponse)JsonConvert.DeserializeObject(responseJson, typeof(VaultResponse));
+			var response = SerializeHelper.Deserialize<VaultResponse>(responseJson);
 			response.JsonResponse = responseJson;
 			return response;
 		}
@@ -76,7 +76,7 @@ namespace Paydock_dotnet_sdk.Services
 		{
 			var responseJson = _serviceHelper.CallPaydock("vault/payment_sources", HttpMethod.GET, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-			var response = (VaultItemsResponse)JsonConvert.DeserializeObject(responseJson, typeof(VaultItemsResponse));
+			var response = SerializeHelper.Deserialize<VaultItemsResponse>(responseJson);
 			response.JsonResponse = responseJson;
 			return response;
 		}
