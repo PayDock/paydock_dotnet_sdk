@@ -23,7 +23,7 @@ namespace Paydock_dotnet_sdk.Tools
         public static string AppendParameter(this string url, string parameterName, DateTime? value)
         {
             if (value.HasValue)
-                return addUrlParameter(url, parameterName, value.Value.ToString("yyyy-MM-dd"));
+                return addUrlParameter(url, parameterName, value.Value.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffK"));
 
             return url;
         }

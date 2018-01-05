@@ -32,6 +32,25 @@ namespace UnitTests
         {
             var actual = url.AppendParameter(parameterName, value);
             Assert.AreEqual(expected, actual);
-        }
-    }
+		}
+
+		[TestCase("charge/", "key", true, false, "charge/")]
+		[TestCase("charge/", "key", false, false, "charge/?key=2017-01-01T00:00:00.000Z")]
+		[TestCase("charge/", "key", false, true, "charge/?key=2016-12-31T13:00:00.000Z")]
+		[TestCase("charge/?query=1", "key", false, true, "charge/?query=1&key=2016-12-31T13:00:00.000Z")]
+		public void AppendParameterDateTime(string url, string parameterName, bool nullDate, bool localDate, string expected)
+		{
+			DateTime? value = null;
+			if (!nullDate)
+			{
+				if (localDate)
+					value = new DateTime(2017, 1, 1, 0, 0, 0, DateTimeKind.Local);
+				else
+					value = new DateTime(2017, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+			}
+			
+			var actual = url.AppendParameter(parameterName, value);
+			Assert.AreEqual(expected, actual);
+		}
+	}
 }
