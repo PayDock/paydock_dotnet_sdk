@@ -60,7 +60,7 @@ namespace Paydock_dotnet_sdk.Services
 		/// <param name="amount">amount to capture</param>
 		/// <returns>Charge response</returns>
 		[RequiresConfig]
-		public async Task<ChargeResponse> Capture(string chargeId, decimal? amount)
+		public async Task<ChargeResponse> Capture(string chargeId, decimal? amount = null)
 		{
 			object requestData = null;
 			if (amount.HasValue)
@@ -144,7 +144,7 @@ namespace Paydock_dotnet_sdk.Services
 		/// <param name="amount">amount to refund, can be used to issue partial refunds</param>
 		/// <returns>information on the transaction</returns>
 		[RequiresConfig]
-		public async Task<ChargeRefundResponse> Refund(string chargeId, decimal amount)
+		public async Task<ChargeRefundResponse> Refund(string chargeId, decimal? amount = null)
 		{
 			chargeId = Uri.EscapeUriString(chargeId);
 			object requestData = new { amount = amount };

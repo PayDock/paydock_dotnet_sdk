@@ -10,6 +10,6 @@ namespace Paydock_dotnet_sdk.Services
 		Task<ChargeItemsResponse> Get();
 		Task<ChargeItemsResponse> Get(ChargeSearchRequest request);
 		Task<ChargeItemResponse> Get(string chargeId);
-		Task<ChargeRefundResponse> Refund(string chargeId, decimal amount);
+		Task<ChargeRefundResponse> Refund(string chargeId, decimal? amount);
 	}
 }

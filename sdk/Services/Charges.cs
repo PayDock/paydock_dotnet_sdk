@@ -175,11 +175,17 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="amount">amount to refund, can be used to issue partial refunds</param>
         /// <returns>information on the transaction</returns>
         [RequiresConfig]
-        public ChargeRefundResponse Refund(string chargeId, decimal amount)
+        public ChargeRefundResponse Refund(string chargeId, decimal? amount = null)
         {
             chargeId = Uri.EscapeUriString(chargeId);
-			// TODO: clean this up
-            var json = string.Format("{{\"amount\" : \"{0}\"}}", amount);
+
+			string requestData = null;
+			if (amount.HasValue)
+			{
+				requestData = new JObject(new JProperty("amount", amount.Value.ToString())).ToString();
+			}
+
+			var json = string.Format("{{\"amount\" : \"{0}\"}}", amount);
             var responseJson = _serviceHelper.CallPaydock(string.Format("charges/{0}/refunds", chargeId), HttpMethod.POST, json, overrideConfigSecretKey: _overrideConfigSecretKey);
 
 			var response = SerializeHelper.Deserialize<ChargeRefundResponse>(responseJson);

@@ -91,14 +91,18 @@ namespace FunctionalTests
 			Assert.Fail();
 		}
 
-		[TestCase(TestConfig.OverideSecretKey)]
-		[TestCase(null)]
-		public void Refund(string overideSecretKey)
+		[TestCase(TestConfig.OverideSecretKey, false)]
+		[TestCase(null, false)]
+		[TestCase(null, true)]
+		public void Refund(string overideSecretKey, bool isPartialRefund)
 		{
 			// NOTE: depending on the gateway, refunds may fail if transactions have not settled
 			var charge = CreateBasicCharge(7, TestConfig.GatewayId, overideSecretKey: overideSecretKey);
 			ChargeRefundResponse result;
-			result = CreateSvc(overideSecretKey).Refund(charge.resource.data._id, 7);
+			decimal? refundAmount = null;
+			if (isPartialRefund)
+				refundAmount = 6;
+			result = CreateSvc(overideSecretKey).Refund(charge.resource.data._id, refundAmount);
 			Assert.IsTrue(result.IsSuccess);
 		}
 
