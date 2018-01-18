@@ -175,6 +175,15 @@ namespace FunctionalTests
             var logs = new Notifications(overideSecretKey).GetLogs(new NotificationLogRequest());
             var result = new Notifications(overideSecretKey).DeleteLog(logs.resource.data.First()._id);
             Assert.IsTrue(result.IsSuccess);
-        }
-    }
+		}
+
+		[TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(null)]
+		public void ResendNotification(string overideSecretKey)
+		{
+			var logs = new Notifications(overideSecretKey).GetLogs(new NotificationLogRequest());
+			var result = new Notifications(overideSecretKey).ResendNotification(logs.resource.data.First()._id);
+			Assert.IsTrue(result.IsSuccess);
+		}
+	}
 }

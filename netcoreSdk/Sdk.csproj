@@ -12,7 +12,7 @@
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>C:\Users\davidcameron\Documents\GitHub\paydock_dotnet_sdk\sdk\paydock.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>Paydock_dotnet_sdk</AssemblyName>
-    <Version>1.1.9</Version>
+    <Version>1.1.10</Version>
     <Description>Paydock .Net Core SDK</Description>
   </PropertyGroup>
 
@@ -48,6 +48,7 @@
     <Compile Include="..\sdk\Models\GatewayResponse.cs" Link="Models\GatewayResponse.cs" />
     <Compile Include="..\sdk\Models\GatewayUpdateRequest.cs" Link="Models\GatewayUpdateRequest.cs" />
     <Compile Include="..\sdk\Models\NotificationLogRequest.cs" Link="Models\NotificationLogRequest.cs" />
+    <Compile Include="..\sdk\Models\NotificationLogResponse.cs" Link="Models\NotificationLogResponse.cs" />
     <Compile Include="..\sdk\Models\NotificationLogsResponse.cs" Link="Models\NotificationLogsResponse.cs" />
     <Compile Include="..\sdk\Models\NotificationTemplateItemsResponse.cs" Link="Models\NotificationTemplateItemsResponse.cs" />
     <Compile Include="..\sdk\Models\NotificationTemplateRequest.cs" Link="Models\NotificationTemplateRequest.cs" />

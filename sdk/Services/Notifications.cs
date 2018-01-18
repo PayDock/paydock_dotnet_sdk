@@ -175,7 +175,7 @@ namespace Paydock_dotnet_sdk.Services
         /// <summary>
         /// gets notification logs
         /// </summary>
-        /// <param name="request">data for the trigger</param>
+        /// <param name="request">data for the notification logs</param>
         /// <returns>notification logs</returns>
         [RequiresConfig]
         public NotificationLogsResponse GetLogs(NotificationLogRequest request)
@@ -197,20 +197,36 @@ namespace Paydock_dotnet_sdk.Services
             return response;
         }
 
-        /// <summary>
-        /// deletes a notification trigger
-        /// </summary>
-        /// <param name="notificationTriggerId">id for the trigger</param>
-        /// <returns>notification trigger</returns>
-        [RequiresConfig]
-        public NotificationTriggerResponse DeleteLog(string notificationLogId)
+		/// <summary>
+		/// deletes a notification log
+		/// </summary>
+		/// <param name="notificationLogId">id for the notification log</param>
+		/// <returns>notification log</returns>
+		[RequiresConfig]
+        public NotificationLogResponse DeleteLog(string notificationLogId)
 		{
 			notificationLogId = Uri.EscapeUriString(notificationLogId);
 			var responseJson = _serviceHelper.CallPaydock("notifications/logs/" + notificationLogId, HttpMethod.DELETE, "", overrideConfigSecretKey: _overrideConfigSecretKey);
 
-			var response = SerializeHelper.Deserialize<NotificationTriggerResponse>(responseJson);
+			var response = SerializeHelper.Deserialize<NotificationLogResponse>(responseJson);
             response.JsonResponse = responseJson;
             return response;
-        }
-    }
+		}
+
+		/// <summary>
+		/// resends a notification log
+		/// </summary>
+		/// <param name="notificationLogId">id for the notification log</param>
+		/// <returns>notification log</returns>
+		[RequiresConfig]
+		public NotificationLogResponse ResendNotification(string notificationLogId)
+		{
+			notificationLogId = Uri.EscapeUriString(notificationLogId);
+			var responseJson = _serviceHelper.CallPaydock("notifications/logs/" + notificationLogId, HttpMethod.PUT, "", overrideConfigSecretKey: _overrideConfigSecretKey);
+
+			var response = SerializeHelper.Deserialize<NotificationLogResponse>(responseJson);
+			response.JsonResponse = responseJson;
+			return response;
+		}
+	}
 }

@@ -136,7 +136,7 @@ namespace Paydock_dotnet_sdk.Services
 		/// <summary>
 		/// gets notification logs
 		/// </summary>
-		/// <param name="request">data for the trigger</param>
+		/// <param name="request">data for the notification logs</param>
 		/// <returns>notification logs</returns>
 		[RequiresConfig]
 		public async Task<NotificationLogsResponse> GetLogs(NotificationLogRequest request)
@@ -157,8 +157,8 @@ namespace Paydock_dotnet_sdk.Services
 		/// <summary>
 		/// deletes a notification trigger
 		/// </summary>
-		/// <param name="notificationLogId">id for the trigger</param>
-		/// <returns>notification trigger</returns>
+		/// <param name="notificationLogId">id for the notification log</param>
+		/// <returns>notification log</returns>
 		[RequiresConfig]
 		public async Task<NotificationLogResponse> DeleteLog(string notificationLogId)
 		{
@@ -166,12 +166,12 @@ namespace Paydock_dotnet_sdk.Services
 			return await _serviceHelper.Delete<NotificationLogResponse>("notifications/logs/" + notificationLogId, overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 
-        /// <summary>
-        /// deletes a notification trigger
-        /// </summary>
-        /// <param name="notificationLogId">id for the trigger</param>
-        /// <returns>notification trigger</returns>
-        [RequiresConfig]
+		/// <summary>
+		/// deletes a notification trigger
+		/// </summary>
+		/// <param name="notificationLogId">id for the notification log</param>
+		/// <returns>notification log</returns>
+		[RequiresConfig]
         public async Task<NotificationLogResponse> ResendNotification(string notificationLogId)
         {
             notificationLogId = Uri.EscapeUriString(notificationLogId);

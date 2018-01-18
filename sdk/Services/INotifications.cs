@@ -6,8 +6,9 @@ namespace Paydock_dotnet_sdk.Services
     {
         NotificationTemplateResponse AddTemplate(NotificationTemplateRequest request);
         NotificationTriggerResponse AddTrigger(NotificationTriggerRequest request);
-        NotificationTriggerResponse DeleteLog(string notificationLogId);
-        NotificationTemplateResponse DeleteTemplate(string notificationTemplateId);
+        NotificationLogResponse DeleteLog(string notificationLogId);
+		NotificationLogResponse ResendNotification(string notificationLogId);
+		NotificationTemplateResponse DeleteTemplate(string notificationTemplateId);
         NotificationTriggerResponse DeleteTrigger(string notificationTriggerId);
         NotificationLogsResponse GetLogs(NotificationLogRequest request);
         NotificationTriggerResponse GetTrigger(string notificationTriggerId);
