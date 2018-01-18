@@ -56,7 +56,7 @@ namespace Paydock_dotnet_sdk.Services
 		/// <summary>
 		/// Delete a notification template
 		/// </summary>
-		/// <param name="subscriptionId">id of the notification template</param>
+		/// <param name="notificationTemplateId">id of the notification template</param>
 		/// <returns>information on the notification template</returns>
 		[RequiresConfig]
 		public async Task<NotificationTemplateResponse> DeleteTemplate(string notificationTemplateId)
@@ -68,7 +68,7 @@ namespace Paydock_dotnet_sdk.Services
 		/// <summary>
 		/// Delete a notification template
 		/// </summary>
-		/// <param name="subscriptionId">id of the notification template</param>
+		/// <param name="notificationTemplateId">id of the notification template</param>
 		/// <returns>information on the notification template</returns>
 		[RequiresConfig]
 		public async Task<NotificationTemplateResponse> GetTemplate(string notificationTemplateId)
@@ -157,13 +157,25 @@ namespace Paydock_dotnet_sdk.Services
 		/// <summary>
 		/// deletes a notification trigger
 		/// </summary>
-		/// <param name="notificationTriggerId">id for the trigger</param>
+		/// <param name="notificationLogId">id for the trigger</param>
 		/// <returns>notification trigger</returns>
 		[RequiresConfig]
-		public async Task<NotificationTriggerResponse> DeleteLog(string notificationLogId)
+		public async Task<NotificationLogResponse> DeleteLog(string notificationLogId)
 		{
 			notificationLogId = Uri.EscapeUriString(notificationLogId);
-			return await _serviceHelper.Delete<NotificationTriggerResponse>("notifications/logs/" + notificationLogId, overrideConfigSecretKey: _overrideConfigSecretKey);
+			return await _serviceHelper.Delete<NotificationLogResponse>("notifications/logs/" + notificationLogId, overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
+
+        /// <summary>
+        /// deletes a notification trigger
+        /// </summary>
+        /// <param name="notificationLogId">id for the trigger</param>
+        /// <returns>notification trigger</returns>
+        [RequiresConfig]
+        public async Task<NotificationLogResponse> ResendNotification(string notificationLogId)
+        {
+            notificationLogId = Uri.EscapeUriString(notificationLogId);
+            return await _serviceHelper.Put<NotificationLogResponse, object>(null, "notifications/logs/" + notificationLogId, overrideConfigSecretKey: _overrideConfigSecretKey);
+        }
 	}
 }
