@@ -180,8 +180,8 @@ namespace FunctionalTests
 			var charge = RequestFactory.CreateBasicStripeConnectCharge();
 			charge.meta = new MetaData
 			{
-				stripe_direct_account_id = "stripe_account_id",
-				stripe_application_fee = 2M
+				stripe_destination_account_id = "stripe_account_id",
+				stripe_destination_amount = 2M
 			};
 
 			ChargeResponse result;

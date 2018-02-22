@@ -6,15 +6,16 @@ namespace FunctionalTests
     {
         public const string SecretKey = "";
         public const string GatewayId = "";
-		public const string AuthoriseGatewayId = "";
-		public const string PaypalGatewayId = "";
+        public const string PaypalGatewayId = "";
+        public const string AuthoriseGatewayId = "";
         public const string PublicKey = "";
         public const string OverideSecretKey = "";
         public const string OveridePublicKey = "";
+        public const string StripeGatewayId = "";
 
         public static void Init()
         {
             Config.Initialise(Environment.Sandbox, SecretKey, PublicKey, 60000);
-		}
+        }
     }
 }

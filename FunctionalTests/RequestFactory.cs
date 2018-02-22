@@ -131,7 +131,7 @@ namespace FunctionalTests
 				{
 					payment_source = new PaymentSource
 					{
-						gateway_id = TestConfig.GatewayId,
+						gateway_id = TestConfig.StripeGatewayId,
 						card_name = "Test Name",
 						card_number = "4111111111111111",
 						card_ccv = "123",

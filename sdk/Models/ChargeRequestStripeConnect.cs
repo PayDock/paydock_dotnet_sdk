@@ -9,9 +9,9 @@
 	public class MetaData
 	{
 		public string stripe_direct_account_id;
-		public decimal stripe_application_fee;
+		public decimal? stripe_application_fee;
 		public string stripe_destination_account_id;
-		public decimal stripe_destination_amount;
+		public decimal? stripe_destination_amount;
 	}
 
 	public class Transfer
