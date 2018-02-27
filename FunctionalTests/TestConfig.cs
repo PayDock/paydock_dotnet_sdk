@@ -12,6 +12,7 @@ namespace FunctionalTests
         public const string OverideSecretKey = "";
         public const string OveridePublicKey = "";
         public const string StripeGatewayId = "";
+        public const string StripeAccountId = "";
 
         public static void Init()
         {
