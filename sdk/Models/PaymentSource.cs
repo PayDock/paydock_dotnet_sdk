@@ -14,6 +14,7 @@ namespace Paydock_dotnet_sdk.Models
     public class PaymentSource
     {
         public string gateway_id { get; set; }
+				public string vault_token { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public PaymentType type { get; set; }
         public string account_name { get; set; }
