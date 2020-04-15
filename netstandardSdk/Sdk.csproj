@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netstandard1.2</TargetFramework>
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
     <RootNamespace>Paydock_dotnet_sdk</RootNamespace>
     <AssemblyVersion>1.1.11.0</AssemblyVersion>
     <FileVersion>1.1.11.0</FileVersion>
-    <SignAssembly>True</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>C:\Users\davidcameron\Documents\GitHub\paydock_dotnet_sdk\sdk\paydock.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>Paydock_dotnet_sdk</AssemblyName>
     <Version>1.1.11</Version>

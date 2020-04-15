@@ -1,3 +1,3 @@
 dotnet restore Sdk.csproj
-dotnet build Sdk.csproj -c:Release -f:netcoreapp1.1
+dotnet build Sdk.csproj -c:Release
 ..\nuget pack Package.nuspec

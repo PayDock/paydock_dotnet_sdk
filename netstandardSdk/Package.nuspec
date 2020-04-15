@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>PaydockSdk.Core</id>
+    <id>PaydockSdkNetStandard</id>
     <version>1.1.11</version>
     <authors>Paydock</authors>
     <owners>Paydock</owners>
     <licenseUrl>https://github.com/PayDockDev/paydock_dotnet_sdk/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/PayDockDev/paydock_dotnet_sdk</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Paydock .Net Core SDK</description>
+    <description>Paydock .Net Standard 1.2 SDK</description>
     <releaseNotes>1.1.11 corrected stripe connect support</releaseNotes>
-    <copyright>Copyright 2017</copyright>
+    <copyright>Copyright 2020</copyright>
     <tags></tags>
     <dependencies>
       <dependency id="Newtonsoft.Json" version="10.0.3" />
@@ -18,6 +18,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\release\netcoreapp1.1\Paydock_dotnet_sdk.dll" target="lib\netcoreapp\Paydock_dotnet_sdk.dll" />
+    <file src="bin\release\netstandard1.2\Paydock_dotnet_sdk.dll" target="lib\netstandard1.2\Paydock_dotnet_sdk.dll" />
   </files>
 </package>
