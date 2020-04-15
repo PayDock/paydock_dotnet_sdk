@@ -4,13 +4,13 @@ This SDK provides a wrapper around the PayDock REST API.
 
 For more info on the Paydock API, see our [full documentation](https://docs.paydock.com).
 
-In order to support the different ways our customers use PayDock, we've releaseed 2 versions of the SDK:
-* .Net 4.0 SDK
-* .Net Core SDK - with async support
+In order to support the different ways our customers use PayDock, we've released 2 versions of the SDK:
+* .Net 4.0 SDK (for pre .NET 4.5.1)
+* .Net Standard SDK - with async support (for net451+ and netcoreapp1.0+)
 
-## .Net 4.0 SDK Usage
+## SDK Usage
 
-The best way to get this is on [nuget](https://www.nuget.org/packages/PaydockSdk/)
+Get the SDK assembly from [nuget](https://www.nuget.org/packages/PaydockSdk/)
 
 # Simple example to create a single charge.
 
