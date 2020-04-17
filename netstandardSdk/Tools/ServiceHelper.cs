@@ -77,9 +77,12 @@ namespace Paydock_dotnet_sdk.Services
 
 		private (HttpRequestMessage httpRequest, HttpClient httpClient) BuildRequest(HttpMethod method, string endpoint, string jsonBody = null,
 			bool excludeSecretKey = false, string overrideConfigSecretKey = null)
-		{
-			var httpClient = new HttpClient();
-			httpClient.DefaultRequestHeaders.Accept.Clear();
+        {
+            var httpClientHandler = Config.WebProxy == null
+                ? new HttpClientHandler()
+                : new HttpClientHandler {Proxy = Config.WebProxy};
+            var httpClient = new HttpClient(httpClientHandler);
+            httpClient.DefaultRequestHeaders.Accept.Clear();
 			var httpRequest = new HttpRequestMessage()
 			{
 				RequestUri = new Uri(Config.BaseUrl() + endpoint),
