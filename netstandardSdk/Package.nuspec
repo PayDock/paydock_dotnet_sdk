@@ -5,7 +5,7 @@
     <version>1.1.11</version>
     <authors>Paydock</authors>
     <owners>Paydock</owners>
-    <licenseUrl>https://github.com/PayDockDev/paydock_dotnet_sdk/blob/master/LICENSE</licenseUrl>
+    <license type="expression">MIT</license>
     <projectUrl>https://github.com/PayDockDev/paydock_dotnet_sdk</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net Standard 1.2 SDK</description>
@@ -13,8 +13,10 @@
     <copyright>Copyright 2020</copyright>
     <tags></tags>
     <dependencies>
-      <dependency id="Newtonsoft.Json" version="10.0.3" />
-      <dependency id="System.ValueTuple" version="4.4.0" />
+	  <group targetFramework="netstandard1.2">
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
+        <dependency id="System.ValueTuple" version="4.4.0" />
+	  </group>
     </dependencies>
   </metadata>
   <files>
