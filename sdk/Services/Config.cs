@@ -1,4 +1,7 @@
-﻿namespace Paydock_dotnet_sdk.Services
+﻿using System;
+using System.Net;
+
+namespace Paydock_dotnet_sdk.Services
 {
     public enum Environment
     {
@@ -14,27 +17,29 @@
         public static Environment Environment { get; private set; }
         public static string SecretKey { get; private set; }
         public static string PublicKey { get; private set; }
+        public static IWebProxy WebProxy { get; private set; }
 		public static int TimeoutMilliseconds { get; set; }
 
 		static Config()
         {
             Environment = Environment.Sandbox;
 			TimeoutMilliseconds = 60000;
-
 		}
 
-		/// <summary>
-		/// Initialise configuration for Paydock
-		/// </summary>
-		/// <param name="env">Environment to connect to</param>
-		/// <param name="secretKey">Secret key for authentication</param>
-		/// <param name="publicKey">Public key for authentication</param>
-		/// <param name="timeoutMilliseconds">timeout for calls to the API</param>
-		public static void Initialise(Environment env, string secretKey, string publicKey, int timeoutMilliseconds = 60000)
+        /// <summary>
+        /// Initialise configuration for Paydock
+        /// </summary>
+        /// <param name="env">Environment to connect to</param>
+        /// <param name="secretKey">Secret key for authentication</param>
+        /// <param name="publicKey">Public key for authentication</param>
+        /// <param name="webProxy"></param>
+        /// <param name="timeoutMilliseconds">timeout for calls to the API</param>
+        public static void Initialise(Environment env, string secretKey, string publicKey, int timeoutMilliseconds = 60000, IWebProxy webProxy = null)
         {
             Environment = env;
             SecretKey = secretKey;
             PublicKey = publicKey;
+            WebProxy = webProxy;
 			TimeoutMilliseconds = timeoutMilliseconds;
 		}
 

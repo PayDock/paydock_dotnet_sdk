@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\netcoreSdk\Sdk.csproj" />
+    <ProjectReference Include="..\netstandardSdk\Sdk.csproj" />
   </ItemGroup>
 
   <ItemGroup>
