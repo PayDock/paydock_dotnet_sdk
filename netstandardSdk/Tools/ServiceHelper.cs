@@ -8,6 +8,16 @@ namespace Paydock_dotnet_sdk.Services
 {
     public class ServiceHelper : IServiceHelper
 	{
+		private static readonly HttpClient httpClient;
+		static ServiceHelper()
+		{
+			var httpClientHandler = Config.WebProxy == null
+						 ? new HttpClientHandler()
+						 : new HttpClientHandler { Proxy = Config.WebProxy };
+			httpClient = new HttpClient(httpClientHandler);
+			httpClient.Timeout = new TimeSpan(0, 0, 0, 0, Config.TimeoutMilliseconds);
+		}
+
 		public async Task<T> Get<T>(string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
 		{
 			var requestResult = BuildRequest(HttpMethod.Get, endpoint, null, excludeSecretKey, overrideConfigSecretKey);
@@ -78,17 +88,12 @@ namespace Paydock_dotnet_sdk.Services
 		private (HttpRequestMessage httpRequest, HttpClient httpClient) BuildRequest(HttpMethod method, string endpoint, string jsonBody = null,
 			bool excludeSecretKey = false, string overrideConfigSecretKey = null)
         {
-            var httpClientHandler = Config.WebProxy == null
-                ? new HttpClientHandler()
-                : new HttpClientHandler {Proxy = Config.WebProxy};
-            var httpClient = new HttpClient(httpClientHandler);
             httpClient.DefaultRequestHeaders.Accept.Clear();
 			var httpRequest = new HttpRequestMessage()
 			{
 				RequestUri = new Uri(Config.BaseUrl() + endpoint),
 				Method = method
 			};
-			httpClient.Timeout = new TimeSpan(0, 0, 0, 0, Config.TimeoutMilliseconds);
 
 			// body
 			if (jsonBody != null)
