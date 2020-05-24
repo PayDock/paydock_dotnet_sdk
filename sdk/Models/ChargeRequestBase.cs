@@ -12,5 +12,6 @@ namespace Paydock_dotnet_sdk.Models
 		public string customer_id { get; set; }
 		public string payment_source_id { get; set; }
         public Customer customer { get; set; }
+        public ThreeDSecure  _3ds { get; set; }
     }
 }
