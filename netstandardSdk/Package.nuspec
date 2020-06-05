@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>PaydockSdkNetStandard</id>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
     <authors>Paydock</authors>
     <owners>Paydock</owners>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/PayDockDev/paydock_dotnet_sdk</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net Standard 1.2 SDK</description>
-    <releaseNotes>1.2.3 
+    <releaseNotes>1.2.4 
     - added 3ds and fraud fields to charge request</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags></tags>
