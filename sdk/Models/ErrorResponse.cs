@@ -1,10 +1,21 @@
-﻿namespace Paydock_dotnet_sdk.Models
+﻿using Paydock_dotnet_sdk.Tools;
+
+namespace Paydock_dotnet_sdk.Models
 {
-    public class ErrorResponse
+    public class ErrorResponse : ErrorResponseBase
     {
-        public int Status { get; set; }
-        public string ErrorMessage { get; set; }
-        public dynamic ExtendedInformation { get; set; }
-        public string JsonResponse { get; set; }
+        public string ErrorCode { get; set; }
+        public Details[] ErrorDetails { get; set; }        
+        public ChargeExceptionResponse ExceptionChargeResponse { get; set; }
     }
+
+    public class Details
+    {
+        public string gateway_specific_code { get; set; }
+        public string gateway_specific_description { get; set; }
+        public string param_name { get; set; }
+        public string description { get; set; }
+
+    }
+
 }

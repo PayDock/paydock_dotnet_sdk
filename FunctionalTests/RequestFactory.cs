@@ -4,7 +4,7 @@ namespace FunctionalTests
 {
 	public static class RequestFactory
 	{
-		public static ChargeRequest CreateChargeRequest(decimal amount, string gatewayId, string customerEmail = "")
+		public static ChargeRequest CreateChargeRequest(decimal amount, string gatewayId, string customerEmail = "test@test.com")
 		{
 			return new ChargeRequest
 			{
@@ -16,12 +16,23 @@ namespace FunctionalTests
 					payment_source = new PaymentSource
 					{
 						gateway_id = gatewayId,
-						card_name = "Test Name",
-						card_number = "4111111111111111",
+						card_name = "Test Nametest",
+						card_number = "5123450000000008",
 						card_ccv = "123",
 						expire_month = "10",
-						expire_year = "2020"
+						expire_year = "2022"
 					}
+				}
+			};
+		}
+
+		public static ChargeRequest CreateChargeRequest3DS(string chargeId)
+		{
+			return new ChargeRequest
+			{
+				_3ds = new ThreeDSecure
+				{
+					charge_id = chargeId
 				}
 			};
 		}

@@ -78,7 +78,7 @@ namespace FunctionalTests
 		{
 			try
 			{
-				ChargeItemResponse result = await CreateSvc(overideSecretKey).Get("invalid_id_string");
+				ChargeItemResponse result = await CreateSvc(overideSecretKey).Get("5b83eebc6d52ca1af1dd12df");
 			}
 			catch (ResponseException ex)
 			{
@@ -188,7 +188,7 @@ namespace FunctionalTests
 		[TestCase(null)]
 		public async Task CreateAuthoriseCharge(string overideSecretKey)
 		{
-			var charge = RequestFactory.CreateChargeRequest(20M, TestConfig.AuthoriseGatewayId);
+			var charge = RequestFactory.CreateChargeRequest(20M, TestConfig.MasterCardGatewayId);
 
 			var result = await CreateSvc(overideSecretKey).Authorise(charge);
 
@@ -201,7 +201,7 @@ namespace FunctionalTests
 		public async Task AuthoriseAndCaptureCharge(string overideSecretKey, decimal? amount)
 		{
 			var svc = CreateSvc(overideSecretKey);
-			var charge = RequestFactory.CreateChargeRequest(20M, TestConfig.AuthoriseGatewayId);
+			var charge = RequestFactory.CreateChargeRequest(20M, TestConfig.MasterCardGatewayId);
 
 			var chargeResponse = await svc.Authorise(charge);
 
@@ -216,13 +216,59 @@ namespace FunctionalTests
 		public async Task AuthoriseAndCancelCharge(string overideSecretKey, decimal? amount)
 		{
 			var svc = CreateSvc(overideSecretKey);
-			var charge = RequestFactory.CreateChargeRequest(20M, TestConfig.AuthoriseGatewayId);
+			var charge = RequestFactory.CreateChargeRequest(20M, TestConfig.MasterCardGatewayId);
 
 			var chargeResponse = await svc.Authorise(charge);
 
 			var cancelAuthoriseResponse = await svc.CancelAuthorisation(chargeResponse.resource.data._id);
 
 			Assert.IsTrue(cancelAuthoriseResponse.IsSuccess);
+		}	
+		
+		[TestCase(TestConfig.GatewayId, "4040404040404040")]
+		[TestCase(TestConfig.MasterCardGatewayId, "4040404040404040")]
+		public async Task CreateFailedCharge( string gatewayId, string cardNumber, string customerEmail = "", string overideSecretKey = null)
+		{
+			var charge = RequestFactory.CreateChargeRequest(1.1M, gatewayId, customerEmail);			
+			try
+			{
+				charge.customer.payment_source.card_number = cardNumber;
+				var result = await CreateSvc(overideSecretKey).Add(charge);				
+			}
+			catch (ResponseException ex)
+			{
+				Assert.IsTrue(ex.ErrorResponse.Status == 400);
+				Assert.IsTrue(ex.ErrorResponse.ExceptionChargeResponse != null);
+			}			
+		}
+
+		[TestCase(TestConfig.MasterCardGatewayId, "5123450000000008", "test@test.com")]
+		[TestCase(TestConfig.MasterCardGatewayId, "2223000000000007", "test@test.com")]
+		[TestCase(TestConfig.MasterCardGatewayId, "4508750015741019", "test@test.com")]
+		[TestCase(TestConfig.MasterCardGatewayId, "30123400000000", "test@test.com")]
+		public async Task CreateCharge(string gatewayId, string cardNumber, string customerEmail = "", string overideSecretKey = null)
+		{
+			var charge = RequestFactory.CreateChargeRequest(1.1M, gatewayId, customerEmail);
+
+			charge.customer.payment_source.card_number = cardNumber;
+			var result = await CreateSvc(overideSecretKey).Add(charge);
+
+			Assert.IsTrue(result.status == 201);
+		}
+
+		[TestCase("5b83eebc6d52ca1af1dd12df")]
+		public async Task CreateFailedChargeWith3DSAuth(string chargeId="", string overideSecretKey = null)
+		{
+			var charge = RequestFactory.CreateChargeRequest3DS(chargeId);
+			try
+			{
+				var result = await CreateSvc(overideSecretKey).Add(charge);
+			}
+			catch (ResponseException ex)
+			{
+				Assert.IsTrue(ex.ErrorResponse.Status == 400);
+				Assert.IsTrue(ex.ErrorResponse.ExceptionChargeResponse != null);
+			}
 		}
 	}
 }

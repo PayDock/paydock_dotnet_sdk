@@ -3,5 +3,7 @@
     public class ThreeDSecure
     {
         public string charge_id { get; set; }
+
+        public string token { get; set; }
     }
 }

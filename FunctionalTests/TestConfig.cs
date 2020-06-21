@@ -13,7 +13,7 @@ namespace FunctionalTests
         public const string OveridePublicKey = "";
         public const string StripeGatewayId = "";
         public const string StripeAccountId = "";
-
+        public const string MasterCardGatewayId = "";
         public static void Init()
         {
             Config.Initialise(Environment.Sandbox, SecretKey, PublicKey, 60000);

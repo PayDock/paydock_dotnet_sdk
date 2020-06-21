@@ -26,6 +26,19 @@ namespace FunctionalTests
 				return await new Customers().Add(request);
 		}
 
+
+
+		private async Task<CustomerResponse> CreateBasicFailedCustomer(string email = "", string overideSecretKey = null)
+		{
+			var request = RequestFactory.CreateCustomerRequest(email);
+			request.payment_source.card_number = "4242424242420000";
+			if (overideSecretKey != null)
+				return await new Customers(overideSecretKey).Add(request);
+			else
+				return await new Customers().Add(request);
+		}
+
+
 		[TestCase(TestConfig.OverideSecretKey)]
 		[TestCase(null)]
 		public async Task CreateCustomerWithCreditCard(string overideSecretKey)
@@ -33,6 +46,21 @@ namespace FunctionalTests
 			var result = await CreateBasicCustomer(overideSecretKey: overideSecretKey);
 
 			Assert.IsTrue(result.IsSuccess);
+		}
+
+		[TestCase(TestConfig.OverideSecretKey)]
+		[TestCase(null)]
+		public async Task CreateCustomerWithFailedCreditCard(string overideSecretKey)
+		{
+			try
+			{
+				var result = await CreateBasicFailedCustomer(overideSecretKey: overideSecretKey);
+			}
+			catch (ResponseException ex)
+			{
+				Assert.IsTrue(ex.ErrorResponse.Status == 400);
+				Assert.IsTrue(ex.ErrorResponse.ErrorDetails != null);
+			}
 		}
 
 		[TestCase(TestConfig.OverideSecretKey)]
@@ -102,9 +130,9 @@ namespace FunctionalTests
 			{
 				CustomerItemResponse result;
 				if (overideSecretKey != null)
-					result = await new Customers(overideSecretKey).Get("invalid_id_string");
+					result = await new Customers(overideSecretKey).Get("5b83eebc6d52ca1af1dd12df");
 				else
-					result = await new Customers().Get("invalid_id_string");
+					result = await new Customers().Get("5b83eebc6d52ca1af1dd12df");
 			}
 			catch (ResponseException ex)
 			{

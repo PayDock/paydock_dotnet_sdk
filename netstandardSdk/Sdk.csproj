@@ -7,13 +7,13 @@
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
     <RootNamespace>Paydock_dotnet_sdk</RootNamespace>
-    <AssemblyVersion>1.2.5.0</AssemblyVersion>
-    <FileVersion>1.2.5.0</FileVersion>
+    <AssemblyVersion>1.2.6.0</AssemblyVersion>
+    <FileVersion>1.2.6.0</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>PayDockOssKeyFile.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>PaydockSdk.Core</AssemblyName>
-    <PackageVersion>1.2.5-rc</PackageVersion>
-    <Version>1.2.5-rc</Version>
+    <PackageVersion>1.2.6-rc</PackageVersion>
+    <Version>1.2.6-rc</Version>
     <Description>Paydock .Net Standard SDK</Description>
     <DelaySign>false</DelaySign>
   </PropertyGroup>
@@ -24,6 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\sdk\Models\ChargeExceptionResponse.cs" Link="Models\ChargeExceptionResponse.cs" />
     <Compile Include="..\sdk\Models\ChargeItemResponse.cs" Link="Models\ChargeItemResponse.cs" />
     <Compile Include="..\sdk\Models\ChargeItemsResponse.cs" Link="Models\ChargeItemsResponse.cs" />
     <Compile Include="..\sdk\Models\ChargeRefundRequest.cs" Link="Models\ChargeRefundRequest.cs" />
@@ -41,6 +42,7 @@
     <Compile Include="..\sdk\Models\CustomerSearchRequest.cs" Link="Models\CustomerSearchRequest.cs" />
     <Compile Include="..\sdk\Models\CustomerUpdateRequest.cs" Link="Models\CustomerUpdateRequest.cs" />
     <Compile Include="..\sdk\Models\ErrorResponse.cs" Link="Models\ErrorResponse.cs" />
+    <Compile Include="..\sdk\Models\ErrorResponseBase.cs" Link="Models\ErrorResponseBase.cs" />
     <Compile Include="..\sdk\Models\ExternalCheckoutRequest.cs" Link="Models\ExternalCheckoutRequest.cs" />
     <Compile Include="..\sdk\Models\ExternalCheckoutResponse.cs" Link="Models\ExternalCheckoutResponse.cs" />
     <Compile Include="..\sdk\Models\GatewayData.cs" Link="Models\GatewayData.cs" />

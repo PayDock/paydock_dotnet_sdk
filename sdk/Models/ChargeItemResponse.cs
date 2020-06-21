@@ -30,6 +30,7 @@ namespace Paydock_dotnet_sdk.Models
             public bool one_off { get; set; }
             public bool archived { get; set; }
             public Customer customer { get; set; }
+            public ThreeDSecure _3ds { get; set; }
             public string status { get; set; }
         }
 

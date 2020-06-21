@@ -35,7 +35,7 @@ namespace FunctionalTests
 		}
 
 		[TestCase(TestConfig.OverideSecretKey)]
-		[TestCase(null)]
+		//[TestCase(null)]
 		public async Task AddTemplate(string overideSecretKey)
 		{
 			var result = await CreateBasicNotificationTemplate(overideSecretKey);

@@ -30,8 +30,46 @@ namespace Paydock_dotnet_sdk.Tools
 				errorResponse.ErrorMessage = (string)json["error"]["message"]["message"];
 			}
 
+			if (json["resource"] != null &&
+					json["resource"]["type"] != null &&
+						Convert.ToString(json["resource"]["type"]) == "charge")			
+				AddExceptionChargeResponce(errorResponse, result);			
+
+			if (json["error"]["code"] != null)			
+				errorResponse.ErrorCode = Convert.ToString(json["error"]["code"]);			
+
+			if (json["error"]["details"] != null)
+				AddErrorDetails(errorResponse, result, obj);
+
 			throw new ResponseException(errorResponse, errorResponse.Status.ToString(), innerException);
 		}
+
+		public static void AddExceptionChargeResponce(ErrorResponse errorResponse, string result)
+		{
+			try
+			{
+				var chargeResponse = JsonConvert.DeserializeObject<ChargeExceptionResponse>(result);
+				if (chargeResponse != null)
+					errorResponse.ExceptionChargeResponse = chargeResponse;
+			}
+			catch (Exception) { }
+		}
+
+		public static void AddErrorDetails(ErrorResponse errorResponse, string result, dynamic obj)
+		{
+			try
+			{
+				errorResponse.ErrorDetails = JsonConvert.DeserializeObject<Details[]>(
+						JsonConvert.SerializeObject(obj.error.details),
+						new JsonSerializerSettings
+						{
+							DateTimeZoneHandling = DateTimeZoneHandling.Utc
+						}
+				);
+			}
+			catch (Exception) { }
+		}
+
 
 		public static void CreateTimeoutException()
 		{

@@ -94,6 +94,7 @@
     <Compile Include="Models\ChargeSearchRequest.cs" />
     <Compile Include="Models\ChargeResponse.cs" />
     <Compile Include="Models\ErrorResponse.cs" />
+    <Compile Include="Models\ErrorResponseBase.cs" />
     <Compile Include="Models\PaymentSource.cs" />
     <Compile Include="Models\ThreeDSecure.cs" />
     <Compile Include="Models\ChargeRefundResponse.cs" />
