@@ -48,7 +48,7 @@ namespace Paydock_dotnet_sdk.Tools
 		{
 			try
 			{
-				var chargeResponse = JsonConvert.DeserializeObject<ChargeExceptionResponse>(result);
+				var chargeResponse = JsonConvert.DeserializeObject<ChargeResponse>(result);
 				if (chargeResponse != null)
 					errorResponse.ExceptionChargeResponse = chargeResponse;
 			}

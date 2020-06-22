@@ -6,7 +6,7 @@ namespace Paydock_dotnet_sdk.Models
     {
         public string ErrorCode { get; set; }
         public Details[] ErrorDetails { get; set; }        
-        public ChargeExceptionResponse ExceptionChargeResponse { get; set; }
+        public ChargeResponse ExceptionChargeResponse { get; set; }
     }
 
     public class Details

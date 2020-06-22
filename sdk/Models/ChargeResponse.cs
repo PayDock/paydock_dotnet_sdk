@@ -23,8 +23,10 @@ namespace Paydock_dotnet_sdk.Models
             public string currency { get; set; }
             public string reference { get; set; }
             public DateTime updated_at { get; set; }
+            public bool capture { get; set; }
             public string user_id { get; set; }
             public Transaction[] transactions { get; set; }
+            public ThreeDSecure _3ds { get; set; }
             public bool one_off { get; set; }
             public bool archived { get; set; }
             public Customer customer { get; set; }
