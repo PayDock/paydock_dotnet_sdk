@@ -32,6 +32,18 @@ namespace Paydock_dotnet_sdk.Services
 		}
 
 		/// <summary>
+		/// Initiate a 3DS authentication for charge
+		/// </summary>
+		/// <param name="request">Charge data</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> Init3DS(ChargeRequestBase request)
+		{
+			return await _serviceHelper.Post<ChargeResponse, ChargeRequestBase>(request, "charges/3ds", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+
+		/// <summary>
 		/// Add a charge
 		/// </summary>
 		/// <param name="request">Charge data</param>
@@ -135,6 +147,18 @@ namespace Paydock_dotnet_sdk.Services
 		{
 			chargeId = Uri.EscapeUriString(chargeId);
 			return await _serviceHelper.Get<ChargeItemResponse>(string.Format("charges/{0}", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Retrive a single charge with 3DS authorisaton Id
+		/// </summary>
+		/// <param name="threeDSId">id of the 3ds authorisation</param>
+		/// <returns>charge data</returns>
+		[RequiresConfig]
+		public async Task<ChargeItemResponse> GetWith3DSId(string threeDSId)
+		{
+			threeDSId = Uri.EscapeUriString(threeDSId);
+			return await _serviceHelper.Get<ChargeItemResponse>(string.Format("charges/3ds/{0}", threeDSId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 
 		/// <summary>

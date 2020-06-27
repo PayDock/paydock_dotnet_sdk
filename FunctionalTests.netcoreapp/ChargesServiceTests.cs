@@ -223,10 +223,36 @@ namespace FunctionalTests
 			var cancelAuthoriseResponse = await svc.CancelAuthorisation(chargeResponse.resource.data._id);
 
 			Assert.IsTrue(cancelAuthoriseResponse.IsSuccess);
-		}	
-		
-		[TestCase(TestConfig.GatewayId, "4040404040404040")]
-		[TestCase(TestConfig.MasterCardGatewayId, "4040404040404040")]
+		}
+
+		[TestCase(TestConfig.MasterCardGatewayId, "5500005555555559", "test@test.com")]
+		public async Task Initiate3DS(string gatewayId, string cardNumber, string customerEmail = "", string overideSecretKey = null)
+		{
+			
+				var tokenRequest = new TokenRequest
+				{
+					gateway_id = gatewayId,
+					card_name = "John Smith",
+					card_number = cardNumber,
+					card_ccv = "123",
+					expire_month = "10",
+					expire_year = "2023",
+					email = customerEmail
+				};
+
+
+				TokenResponse tokenResult = await new Tokens().Create(tokenRequest);
+				ChargeRequest threeDSrequest =  RequestFactory.Init3DSRequest(10M, tokenResult.resource.data);
+
+				var result = await CreateSvc(overideSecretKey).Init3DS(threeDSrequest);
+				
+				Assert.IsTrue(result.IsSuccess);
+			
+		}
+
+
+		//[TestCase(TestConfig.GatewayId, "4040404040404040")]
+		[TestCase(TestConfig.MasterCardGatewayId, "5123450000000008", "test@test.com")]
 		public async Task CreateFailedCharge( string gatewayId, string cardNumber, string customerEmail = "", string overideSecretKey = null)
 		{
 			var charge = RequestFactory.CreateChargeRequest(1.1M, gatewayId, customerEmail);			
@@ -269,6 +295,29 @@ namespace FunctionalTests
 				Assert.IsTrue(ex.ErrorResponse.Status == 400);
 				Assert.IsTrue(ex.ErrorResponse.ExceptionChargeResponse != null);
 			}
+		}
+
+		[TestCase("aa5fa9fa-bc15-4aa5-9245-8b61bc614e44")]
+		public async Task CreateChargeWith3DSAuth(string id = "", string overideSecretKey = null)
+		{
+			var charge = RequestFactory.CreateChargeRequest3DSwithUUID(id);
+			try
+			{
+				var result = await CreateSvc(overideSecretKey).Add(charge);
+				Assert.IsTrue(result.IsSuccess);
+			}
+			catch (ResponseException)
+			{
+				
+			}
+		}
+
+		[TestCase("aa5fa9fa-bc15-4aa5-9245-8b61bc614e44")]
+		public async Task GetChargesWith3DSId(string threeDSId, string overideSecretKey = null)
+		{
+			
+			ChargeItemResponse result = await CreateSvc(overideSecretKey).GetWith3DSId(threeDSId);
+			Assert.IsTrue(result.IsSuccess);
 		}
 	}
 }

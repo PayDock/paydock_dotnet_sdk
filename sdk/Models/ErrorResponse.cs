@@ -15,6 +15,7 @@ namespace Paydock_dotnet_sdk.Models
         public string gateway_specific_description { get; set; }
         public string param_name { get; set; }
         public string description { get; set; }
+        public string status_code { get; set; }
 
     }
 

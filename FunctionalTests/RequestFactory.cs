@@ -1,4 +1,5 @@
 ﻿using Paydock_dotnet_sdk.Models;
+using System.Collections.Generic;
 
 namespace FunctionalTests
 {
@@ -26,6 +27,30 @@ namespace FunctionalTests
 			};
 		}
 
+
+		public static ChargeRequest Init3DSRequest(decimal amount, string token)
+		{
+			return new ChargeRequest
+			{
+				token = token,
+				amount = amount,
+				currency = "AUD",
+				_3ds = new ThreeDSecure
+				{
+					browser_details = new Dictionary<string, string> 
+					{
+						{ "name","CHROME" },
+						{ "java_enabled","true" },
+						{ "language","en-US" },
+						{ "screen_height","640" },
+						{ "screen_width","480" },
+						{ "time_zone", "273" },
+						{ "color_depth", "24" }
+					}
+				}
+			};
+		}
+
 		public static ChargeRequest CreateChargeRequest3DS(string chargeId)
 		{
 			return new ChargeRequest
@@ -33,6 +58,19 @@ namespace FunctionalTests
 				_3ds = new ThreeDSecure
 				{
 					charge_id = chargeId
+				}
+			};
+		}
+
+		public static ChargeRequest CreateChargeRequest3DSwithUUID(string id)
+		{
+			return new ChargeRequest
+			{
+				amount = 10m,
+				currency = "AUD",
+				_3ds = new ThreeDSecure
+				{
+					id = id
 				}
 			};
 		}
