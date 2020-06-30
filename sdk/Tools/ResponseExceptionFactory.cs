@@ -21,14 +21,14 @@ namespace Paydock_dotnet_sdk.Tools
 			};
 
 			var json = JObject.Parse(result);
-			if (json["error"]["message"].Count() == 0)
-			{
-				errorResponse.ErrorMessage = (string)json["error"]["message"];
-			}
-			else if (json["error"]["message"]["message"].Count() == 0)
-			{
-				errorResponse.ErrorMessage = (string)json["error"]["message"]["message"];
-			}
+			if (json["error"]["message"] != null && 
+					json["error"]["message"].Count() == 0)
+							errorResponse.ErrorMessage = (string)json["error"]["message"];
+			
+			else if (json["error"]["message"] != null &&
+				json["error"]["message"]["message"].Count() == 0)
+					errorResponse.ErrorMessage = (string)json["error"]["message"]["message"];
+			
 
 			if (json["resource"] != null &&
 					json["resource"]["type"] != null &&

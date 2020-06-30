@@ -259,6 +259,7 @@ namespace FunctionalTests
 			try
 			{
 				charge.customer.payment_source.card_number = cardNumber;
+				charge.reference = "12345678901234567890123456";
 				var result = await CreateSvc(overideSecretKey).Add(charge);				
 			}
 			catch (ResponseException ex)
@@ -297,6 +298,22 @@ namespace FunctionalTests
 			}
 		}
 
+		[TestCase("d0abbdf6-b02e-4cd9-80e9-18beebb5a9b1")]
+		public async Task CreateFailedChargeWith3DSAuthValidation(string id = "", string overideSecretKey = null)
+		{
+			var charge = RequestFactory.CreateChargeRequest3DSwithUUID(id);
+			try
+			{
+				charge.reference = "12345678901234567890123456";
+				var result = await CreateSvc(overideSecretKey).Add(charge);
+			}
+			catch (ResponseException ex)
+			{
+				Assert.IsTrue(ex.ErrorResponse.Status == 400);
+				Assert.IsTrue(ex.ErrorResponse.ExceptionChargeResponse != null);
+			}
+		}
+
 		[TestCase("aa5fa9fa-bc15-4aa5-9245-8b61bc614e44")]
 		public async Task CreateChargeWith3DSAuth(string id = "", string overideSecretKey = null)
 		{
@@ -312,7 +329,7 @@ namespace FunctionalTests
 			}
 		}
 
-		[TestCase("aa5fa9fa-bc15-4aa5-9245-8b61bc614e44")]
+		[TestCase("579462bb-f119-4e19-890b-4116e9f680bc")]
 		public async Task GetChargesWith3DSId(string threeDSId, string overideSecretKey = null)
 		{
 			

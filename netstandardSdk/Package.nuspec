@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>PaydockSdkNetStandard</id>
-    <version>1.2.7</version>
+    <version>1.2.9</version>
     <authors>Paydock</authors>
     <owners>Paydock</owners>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/PayDockDev/paydock_dotnet_sdk</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net Standard 1.2 SDK</description>
-    <releaseNotes>1.2.7 
+    <releaseNotes>1.2.9 
     - Extended Error Responce + 3DS intiation </releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags></tags>
