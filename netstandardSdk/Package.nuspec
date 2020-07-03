@@ -9,8 +9,8 @@
     <projectUrl>https://github.com/PayDockDev/paydock_dotnet_sdk</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net Standard 1.2 SDK</description>
-    <releaseNotes>1.2.9 
-    - Extended Error Responce + 3DS intiation </releaseNotes>
+    <releaseNotes>1.3.0 
+    - Normalized Error Responce </releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags></tags>
     <dependencies>

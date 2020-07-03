@@ -4,6 +4,7 @@
     {
         public int Status { get; set; }
         public string ErrorMessage { get; set; }
+        public string ErrorCode { get; set; }
         public dynamic ExtendedInformation { get; set; }
         public string JsonResponse { get; set; }
     }

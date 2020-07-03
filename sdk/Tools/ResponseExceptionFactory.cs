@@ -20,27 +20,37 @@ namespace Paydock_dotnet_sdk.Tools
 				JsonResponse = result
 			};
 
+
 			var json = JObject.Parse(result);
-			if (json["error"]["message"] != null && 
-					json["error"]["message"].Count() == 0)
-							errorResponse.ErrorMessage = (string)json["error"]["message"];
-			
-			else if (json["error"]["message"] != null &&
-				json["error"]["message"]["message"].Count() == 0)
-					errorResponse.ErrorMessage = (string)json["error"]["message"]["message"];
-			
+			if (json["error_summary"] != null)
+			{
+				if (json["error_summary"]["message"] != null &&
+						json["error_summary"]["message"].Count() == 0)
+					errorResponse.ErrorMessage = (string)json["error_summary"]["message"];
 
-			if (json["resource"] != null &&
-					json["resource"]["type"] != null &&
-						Convert.ToString(json["resource"]["type"]) == "charge")			
-				AddExceptionChargeResponce(errorResponse, result);			
+				else if (json["error_summary"]["message"] != null &&
+					json["error_summary"]["message"]["message"].Count() == 0)
+					errorResponse.ErrorMessage = (string)json["error_summary"]["message"]["message"];
 
-			if (json["error"]["code"] != null)			
-				errorResponse.ErrorCode = Convert.ToString(json["error"]["code"]);			
 
-			if (json["error"]["details"] != null)
-				AddErrorDetails(errorResponse, result, obj);
+				if (json["resource"] != null &&
+						json["resource"]["type"] != null &&
+							Convert.ToString(json["resource"]["type"]) == "charge")
+					AddExceptionChargeResponce(errorResponse, result);
 
+				if (json["error_summary"]["status_code"] != null)
+					errorResponse.StatusCode = Convert.ToString(json["error_summary"]["status_code"]);
+
+				if (json["error_summary"]["status_code_description"] != null)
+					errorResponse.StatusCodeDescription = Convert.ToString(json["error_summary"]["status_code_description"]);
+
+				if (json["error_summary"]["code"] != null)
+					errorResponse.ErrorCode = Convert.ToString(json["error_summary"]["code"]);
+
+				if (json["error_summary"]["details"] != null)
+					AddErrorDetails(errorResponse, result, obj);
+
+			}
 			throw new ResponseException(errorResponse, errorResponse.Status.ToString(), innerException);
 		}
 
@@ -59,8 +69,8 @@ namespace Paydock_dotnet_sdk.Tools
 		{
 			try
 			{
-				errorResponse.ErrorDetails = JsonConvert.DeserializeObject<Details[]>(
-						JsonConvert.SerializeObject(obj.error.details),
+				errorResponse.ErrorDetails = JsonConvert.DeserializeObject<Details>(
+						JsonConvert.SerializeObject(obj.error_summary.details),
 						new JsonSerializerSettings
 						{
 							DateTimeZoneHandling = DateTimeZoneHandling.Utc

@@ -259,7 +259,7 @@ namespace FunctionalTests
 			try
 			{
 				charge.customer.payment_source.card_number = cardNumber;
-				charge.reference = "12345678901234567890123456";
+				charge.reference = "12345655555555555";
 				var result = await CreateSvc(overideSecretKey).Add(charge);				
 			}
 			catch (ResponseException ex)
