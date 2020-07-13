@@ -23,6 +23,23 @@ namespace FunctionalTests
 						expire_month = "10",
 						expire_year = "2022"
 					}
+				},
+				fraud = new FraudData
+				{
+					token = "devicetoken",
+					data = new
+					{
+						transaction = new 
+						{
+							transactionId = "transactionID",
+							cncStoreID = "123123",
+							billing = new
+							{
+								billingEmail = "johnsmith@email.com"
+							}
+						}
+
+					}
 				}
 			};
 		}
