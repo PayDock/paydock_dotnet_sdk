@@ -32,6 +32,7 @@ namespace Paydock_dotnet_sdk.Models
             public Customer customer { get; set; }
             public ThreeDSecure _3ds { get; set; }
             public string status { get; set; }
+            public FraudBase fraud { get; set; }
         }
 
         public class Customer
@@ -82,6 +83,7 @@ namespace Paydock_dotnet_sdk.Models
             public string status_code { get; set; }
             public string _source_ip_address { get; set; }
             public string type { get; set; }
+            public FraudResponse fraud { get; set; }
         }
 
         public class Req

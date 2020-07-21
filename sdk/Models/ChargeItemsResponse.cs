@@ -29,6 +29,7 @@ namespace Paydock_dotnet_sdk.Models
             public bool archived { get; set; }
             public Customer customer { get; set; }
             public string status { get; set; }
+            public FraudBase fraud { get; set; }
         }
 
         public class Customer

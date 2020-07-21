@@ -27,6 +27,7 @@ namespace Paydock_dotnet_sdk.Models
             public bool one_off { get; set; }
             public Customer customer { get; set; }
             public string status { get; set; }
+            public FraudBase fraud { get; set; }
         }
 
         public class Customer
@@ -70,6 +71,7 @@ namespace Paydock_dotnet_sdk.Models
             public string status { get; set; }
             public string type { get; set; }
             public DateTime pended_at { get; set; }
+            public FraudResponse fraud { get; set; }
         }
     }
 }

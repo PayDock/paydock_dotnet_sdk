@@ -31,6 +31,7 @@ namespace Paydock_dotnet_sdk.Models
             public bool archived { get; set; }
             public Customer customer { get; set; }
             public string status { get; set; }
+            public FraudBase fraud { get; set; }
         }
 
         public class Customer
@@ -78,6 +79,7 @@ namespace Paydock_dotnet_sdk.Models
             public string gateway_specific_description { get; set; }
             public string _source_ip_address { get; set; }
             public string type { get; set; }
+            public FraudResponse fraud { get; set; }
         }
     }
 }
