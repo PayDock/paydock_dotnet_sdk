@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Paydock_dotnet_sdk.Tools;
 
 namespace Paydock_dotnet_sdk.Services
@@ -57,7 +58,7 @@ namespace Paydock_dotnet_sdk.Services
 			if (data == null)
 				return null;
 
-			return JsonConvert.SerializeObject(data, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, DateTimeZoneHandling = DateTimeZoneHandling.Utc });
+			return JsonConvert.SerializeObject(data, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver(), NullValueHandling = NullValueHandling.Ignore, DateTimeZoneHandling = DateTimeZoneHandling.Utc });
 		}
 
 		private static async Task<HttpResponseMessage> SendRequest(HttpClient httpClient, HttpRequestMessage request)
