@@ -31,6 +31,7 @@ namespace Paydock_dotnet_sdk.Models
             public bool archived { get; set; }
             public Customer customer { get; set; }
             public string status { get; set; }
+            public string description { get; set; }
             public FraudBase fraud { get; set; }
         }
 
@@ -40,6 +41,8 @@ namespace Paydock_dotnet_sdk.Models
             public string last_name { get; set; }
             public string email { get; set; }
             public string reference { get; set; }
+            public string customer_id { get; set; }
+            public string phone { get; set; }
             public Payment_Source payment_source { get; set; }
         }
 
@@ -52,7 +55,13 @@ namespace Paydock_dotnet_sdk.Models
 			public string account_routing { get; set; }
 			public string account_holder_type { get; set; }
 			public string account_bank_name { get; set; }
-			public string card_name { get; set; }
+            public string account_type { get; set; }
+            public string address_line1 { get; set; }
+            public string address_line2 { get; set; }
+            public string address_city { get; set; }
+            public string address_state { get; set; }
+            public string address_country { get; set; }
+            public string card_name { get; set; }
             public string card_number_last4 { get; set; }
             public int expire_month { get; set; }
             public int expire_year { get; set; }
