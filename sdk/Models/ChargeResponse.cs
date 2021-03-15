@@ -33,6 +33,7 @@ namespace Paydock_dotnet_sdk.Models
             public string status { get; set; }
             public string description { get; set; }
             public FraudBase fraud { get; set; }
+            public ShippingData shipping { get; set; }
         }
 
         public class Customer
@@ -43,6 +44,7 @@ namespace Paydock_dotnet_sdk.Models
             public string reference { get; set; }
             public string customer_id { get; set; }
             public string phone { get; set; }
+            public string phone2 { get; set; }
             public Payment_Source payment_source { get; set; }
         }
 
@@ -61,6 +63,7 @@ namespace Paydock_dotnet_sdk.Models
             public string address_city { get; set; }
             public string address_state { get; set; }
             public string address_country { get; set; }
+            public string address_company { get; set; }
             public string card_name { get; set; }
             public string card_number_last4 { get; set; }
             public int expire_month { get; set; }
@@ -72,7 +75,8 @@ namespace Paydock_dotnet_sdk.Models
             public string gateway_type { get; set; }
 			public string checkout_holder { get; set; }
 			public string checkout_email { get; set; }
-		}
+            public string vault_token { get; set; }
+        }
 
         public class Transaction
         {

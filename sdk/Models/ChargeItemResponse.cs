@@ -33,6 +33,7 @@ namespace Paydock_dotnet_sdk.Models
             public ThreeDSecure _3ds { get; set; }
             public string status { get; set; }
             public FraudBase fraud { get; set; }
+            public ShippingData shipping { get; set; }
         }
 
         public class Customer
@@ -42,6 +43,7 @@ namespace Paydock_dotnet_sdk.Models
             public string last_name { get; set; }
             public string email { get; set; }
             public string phone { get; set; }
+            public string phone2 { get; set; }
             public Payment_Source payment_source { get; set; }
         }
 
@@ -66,7 +68,13 @@ namespace Paydock_dotnet_sdk.Models
             public string address_postcode { get; set; }
             public string address_state { get; set; }
             public string address_country { get; set; }
+            public string address_company { get; set; }
             public string gateway_id { get; set; }
+            public string gateway_name { get; set; }
+            public string gateway_type { get; set; }
+            public string checkout_holder { get; set; }
+            public string checkout_email { get; set; }
+            public string vault_token { get; set; }
         }
 
         public class Transaction
