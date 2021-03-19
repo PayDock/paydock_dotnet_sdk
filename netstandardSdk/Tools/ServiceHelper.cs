@@ -44,6 +44,15 @@ namespace Paydock_dotnet_sdk.Services
 			return await ProcessResponse<T>(response);
 		}
 
+		public async Task<T> Delete<T, R>(R request,string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
+		{
+			var json = SerializeObject(request);
+			var requestResult = BuildRequest(HttpMethod.Delete, endpoint, json, excludeSecretKey, overrideConfigSecretKey);
+
+			var response = await SendRequest(requestResult.httpClient, requestResult.httpRequest);
+            return await ProcessResponse<T>(response);
+		}
+
 		public async Task<T> Post<T, R>(R request, string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null)
 		{
 			var json = SerializeObject(request);

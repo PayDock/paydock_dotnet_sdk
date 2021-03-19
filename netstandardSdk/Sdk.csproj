@@ -7,13 +7,13 @@
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
     <RootNamespace>Paydock_dotnet_sdk</RootNamespace>
-    <AssemblyVersion>1.3.7.0</AssemblyVersion>
-    <FileVersion>1.3.7.0</FileVersion>
+    <AssemblyVersion>1.3.8.0</AssemblyVersion>
+    <FileVersion>1.3.8.0</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>PayDockOssKeyFile.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>PaydockSdk.Core</AssemblyName>
-    <PackageVersion>1.3.7</PackageVersion>
-    <Version>1.3.7</Version>
+    <PackageVersion>1.3.8</PackageVersion>
+    <Version>1.3.8</Version>
     <Description>Paydock .Net Standard SDK</Description>
   </PropertyGroup>
 
@@ -32,6 +32,7 @@
     <Compile Include="..\sdk\Models\ChargeRequestStripeConnect.cs" Link="Models\ChargeRequestStripeConnect.cs" />
     <Compile Include="..\sdk\Models\ChargeResponse.cs" Link="Models\ChargeResponse.cs" />
     <Compile Include="..\sdk\Models\ChargeSearchRequest.cs" Link="Models\ChargeSearchRequest.cs" />
+    <Compile Include="..\sdk\Models\TransactionResponse.cs" Link="Models\TransactionResponse.cs" />
     <Compile Include="..\sdk\Models\Customer.cs" Link="Models\Customer.cs" />
     <Compile Include="..\sdk\Models\CustomerItemResponse.cs" Link="Models\CustomerItemResponse.cs" />
     <Compile Include="..\sdk\Models\CustomerItemsResponse.cs" Link="Models\CustomerItemsResponse.cs" />

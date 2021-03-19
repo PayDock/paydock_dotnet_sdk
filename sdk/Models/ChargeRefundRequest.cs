@@ -7,5 +7,6 @@ namespace Paydock_dotnet_sdk.Models
         [JsonIgnore]
         public string id { get; set; }
         public decimal amount { get; set; }
+        public dynamic custom_fields { get; set; }
     }
 }

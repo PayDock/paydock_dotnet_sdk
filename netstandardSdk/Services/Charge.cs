@@ -70,19 +70,41 @@ namespace Paydock_dotnet_sdk.Services
 		/// </summary>
 		/// <param name="chargeId">id for the charge to capture</param>
 		/// <param name="amount">amount to capture</param>
+		/// <param name="customFields">Custom fields free-form object</param>
 		/// <returns>Charge response</returns>
 		[RequiresConfig]
-		public async Task<ChargeResponse> Capture(string chargeId, decimal? amount = null)
+		public async Task<ChargeResponse> Capture(string chargeId, decimal? amount = null, dynamic customFields = null)
 		{
-			object requestData = null;
+			object requestData = new { custom_fields = customFields };
 			if (amount.HasValue)
-			{
-				requestData = new { amount = amount.Value };
+            {
+				requestData = new {
+					custom_fields = customFields,
+					amount = amount.Value
+				};
 			}
 
 			chargeId = Uri.EscapeUriString(chargeId);
 			return await _serviceHelper.Post<ChargeResponse, object>(requestData, string.Format("charges/{0}/capture", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
+
+
+		/// <summary>
+		/// Update cutom fields for transaction in a charge
+		/// </summary>
+		/// <param name="chargeId">id for the charge</param>
+		/// <param name="transactionId">id for the transaction in charge to update custom fields</param>
+		/// <param name="customFields">Custom fields free-form object</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public async Task<TransactionResponse> UpdateCustomFields(string chargeId, string transactionId, object customFields)
+		{
+
+			chargeId = Uri.EscapeUriString(chargeId);
+			transactionId = Uri.EscapeUriString(transactionId);
+			return await _serviceHelper.Post<TransactionResponse, object>(customFields, string.Format("charges/{0}/transactions/{1}/custom-fields", chargeId, transactionId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
 
 		/// <summary>
 		/// cancel a previously authorised charge
@@ -94,6 +116,24 @@ namespace Paydock_dotnet_sdk.Services
 		{
 			chargeId = Uri.EscapeUriString(chargeId);
 			return await _serviceHelper.Delete<ChargeResponse>(string.Format("charges/{0}/capture", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// cancel a previously authorised charge
+		/// </summary>
+		/// <param name="chargeId">id for the charge to capture</param>
+		/// <param name="customFields">Custom fields free-form object</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> CancelAuthorisation(string chargeId, dynamic customFields)
+		{
+			object requestData = null;
+			if (customFields.HasValue)
+			{
+				requestData = new { custom_fields = customFields.Value };
+			}
+			chargeId = Uri.EscapeUriString(chargeId);
+			return await _serviceHelper.Delete<ChargeResponse, object>(requestData, string.Format("charges/{0}/capture", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 
 		/// <summary>
@@ -172,9 +212,26 @@ namespace Paydock_dotnet_sdk.Services
 		{
 			chargeId = Uri.EscapeUriString(chargeId);
 			object requestData = new { amount = amount };
+		
+			return await _serviceHelper.Post<ChargeRefundResponse, object>(requestData, string.Format("charges/{0}/refunds", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Refund a transaction
+		/// </summary>
+		/// <param name="chargeId">id of the charge to refund</param>
+		/// <param name="amount">amount to refund, can be used to issue partial refunds</param>
+		/// <param name="customFields">Custom fields free-form object</param>
+		/// <returns>information on the transaction</returns>
+		[RequiresConfig]
+		public async Task<ChargeRefundResponse> Refund(string chargeId, decimal? amount = null, dynamic customFields = null)
+		{
+			chargeId = Uri.EscapeUriString(chargeId);
+			object requestData = new { amount = amount, custom_fields = customFields };
 
 			return await _serviceHelper.Post<ChargeRefundResponse, object>(requestData, string.Format("charges/{0}/refunds", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
+
 
 		/// <summary>
 		/// Archive a transaction

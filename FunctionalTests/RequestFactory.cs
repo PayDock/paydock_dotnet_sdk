@@ -18,11 +18,15 @@ namespace FunctionalTests
 					{
 						gateway_id = gatewayId,
 						card_name = "Test Nametest",
-						card_number = "5123450000000008",
+						card_number = "4242424242424242",
 						card_ccv = "123",
-						expire_month = "10",
-						expire_year = "2022"
+						expire_month = "12",
+						expire_year = "2021"
 					}
+				},
+				custom_fields = new {
+					key1 = "customValue1",
+					key2 = "customValue2"
 				},
 				fraud = new FraudData
 				{
@@ -105,8 +109,8 @@ namespace FunctionalTests
 					card_name = "John Smith",
 					card_number = "4111111111111111",
 					card_ccv = "123",
-					expire_month = "10",
-					expire_year = "2020"
+					expire_month = "12",
+					expire_year = "2021"
 				}
 			};
 		}

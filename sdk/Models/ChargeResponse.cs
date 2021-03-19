@@ -83,6 +83,7 @@ namespace Paydock_dotnet_sdk.Models
             public string _id { get; set; }
             public decimal amount { get; set; }
             public DateTime created_at { get; set; }
+            public DateTime updated_at { get; set; }
             public string currency { get; set; }
             public string status { get; set; }
             public string status_code { get; set; }
@@ -93,6 +94,7 @@ namespace Paydock_dotnet_sdk.Models
             public string _source_ip_address { get; set; }
             public string type { get; set; }
             public FraudResponse fraud { get; set; }
+            public dynamic custom_fields { get; set; }
         }
     }
 }

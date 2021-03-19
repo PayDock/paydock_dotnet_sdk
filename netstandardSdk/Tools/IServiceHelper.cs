@@ -8,5 +8,6 @@ namespace Paydock_dotnet_sdk.Services
 		Task<T> Post<T, R>(R request, string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null);
 		Task<T> Get<T>(string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null);
 		Task<T> Delete<T>(string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null);
+		Task<T> Delete<T, R>(R request, string endpoint, bool excludeSecretKey = false, string overrideConfigSecretKey = null);
 	}
 }

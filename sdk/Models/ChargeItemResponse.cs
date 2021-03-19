@@ -80,6 +80,7 @@ namespace Paydock_dotnet_sdk.Models
         public class Transaction
         {
             public DateTime created_at { get; set; }
+            public DateTime updated_at { get; set; }
             public decimal amount { get; set; }
             public string currency { get; set; }
             public string _id { get; set; }
@@ -92,6 +93,7 @@ namespace Paydock_dotnet_sdk.Models
             public string _source_ip_address { get; set; }
             public string type { get; set; }
             public FraudResponse fraud { get; set; }
+            public dynamic custom_fields { get; set; }
         }
 
         public class Req

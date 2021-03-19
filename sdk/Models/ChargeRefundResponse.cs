@@ -62,6 +62,7 @@ namespace Paydock_dotnet_sdk.Models
             public string _id { get; set; }
             public decimal amount { get; set; }
             public DateTime created_at { get; set; }
+            public DateTime updated_at { get; set; }
             public string currency { get; set; }
             public string error_code { get; set; }
             public string error_message { get; set; }
@@ -72,6 +73,7 @@ namespace Paydock_dotnet_sdk.Models
             public string type { get; set; }
             public DateTime pended_at { get; set; }
             public FraudResponse fraud { get; set; }
+            public dynamic custom_fields { get; set; }
         }
     }
 }
