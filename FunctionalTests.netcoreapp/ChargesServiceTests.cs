@@ -278,6 +278,30 @@
             Assert.IsTrue(cancelAuthoriseResponse.IsSuccess);
         }
 
+
+
+        [TestCase(TestConfig.OverideSecretKey, null)]
+        [TestCase(null, null)]
+        [TestCase(null, 10)]
+        public async Task AuthoriseAndCancelChargeWithCustomFields(string overideSecretKey, decimal? amount)
+        {
+            var svc = CreateSvc(overideSecretKey);
+            var charge = RequestFactory.CreateChargeRequest(20M, TestConfig.MasterCardGatewayId);
+
+            var chargeResponse = await svc.Authorise(charge);
+
+            var customFields = new
+            {
+                key1 = "valueCancel",
+                key2 = "valueCancel2"
+            };
+
+            var cancelAuthoriseResponse = await svc.CancelAuthorisation(chargeResponse.resource.data._id, customFields);
+
+            Assert.IsTrue(cancelAuthoriseResponse.IsSuccess);
+        }
+
+
         [TestCase(TestConfig.MasterCardGatewayId, "5500005555555559", "test@test.com")]
         public async Task Initiate3DS(string gatewayId, string cardNumber, string customerEmail = "", string overideSecretKey = null)
         {

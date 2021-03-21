@@ -127,11 +127,8 @@ namespace Paydock_dotnet_sdk.Services
 		[RequiresConfig]
 		public async Task<ChargeResponse> CancelAuthorisation(string chargeId, dynamic customFields)
 		{
-			object requestData = null;
-			if (customFields.HasValue)
-			{
-				requestData = new { custom_fields = customFields.Value };
-			}
+			object requestData = new { custom_fields = customFields };
+			
 			chargeId = Uri.EscapeUriString(chargeId);
 			return await _serviceHelper.Delete<ChargeResponse, object>(requestData, string.Format("charges/{0}/capture", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
