@@ -11,7 +11,7 @@ namespace Paydock_dotnet_sdk.Models
         public string address_country { get; set; }
         public string address_postcode { get; set; }
         public string address_company { get; set; }
-        public string origin_address_postcode { get; set; }
+        public string address_origin_postcode { get; set; }
         public Contact contact { get; set; }
     }
 
