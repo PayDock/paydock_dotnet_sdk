@@ -71,6 +71,7 @@ namespace Paydock_dotnet_sdk.Models
             public string checkout_holder { get; set; }
             public string checkout_email { get; set; }
             public string vault_token { get; set; }
+            public string external_payer_id { get; set; }
 
         }
     }
