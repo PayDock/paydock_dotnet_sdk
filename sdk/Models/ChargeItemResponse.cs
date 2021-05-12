@@ -95,7 +95,7 @@ namespace Paydock_dotnet_sdk.Models
             public string type { get; set; }
             public FraudResponse fraud { get; set; }
             public dynamic custom_fields { get; set; }
-            public decimal amount_fee { get; set; }
+            public decimal? amount_fee { get; set; }
         }
 
         public class Req

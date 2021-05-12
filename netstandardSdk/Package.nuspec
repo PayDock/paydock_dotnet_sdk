@@ -2,15 +2,15 @@
 <package >
   <metadata>
     <id>PaydockSdkNetStandard</id>
-    <version>1.3.12</version>
+    <version>1.3.13</version>
     <authors>Paydock</authors>
     <owners>Paydock</owners>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/PayDockDev/paydock_dotnet_sdk</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net Standard 1.2 SDK</description>
-    <releaseNotes>1.3.12 
-    - Extra Charge object feilds </releaseNotes>
+    <releaseNotes>1.3.13 
+    - Nullable amount_fee for paypal </releaseNotes>
     <copyright>Copyright 2021</copyright>
     <tags></tags>
     <dependencies>
