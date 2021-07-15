@@ -222,5 +222,31 @@ namespace FunctionalTests
 				expire_year = "2020"
 			};
 		}
+
+		public static ChargeRequest CreateWalletRequest()
+		{
+			return new ChargeRequest
+			{
+				amount = 200.1M,
+				currency = "AUD",
+				customer = new Customer
+				{
+					first_name = "First",
+					last_name = "Last",
+					email = "test@test.com",
+					phone = "+123456789",
+					payment_source = new PaymentSource
+					{
+						gateway_id = TestConfig.FlypayGatewayId,
+						
+					}
+				},
+				meta = new Dictionary<string, string>()
+				{
+					{ "store_name", "123" },
+					{ "store_id", "123" }
+				}
+			};
+		}
 	}
 }

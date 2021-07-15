@@ -14,6 +14,7 @@ namespace FunctionalTests
         public const string StripeGatewayId = "";
         public const string StripeAccountId = "";
         public const string MasterCardGatewayId = "";
+        public const string FlypayGatewayId = "";
 
 
         public static void Init()

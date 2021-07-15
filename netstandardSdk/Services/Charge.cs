@@ -55,6 +55,17 @@ namespace Paydock_dotnet_sdk.Services
 		}
 
 		/// <summary>
+		/// Initialise a wallet charge
+		/// </summary>
+		/// <param name="request">Wallet Charge data</param>
+		/// <returns>Wallet response</returns>
+		[RequiresConfig]
+		public async Task<WalletResponse> InitializeWallet(ChargeRequest request)
+		{
+			return await _serviceHelper.Post<WalletResponse, ChargeRequest>(request, "charges/wallet", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
 		/// Authorise a charge
 		/// </summary>
 		/// <param name="request">Charge data</param>

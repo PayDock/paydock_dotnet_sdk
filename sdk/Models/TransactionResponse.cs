@@ -29,6 +29,8 @@ namespace Paydock_dotnet_sdk.Models
             public string type { get; set; }
             public FraudResponse fraud { get; set; }
             public dynamic custom_fields { get; set; }
+            public string external_id { get; set; }
+            public string external_reference { get; set; }
         }
 
     }
