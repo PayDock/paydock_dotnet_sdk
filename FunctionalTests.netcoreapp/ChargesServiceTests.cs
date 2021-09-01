@@ -187,11 +187,13 @@
         [TestCase(TestConfig.OverideSecretKey)]
         public async Task InitialiseWallet(string overideSecretKey)
         {
-            var charge = RequestFactory.CreateWalletRequest();
+           
+                var charge = RequestFactory.CreateWalletRequest();
 
                 var result = await CreateSvc(overideSecretKey).InitializeWallet(charge);
 
                 Assert.IsTrue(result.IsSuccess);
+            
           
         }
 
@@ -327,6 +329,8 @@
                 expire_month = "10",
                 expire_year = "2023",
                 email = customerEmail,
+                address_line1="",
+
             };
 
 
@@ -339,9 +343,9 @@
                 var result = await CreateSvc(overideSecretKey).Init3DS(threeDSrequest);
                 Assert.IsTrue(result.IsSuccess);
             }
-            catch (ResponseException)
+            catch (ResponseException ex)
             {
-
+                Assert.IsTrue(ex.ErrorResponse.Status == 400);
             }
            
 

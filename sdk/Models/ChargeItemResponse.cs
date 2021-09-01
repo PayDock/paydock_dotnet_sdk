@@ -23,6 +23,7 @@ namespace Paydock_dotnet_sdk.Models
             public string currency { get; set; }
             public string subscription_id { get; set; }
             public string reference { get; set; }
+            public string reference2 { get; set; }
             public string description { get; set; }
             public int __v { get; set; }
             public string external_id { get; set; }
@@ -76,6 +77,7 @@ namespace Paydock_dotnet_sdk.Models
             public string checkout_email { get; set; }
             public string vault_token { get; set; }
             public string external_payer_id { get; set; }
+            public string wallet_type { get; set; }
         }
 
         public class Transaction
@@ -98,6 +100,8 @@ namespace Paydock_dotnet_sdk.Models
             public decimal? amount_fee { get; set; }
             public string external_id { get; set; }
             public string external_reference { get; set; }
+            public string external_reference2 { get; set; }
+            public string external_payer_id { get; set; }
 
         }
 

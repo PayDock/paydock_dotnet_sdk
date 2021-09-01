@@ -21,6 +21,8 @@ namespace Paydock_dotnet_sdk.Models
             public DateTime created_at { get; set; }
             public string currency { get; set; }
             public string external_id { get; set; }
+            public string reference { get; set; }
+            public string reference2 { get; set; }
             public DateTime updated_at { get; set; }
             public string user_id { get; set; }
             public Transaction[] transactions { get; set; }
@@ -55,6 +57,7 @@ namespace Paydock_dotnet_sdk.Models
             public string card_scheme { get; set; }
             public string gateway_name { get; set; }
             public string gateway_type { get; set; }
+            public string wallet_type { get; set; }
         }
 
         public class Transaction
@@ -76,6 +79,7 @@ namespace Paydock_dotnet_sdk.Models
             public dynamic custom_fields { get; set; }
             public string external_id { get; set; }
             public string external_reference { get; set; }
+            public string external_reference2 { get; set; }
         }
     }
 }

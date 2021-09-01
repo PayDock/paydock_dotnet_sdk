@@ -17,6 +17,7 @@ namespace FunctionalTests
         public const string FlypayGatewayId = "";
 
 
+
         public static void Init()
         {
             Config.Initialise(Environment.Sandbox, SecretKey, PublicKey, 60000);

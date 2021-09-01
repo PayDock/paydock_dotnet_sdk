@@ -24,6 +24,7 @@ namespace Paydock_dotnet_sdk.Models
             public string description { get; set; }
             public string external_id { get; set; }
             public string reference { get; set; }
+            public string reference2 { get; set; }
             public DateTime updated_at { get; set; }
             public bool one_off { get; set; }
             public bool archived { get; set; }
@@ -72,6 +73,7 @@ namespace Paydock_dotnet_sdk.Models
             public string checkout_email { get; set; }
             public string vault_token { get; set; }
             public string external_payer_id { get; set; }
+            public string wallet_type { get; set; }
 
         }
     }

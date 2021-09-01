@@ -245,7 +245,7 @@ namespace FunctionalTests
 				{
 					{ "store_name", "123" },
 					{ "store_id", "123" }
-				}
+                }
 			};
 		}
 	}
