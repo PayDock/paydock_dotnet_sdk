@@ -101,7 +101,34 @@ namespace Paydock_dotnet_sdk.Services
 
 
 		/// <summary>
-		/// Update cutom fields for transaction in a charge
+		/// Send charge payload to stanalone fraud check
+		/// </summary>
+		/// <param name="request">Charge data</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> FraudCheck(ChargeRequest request)
+		{
+			return await _serviceHelper.Post<ChargeResponse, ChargeRequest>(request, "charges/fraud", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+
+		/// <summary>
+		/// Attach fraud transaction to a charge
+		/// </summary>
+		/// <param name="chargeId">id of the charge</param>
+		/// <param name="fraudCheckChargeId">Id of the fraud check charge</param>
+		/// <returns>information on the transaction</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> FraudCheckAttach(string chargeId, string fraudCheckChargeId)
+		{
+			chargeId = Uri.EscapeUriString(chargeId);
+			object requestData = new { fraud_charge_id = fraudCheckChargeId };
+
+			return await _serviceHelper.Post<ChargeResponse, object>(requestData, string.Format("charges/{0}/fraud/attach", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Update custom fields for transaction in a charge
 		/// </summary>
 		/// <param name="chargeId">id for the charge</param>
 		/// <param name="transactionId">id for the transaction in charge to update custom fields</param>

@@ -7,13 +7,13 @@
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
     <RootNamespace>Paydock_dotnet_sdk</RootNamespace>
-    <AssemblyVersion>1.3.16.8</AssemblyVersion>
-    <FileVersion>1.3.16.8</FileVersion>
+    <AssemblyVersion>1.3.16.9</AssemblyVersion>
+    <FileVersion>1.3.16.9</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>PayDockOssKeyFile.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>PaydockSdk.Core</AssemblyName>
-    <PackageVersion>1.3.16-rc8</PackageVersion>
-    <Version>1.3.16-rc8</Version>
+    <PackageVersion>1.3.16-rc9</PackageVersion>
+    <Version>1.3.16-rc9</Version>
     <Description>Paydock .Net Standard SDK</Description>
   </PropertyGroup>
 
