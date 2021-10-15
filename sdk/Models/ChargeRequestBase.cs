@@ -11,9 +11,12 @@ namespace Paydock_dotnet_sdk.Models
         public string description { get; set; }
 		public string customer_id { get; set; }
 		public string payment_source_id { get; set; }
+        public string fraud_charge_id { get; set; }
+        public bool? bypass_3ds { get; set; }
         public Customer customer { get; set; }
         public ThreeDSecure  _3ds { get; set; }
         public FraudData fraud { get; set; }
         public ShippingData shipping { get; set; }
+        
     }
 }
