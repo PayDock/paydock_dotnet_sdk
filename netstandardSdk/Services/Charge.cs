@@ -208,6 +208,7 @@ namespace Paydock_dotnet_sdk.Services
 			url = url.AppendParameter("status", request.status);
 			url = url.AppendParameter("archived", request.archived);
 			url = url.AppendParameter("reference", request.reference);
+			url = url.AppendParameter("authorization", request.authorization);
 
 			return await _serviceHelper.Get<ChargeItemsResponse>(url, overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
