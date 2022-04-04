@@ -25,6 +25,7 @@ namespace Paydock_dotnet_sdk.Models
             public string reference { get; set; }
             public string reference2 { get; set; }
             public string description { get; set; }
+            public string descriptor { get; set; }
             public int __v { get; set; }
             public string external_id { get; set; }
             public Transaction[] transactions { get; set; }
@@ -98,6 +99,8 @@ namespace Paydock_dotnet_sdk.Models
             public FraudResponse fraud { get; set; }
             public dynamic custom_fields { get; set; }
             public decimal? amount_fee { get; set; }
+            public decimal? amount_points { get; set; }
+            public decimal? points { get; set; }
             public string external_id { get; set; }
             public string external_reference { get; set; }
             public string external_reference2 { get; set; }

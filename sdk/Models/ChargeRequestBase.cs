@@ -10,7 +10,8 @@ namespace Paydock_dotnet_sdk.Models
         public string reference { get; set; }
         public string reference2 { get; set; }
         public string description { get; set; }
-		public string customer_id { get; set; }
+        public string descriptor { get; set; }
+        public string customer_id { get; set; }
 		public string payment_source_id { get; set; }
         public string fraud_charge_id { get; set; }
         public bool? bypass_3ds { get; set; }

@@ -23,6 +23,8 @@ namespace Paydock_dotnet_sdk.Models
             public string external_id { get; set; }
             public string reference { get; set; }
             public string reference2 { get; set; }
+            public string description { get; set; }
+            public string descriptor { get; set; }
             public DateTime updated_at { get; set; }
             public string user_id { get; set; }
             public Transaction[] transactions { get; set; }

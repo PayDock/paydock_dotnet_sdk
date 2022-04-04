@@ -16,6 +16,7 @@ namespace Paydock_dotnet_sdk.Models
         public NotificationTriggerType type { get; set; }
         public string destination { get; set; }
         public string template_id { get; set; }
+        public bool? transaction_only { get; set; }
         [JsonConverter(typeof(StringEnumConverter)), JsonProperty(PropertyName = "event")]
         public NotificationEvent eventTrigger { get; set; }
 

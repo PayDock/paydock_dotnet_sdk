@@ -22,6 +22,7 @@ namespace Paydock_dotnet_sdk.Models
             public DateTime created_at { get; set; }
             public string currency { get; set; }
             public string description { get; set; }
+            public string descriptor { get; set; }
             public string external_id { get; set; }
             public string reference { get; set; }
             public string reference2 { get; set; }

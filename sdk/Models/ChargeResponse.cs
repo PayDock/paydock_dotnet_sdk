@@ -33,6 +33,7 @@ namespace Paydock_dotnet_sdk.Models
             public Customer customer { get; set; }
             public string status { get; set; }
             public string description { get; set; }
+            public string descriptor { get; set; }
             public FraudBase fraud { get; set; }
             public ShippingData shipping { get; set; }
         }
@@ -86,6 +87,8 @@ namespace Paydock_dotnet_sdk.Models
             public string _id { get; set; }
             public decimal amount { get; set; }
             public decimal? amount_fee { get; set; }
+            public decimal? amount_points { get; set; }
+            public decimal? points { get; set; }
             public DateTime created_at { get; set; }
             public DateTime updated_at { get; set; }
             public string currency { get; set; }
