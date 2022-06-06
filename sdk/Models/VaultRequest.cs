@@ -15,5 +15,8 @@ namespace Paydock_dotnet_sdk.Models
 		public string account_name { get; set; }
 		public string account_number { get; set; }
 		public string account_bsb { get; set; }
+		public string card_ccv { get; set; }
+		public bool? store_ccv { get; set; }
+		
 	}
 }
