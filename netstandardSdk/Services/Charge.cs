@@ -111,6 +111,17 @@ namespace Paydock_dotnet_sdk.Services
 			return await _serviceHelper.Post<ChargeResponse, ChargeRequest>(request, "charges/fraud", overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 
+		/// <summary>
+		/// Send charge payload to standalone 3DS
+		/// </summary>
+		/// <param name="request">Charge data</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> ThreeDSStandalone(ChargeRequest request)
+		{
+			return await _serviceHelper.Post<ChargeResponse, ChargeRequest>(request, "charges/standalone-3ds", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
 
 		/// <summary>
 		/// Attach fraud transaction to a charge

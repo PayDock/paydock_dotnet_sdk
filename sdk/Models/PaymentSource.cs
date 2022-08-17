@@ -30,6 +30,7 @@ namespace Paydock_dotnet_sdk.Models
         public string card_ccv { get; set; }
         public string address_line1 { get; set; }
         public string address_line2 { get; set; }
+        public string address_line3 { get; set; }
         public string address_state { get; set; }
         public string address_country { get; set; }
         public string address_city { get; set; }

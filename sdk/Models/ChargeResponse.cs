@@ -24,6 +24,7 @@ namespace Paydock_dotnet_sdk.Models
             public string reference { get; set; }
             public string reference2 { get; set; }
             public DateTime updated_at { get; set; }
+            public string initialization_source { get; set; }
             public bool capture { get; set; }
             public string user_id { get; set; }
             public Transaction[] transactions { get; set; }
@@ -34,6 +35,7 @@ namespace Paydock_dotnet_sdk.Models
             public string status { get; set; }
             public string description { get; set; }
             public string descriptor { get; set; }
+            public string type { get; set; }
             public FraudBase fraud { get; set; }
             public ShippingData shipping { get; set; }
         }
@@ -62,6 +64,7 @@ namespace Paydock_dotnet_sdk.Models
             public string account_type { get; set; }
             public string address_line1 { get; set; }
             public string address_line2 { get; set; }
+            public string address_line3 { get; set; }
             public string address_city { get; set; }
             public string address_state { get; set; }
             public string address_country { get; set; }

@@ -26,11 +26,13 @@ namespace Paydock_dotnet_sdk.Models
             public string external_id { get; set; }
             public string reference { get; set; }
             public string reference2 { get; set; }
+            public string initialization_source { get; set; }
             public DateTime updated_at { get; set; }
             public bool one_off { get; set; }
             public bool archived { get; set; }
             public Customer customer { get; set; }
             public string status { get; set; }
+            public string type { get; set; }
             public FraudBase fraud { get; set; }
             public ShippingData shipping { get; set; }
         }
@@ -61,6 +63,7 @@ namespace Paydock_dotnet_sdk.Models
             public string account_bank_name { get; set; }
             public string address_line1 { get; set; }
             public string address_line2 { get; set; }
+            public string address_line3 { get; set; }
             public string address_city { get; set; }
             public string address_postcode { get; set; }
             public string address_state { get; set; }

@@ -25,12 +25,14 @@ namespace Paydock_dotnet_sdk.Models
             public string reference2 { get; set; }
             public string description { get; set; }
             public string descriptor { get; set; }
+            public string initialization_source { get; set; }
             public DateTime updated_at { get; set; }
             public string user_id { get; set; }
             public Transaction[] transactions { get; set; }
             public bool one_off { get; set; }
             public Customer customer { get; set; }
             public string status { get; set; }
+            public string type { get; set; }
             public FraudBase fraud { get; set; }
         }
 

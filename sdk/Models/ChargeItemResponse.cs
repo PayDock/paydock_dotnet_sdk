@@ -26,6 +26,7 @@ namespace Paydock_dotnet_sdk.Models
             public string reference2 { get; set; }
             public string description { get; set; }
             public string descriptor { get; set; }
+            public string initialization_source { get; set; }
             public int __v { get; set; }
             public string external_id { get; set; }
             public Transaction[] transactions { get; set; }
@@ -34,6 +35,7 @@ namespace Paydock_dotnet_sdk.Models
             public Customer customer { get; set; }
             public ThreeDSecure _3ds { get; set; }
             public string status { get; set; }
+            public string type { get; set; }
             public FraudBase fraud { get; set; }
             public ShippingData shipping { get; set; }
         }
@@ -66,6 +68,7 @@ namespace Paydock_dotnet_sdk.Models
             public string account_bank_name { get; set; }
             public string address_line1 { get; set; }
             public string address_line2 { get; set; }
+            public string address_line3 { get; set; }
             public string address_city { get; set; }
             public string address_postcode { get; set; }
             public string address_state { get; set; }
