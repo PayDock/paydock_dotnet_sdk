@@ -78,6 +78,7 @@ namespace Paydock_dotnet_sdk.Models
             public string vault_token { get; set; }
             public string external_payer_id { get; set; }
             public string wallet_type { get; set; }
+            public string card_number_bin { get; set; }
 
         }
     }

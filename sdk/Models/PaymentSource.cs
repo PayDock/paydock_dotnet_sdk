@@ -38,5 +38,8 @@ namespace Paydock_dotnet_sdk.Models
         public string address_company { get; set; }
         public string checkout_holder { get; set; }
 		public string checkout_email { get; set; }
+        public string card_accept_method { get; set; }
+        public string card_accept_type { get; set; }
+        public string card_holder_accept_method { get; set; }
     }
 }

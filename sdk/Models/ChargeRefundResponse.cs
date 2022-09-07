@@ -84,6 +84,8 @@ namespace Paydock_dotnet_sdk.Models
             public string external_id { get; set; }
             public string external_reference { get; set; }
             public string external_reference2 { get; set; }
+            public string initialization_source { get; set; }
+            public string card_number_bin { get; set; }
         }
     }
 }

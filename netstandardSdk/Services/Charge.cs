@@ -263,6 +263,9 @@ namespace Paydock_dotnet_sdk.Services
 			return await _serviceHelper.Post<ChargeRefundResponse, object>(requestData, string.Format("charges/{0}/refunds", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 
+
+
+
 		/// <summary>
 		/// Refund a transaction
 		/// </summary>
@@ -277,6 +280,30 @@ namespace Paydock_dotnet_sdk.Services
 			object requestData = new { amount = amount, custom_fields = customFields };
 
 			return await _serviceHelper.Post<ChargeRefundResponse, object>(requestData, string.Format("charges/{0}/refunds", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+
+		/// <summary>
+		/// Send payload for standalone Refund
+		/// </summary>
+		/// <param name="request">Charge refund data</param>
+		/// <returns>Charge Refund response</returns>
+		[RequiresConfig]
+		public async Task<ChargeRefundResponse> Refund(ChargeRefundRequest request)
+		{
+			return await _serviceHelper.Post<ChargeRefundResponse, ChargeRefundRequest>(request, "charges/refunds", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Refund a transaction
+		/// </summary>
+		/// <param name="chargeId">id of the charge to refund</param>
+		/// <param name="request">Charge refund data</param>
+		/// <returns>information on the transaction</returns>
+		[RequiresConfig]
+		public async Task<ChargeRefundResponse> Refund(string chargeId, ChargeRefundRequest request)
+		{
+			return await _serviceHelper.Post<ChargeRefundResponse, ChargeRefundRequest>(request, string.Format("charges/{0}/refunds", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 
 

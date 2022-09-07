@@ -82,6 +82,7 @@ namespace Paydock_dotnet_sdk.Models
             public string vault_token { get; set; }
             public string external_payer_id { get; set; }
             public string wallet_type { get; set; }
+            public string card_number_bin { get; set; }
         }
 
         public class Transaction
@@ -108,6 +109,7 @@ namespace Paydock_dotnet_sdk.Models
             public string external_reference { get; set; }
             public string external_reference2 { get; set; }
             public string external_payer_id { get; set; }
+            public string initialization_source { get; set; }
 
         }
 
