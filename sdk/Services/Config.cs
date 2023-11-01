@@ -19,8 +19,9 @@ namespace Paydock_dotnet_sdk.Services
         public static string PublicKey { get; private set; }
         public static IWebProxy WebProxy { get; private set; }
 		public static int TimeoutMilliseconds { get; set; }
+        public static string CustomUrl { get; private set; }
 
-		static Config()
+    static Config()
         {
             Environment = Environment.Sandbox;
 			TimeoutMilliseconds = 60000;
@@ -34,13 +35,15 @@ namespace Paydock_dotnet_sdk.Services
         /// <param name="publicKey">Public key for authentication</param>
         /// <param name="webProxy"></param>
         /// <param name="timeoutMilliseconds">timeout for calls to the API</param>
-        public static void Initialise(Environment env, string secretKey, string publicKey, int timeoutMilliseconds = 60000, IWebProxy webProxy = null)
+        /// <param name="customUrl">Custom Base Url for API</param>
+        public static void Initialise(Environment env, string secretKey, string publicKey, int timeoutMilliseconds = 60000, IWebProxy webProxy = null, string customUrl = null)
         {
             Environment = env;
             SecretKey = secretKey;
             PublicKey = publicKey;
             WebProxy = webProxy;
 			TimeoutMilliseconds = timeoutMilliseconds;
+            CustomUrl = customUrl;
 		}
 
         /// <summary>
@@ -49,6 +52,7 @@ namespace Paydock_dotnet_sdk.Services
         /// <returns>URL for the environment</returns>
         public static string BaseUrl()
         {
+            if (CustomUrl!=null) return CustomUrl;
             return (Environment == Environment.Sandbox ? "https://api-sandbox.paydock.com/v1/" : "https://api.paydock.com/v1/");
         }
     }
