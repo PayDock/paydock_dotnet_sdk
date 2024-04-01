@@ -66,6 +66,18 @@ namespace Paydock_dotnet_sdk.Services
 		}
 
 		/// <summary>
+		/// Initialise a wallet charge
+		/// </summary>
+		/// <param name="request">Wallet Charge data</param>
+		/// <param name="isCaptured">Should Charge be catpured</param>
+		/// <returns>Wallet response</returns>
+		[RequiresConfig]
+		public async Task<WalletResponse> InitializeWallet(ChargeRequest request, Boolean isCaptured)
+		{
+			return await _serviceHelper.Post<WalletResponse, ChargeRequest>(request, isCaptured?"charges/wallet":"charges/wallet?capture=false", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
 		/// Authorise a charge
 		/// </summary>
 		/// <param name="request">Charge data</param>

@@ -15,6 +15,7 @@ namespace Paydock_dotnet_sdk.Models
         public class Data
         {
             public string _id { get; set; }
+            public WalletChargeItem[] items { get; set; }
             public DateTime created_at { get; set; }
             public DateTime updated_at { get; set; }
             public string company_id { get; set; }
@@ -38,6 +39,8 @@ namespace Paydock_dotnet_sdk.Models
             public string type { get; set; }
             public FraudBase fraud { get; set; }
             public ShippingData shipping { get; set; }
+            public WalletAmountDetails[] amount_details { get; set; }
+            public WalletCardAcceptor card_acceptor { get; set; }
         }
 
         public class Customer

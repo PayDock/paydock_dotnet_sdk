@@ -17,6 +17,7 @@ namespace Paydock_dotnet_sdk.Models
             public string external_id { get; set; }
             public int __v { get; set; }
             public string _id { get; set; }
+            public WalletChargeItem[] items { get; set; }
             public decimal amount { get; set; }
             public string company_id { get; set; }
             public DateTime created_at { get; set; }
@@ -111,6 +112,8 @@ namespace Paydock_dotnet_sdk.Models
             public string external_reference2 { get; set; }
             public string external_payer_id { get; set; }
             public string initialization_source { get; set; }
+            public WalletAmountDetails[] amount_details { get; set; }
+            public WalletCardAcceptor card_acceptor { get; set; }
         }
     }
 }

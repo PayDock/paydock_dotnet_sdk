@@ -19,6 +19,7 @@ namespace Paydock_dotnet_sdk.Models
         {
             public string _id { get; set; }
             public decimal amount { get; set; }
+            public WalletChargeItem[] items { get; set; }
             public DateTime created_at { get; set; }
             public string currency { get; set; }
             public string description { get; set; }

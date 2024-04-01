@@ -7,13 +7,13 @@
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
     <RootNamespace>Paydock_dotnet_sdk</RootNamespace>
-    <AssemblyVersion>1.3.18.4</AssemblyVersion>
-    <FileVersion>1.3.18.4</FileVersion>
+    <AssemblyVersion>1.3.18.5</AssemblyVersion>
+    <FileVersion>1.3.18.5</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>PayDockOssKeyFile.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>PaydockSdk.Core</AssemblyName>
-    <PackageVersion>1.3.18-rc4</PackageVersion>
-    <Version>1.3.18-rc4</Version>
+    <PackageVersion>1.3.18-rc5</PackageVersion>
+    <Version>1.3.18-rc5</Version>
     <Description>Paydock .Net Standard SDK</Description>
   </PropertyGroup>
 
@@ -32,6 +32,9 @@
     <Compile Include="..\sdk\Models\ChargeRequestBase.cs" Link="Models\ChargeRequestBase.cs" />
     <Compile Include="..\sdk\Models\ChargeRequestStripeConnect.cs" Link="Models\ChargeRequestStripeConnect.cs" />
     <Compile Include="..\sdk\Models\WalletResponse.cs" Link="Models\WalletResponse.cs" />
+    <Compile Include="..\sdk\Models\WalletAmountDetails.cs" Link="Models\WalletAmountDetails.cs" />
+    <Compile Include="..\sdk\Models\WalletCardAcceptor.cs" Link="Models\WalletCardAcceptor.cs" />
+    <Compile Include="..\sdk\Models\WalletChargeItem.cs" Link="Models\WalletChargeItem.cs" />
     <Compile Include="..\sdk\Models\ChargeSearchRequest.cs" Link="Models\ChargeSearchRequest.cs" />
     <Compile Include="..\sdk\Models\TransactionResponse.cs" Link="Models\TransactionResponse.cs" />
     <Compile Include="..\sdk\Models\Customer.cs" Link="Models\Customer.cs" />

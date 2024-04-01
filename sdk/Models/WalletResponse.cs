@@ -105,6 +105,8 @@ namespace Paydock_dotnet_sdk.Models
             public dynamic custom_fields { get; set; }
             public string external_id { get; set; }
             public string external_reference { get; set; }
+            public WalletAmountDetails[] amount_details { get; set; }
+            public WalletCardAcceptor card_acceptor { get; set; }
         }
     }
 }
