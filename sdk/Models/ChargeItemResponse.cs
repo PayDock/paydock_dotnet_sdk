@@ -39,8 +39,6 @@ namespace Paydock_dotnet_sdk.Models
             public string type { get; set; }
             public FraudBase fraud { get; set; }
             public ShippingData shipping { get; set; }
-            public WalletAmountDetails[] amount_details { get; set; }
-            public WalletCardAcceptor card_acceptor { get; set; }
         }
 
         public class Customer
@@ -86,6 +84,8 @@ namespace Paydock_dotnet_sdk.Models
             public string external_payer_id { get; set; }
             public string wallet_type { get; set; }
             public string card_number_bin { get; set; }
+            public string card_issuer { get; set; }
+            public string card_funding_method { get; set; }
         }
 
         public class Transaction
@@ -101,6 +101,7 @@ namespace Paydock_dotnet_sdk.Models
             public string gateway_specific_code { get; set; }
             public string gateway_specific_description { get; set; }
             public string status_code { get; set; }
+            public string status_code_description { get; set; }
             public string _source_ip_address { get; set; }
             public string type { get; set; }
             public FraudResponse fraud { get; set; }
@@ -113,6 +114,9 @@ namespace Paydock_dotnet_sdk.Models
             public string external_reference2 { get; set; }
             public string external_payer_id { get; set; }
             public string initialization_source { get; set; }
+            public WalletAmountDetails[] amount_details { get; set; }
+            public WalletCardAcceptor card_acceptor { get; set; }
+            public TransactionThreeDSecure _3ds { get; set; }
 
         }
 

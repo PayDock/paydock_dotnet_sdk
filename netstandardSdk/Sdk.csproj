@@ -7,13 +7,13 @@
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
     <RootNamespace>Paydock_dotnet_sdk</RootNamespace>
-    <AssemblyVersion>1.3.18.5</AssemblyVersion>
-    <FileVersion>1.3.18.5</FileVersion>
+    <AssemblyVersion>1.3.18.7</AssemblyVersion>
+    <FileVersion>1.3.18.7</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>PayDockOssKeyFile.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>PaydockSdk.Core</AssemblyName>
-    <PackageVersion>1.3.18-rc5</PackageVersion>
-    <Version>1.3.18-rc5</Version>
+    <PackageVersion>1.3.18-rc7</PackageVersion>
+    <Version>1.3.18-rc7</Version>
     <Description>Paydock .Net Standard SDK</Description>
   </PropertyGroup>
 
@@ -67,6 +67,7 @@
     <Compile Include="..\sdk\Models\NotificationTriggerResponse.cs" Link="Models\NotificationTriggerResponse.cs" />
     <Compile Include="..\sdk\Models\PaymentSource.cs" Link="Models\PaymentSource.cs" />
     <Compile Include="..\sdk\Models\ThreeDSecure.cs" Link="Models\ThreeDSecure.cs" />
+    <Compile Include="..\sdk\Models\TransactionThreeDSecure.cs" Link="Models\TransactionThreeDSecure.cs" />
     <Compile Include="..\sdk\Models\FraudData.cs" Link="Models\FraudData.cs" />
     <Compile Include="..\sdk\Models\FraudBase.cs" Link="Models\FraudBase.cs" />
     <Compile Include="..\sdk\Models\ShippingData.cs" Link="Models\ShippingData.cs" />

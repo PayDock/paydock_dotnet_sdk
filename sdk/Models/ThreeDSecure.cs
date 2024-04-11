@@ -16,6 +16,7 @@ namespace Paydock_dotnet_sdk.Models
         public Authentication authentication { get; set; }
         public Decoupled decoupled { get; set; }
         public Recurring recurring { get; set; }
+        
     }
 
     public class Authentication

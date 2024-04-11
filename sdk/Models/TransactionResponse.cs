@@ -21,6 +21,7 @@ namespace Paydock_dotnet_sdk.Models
             public string currency { get; set; }
             public string status { get; set; }
             public string status_code { get; set; }
+            public string status_code_description { get; set; }
             public string error_code { get; set; }
             public string error_message { get; set; }
             public string gateway_specific_code { get; set; }

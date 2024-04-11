@@ -41,5 +41,10 @@ namespace Paydock_dotnet_sdk.Models
         public string card_accept_method { get; set; }
         public string card_accept_type { get; set; }
         public string card_holder_accept_method { get; set; }
+        public string external_payer_id { get; set; }
+        public string wallet_type { get; set; }
+        public string card_number_bin { get; set; }
+        public string card_issuer { get; set; }
+        public string card_funding_method { get; set; }
     }
 }

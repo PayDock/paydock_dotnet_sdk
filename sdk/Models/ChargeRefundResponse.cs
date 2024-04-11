@@ -78,6 +78,8 @@ namespace Paydock_dotnet_sdk.Models
             public string gateway_specific_description { get; set; }
             public string _source_ip_address { get; set; }
             public string status { get; set; }
+            public string status_code_description { get; set; }
+            public string status_code { get; set; }
             public string type { get; set; }
             public DateTime pended_at { get; set; }
             public FraudResponse fraud { get; set; }
@@ -87,6 +89,7 @@ namespace Paydock_dotnet_sdk.Models
             public string external_reference2 { get; set; }
             public string initialization_source { get; set; }
             public string card_number_bin { get; set; }
+            public TransactionThreeDSecure _3ds { get; set; }
         }
     }
 }

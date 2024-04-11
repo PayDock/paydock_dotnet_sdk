@@ -83,6 +83,10 @@ namespace Paydock_dotnet_sdk.Models
 			public string checkout_email { get; set; }
             public string vault_token { get; set; }
             public string external_payer_id { get; set; }
+            public string wallet_type { get; set; }
+            public string card_number_bin { get; set; }
+            public string card_issuer { get; set; }
+            public string card_funding_method { get; set; }
         }
 
         public class Transaction
@@ -95,6 +99,7 @@ namespace Paydock_dotnet_sdk.Models
             public string currency { get; set; }
             public string status { get; set; }
             public string status_code { get; set; }
+            public string status_code_description { get; set; }
             public string error_code { get; set; }
             public string error_message { get; set; }
             public string gateway_specific_code { get; set; }
@@ -107,6 +112,7 @@ namespace Paydock_dotnet_sdk.Models
             public string external_reference { get; set; }
             public WalletAmountDetails[] amount_details { get; set; }
             public WalletCardAcceptor card_acceptor { get; set; }
+            public TransactionThreeDSecure _3ds { get; set; }
         }
     }
 }

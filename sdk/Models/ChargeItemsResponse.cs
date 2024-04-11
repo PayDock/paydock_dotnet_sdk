@@ -36,6 +36,7 @@ namespace Paydock_dotnet_sdk.Models
             public string type { get; set; }
             public FraudBase fraud { get; set; }
             public ShippingData shipping { get; set; }
+            public ThreeDSecure _3ds { get; set; }
         }
 
         public class Customer
@@ -80,6 +81,8 @@ namespace Paydock_dotnet_sdk.Models
             public string external_payer_id { get; set; }
             public string wallet_type { get; set; }
             public string card_number_bin { get; set; }
+            public string card_issuer { get; set; }
+            public string card_funding_method { get; set; }
 
         }
     }
