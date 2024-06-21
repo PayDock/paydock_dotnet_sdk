@@ -4,7 +4,7 @@ namespace Paydock_dotnet_sdk.Models
     public class WalletAmountDetails
     {
         public decimal amount { get; set; }
-        public decimal points { get; set; }
+        public decimal amount_points { get; set; }
         public string currency { get; set; }
         public PaymentSource payment_source { get; set; }
         public class PaymentSource
