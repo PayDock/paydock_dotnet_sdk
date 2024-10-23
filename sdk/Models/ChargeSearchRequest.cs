@@ -14,7 +14,8 @@ namespace Paydock_dotnet_sdk.Models
         public string search { get; set; }
         public string status { get; set; }
         public bool? archived { get; set; }
-		[Obsolete]
+        public bool? authorization { get; set; }
+        [Obsolete]
         public string transaction_external_id { get; set; }
 		public string reference { get; set; }
 	}

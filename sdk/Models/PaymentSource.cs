@@ -30,6 +30,7 @@ namespace Paydock_dotnet_sdk.Models
         public string card_ccv { get; set; }
         public string address_line1 { get; set; }
         public string address_line2 { get; set; }
+        public string address_line3 { get; set; }
         public string address_state { get; set; }
         public string address_country { get; set; }
         public string address_city { get; set; }
@@ -37,5 +38,13 @@ namespace Paydock_dotnet_sdk.Models
         public string address_company { get; set; }
         public string checkout_holder { get; set; }
 		public string checkout_email { get; set; }
+        public string card_accept_method { get; set; }
+        public string card_accept_type { get; set; }
+        public string card_holder_accept_method { get; set; }
+        public string external_payer_id { get; set; }
+        public string wallet_type { get; set; }
+        public string card_number_bin { get; set; }
+        public string card_issuer { get; set; }
+        public string card_funding_method { get; set; }
     }
 }

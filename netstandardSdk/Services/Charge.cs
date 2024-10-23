@@ -55,6 +55,29 @@ namespace Paydock_dotnet_sdk.Services
 		}
 
 		/// <summary>
+		/// Initialise a wallet charge
+		/// </summary>
+		/// <param name="request">Wallet Charge data</param>
+		/// <returns>Wallet response</returns>
+		[RequiresConfig]
+		public async Task<WalletResponse> InitializeWallet(ChargeRequest request)
+		{
+			return await _serviceHelper.Post<WalletResponse, ChargeRequest>(request, "charges/wallet", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Initialise a wallet charge
+		/// </summary>
+		/// <param name="request">Wallet Charge data</param>
+		/// <param name="isCaptured">Should Charge be catpured</param>
+		/// <returns>Wallet response</returns>
+		[RequiresConfig]
+		public async Task<WalletResponse> InitializeWallet(ChargeRequest request, Boolean isCaptured)
+		{
+			return await _serviceHelper.Post<WalletResponse, ChargeRequest>(request, isCaptured?"charges/wallet":"charges/wallet?capture=false", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
 		/// Authorise a charge
 		/// </summary>
 		/// <param name="request">Charge data</param>
@@ -90,7 +113,45 @@ namespace Paydock_dotnet_sdk.Services
 
 
 		/// <summary>
-		/// Update cutom fields for transaction in a charge
+		/// Send charge payload to stanalone fraud check
+		/// </summary>
+		/// <param name="request">Charge data</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> FraudCheck(ChargeRequest request)
+		{
+			return await _serviceHelper.Post<ChargeResponse, ChargeRequest>(request, "charges/fraud", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Send charge payload to standalone 3DS
+		/// </summary>
+		/// <param name="request">Charge data</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> ThreeDSStandalone(ChargeRequest request)
+		{
+			return await _serviceHelper.Post<ChargeResponse, ChargeRequest>(request, "charges/standalone-3ds", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+
+		/// <summary>
+		/// Attach fraud transaction to a charge
+		/// </summary>
+		/// <param name="chargeId">id of the charge</param>
+		/// <param name="fraudCheckChargeId">Id of the fraud check charge</param>
+		/// <returns>information on the transaction</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> FraudCheckAttach(string chargeId, string fraudCheckChargeId)
+		{
+			chargeId = Uri.EscapeUriString(chargeId);
+			object requestData = new { fraud_charge_id = fraudCheckChargeId };
+
+			return await _serviceHelper.Post<ChargeResponse, object>(requestData, string.Format("charges/{0}/fraud/attach", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Update custom fields for transaction in a charge
 		/// </summary>
 		/// <param name="chargeId">id for the charge</param>
 		/// <param name="transactionId">id for the transaction in charge to update custom fields</param>
@@ -170,6 +231,7 @@ namespace Paydock_dotnet_sdk.Services
 			url = url.AppendParameter("status", request.status);
 			url = url.AppendParameter("archived", request.archived);
 			url = url.AppendParameter("reference", request.reference);
+			url = url.AppendParameter("authorization", request.authorization);
 
 			return await _serviceHelper.Get<ChargeItemsResponse>(url, overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
@@ -213,6 +275,9 @@ namespace Paydock_dotnet_sdk.Services
 			return await _serviceHelper.Post<ChargeRefundResponse, object>(requestData, string.Format("charges/{0}/refunds", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 
+
+
+
 		/// <summary>
 		/// Refund a transaction
 		/// </summary>
@@ -227,6 +292,30 @@ namespace Paydock_dotnet_sdk.Services
 			object requestData = new { amount = amount, custom_fields = customFields };
 
 			return await _serviceHelper.Post<ChargeRefundResponse, object>(requestData, string.Format("charges/{0}/refunds", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+
+		/// <summary>
+		/// Send payload for standalone Refund
+		/// </summary>
+		/// <param name="request">Charge refund data</param>
+		/// <returns>Charge Refund response</returns>
+		[RequiresConfig]
+		public async Task<ChargeRefundResponse> Refund(ChargeRefundRequest request)
+		{
+			return await _serviceHelper.Post<ChargeRefundResponse, ChargeRefundRequest>(request, "charges/refunds", overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
+		/// Refund a transaction
+		/// </summary>
+		/// <param name="chargeId">id of the charge to refund</param>
+		/// <param name="request">Charge refund data</param>
+		/// <returns>information on the transaction</returns>
+		[RequiresConfig]
+		public async Task<ChargeRefundResponse> Refund(string chargeId, ChargeRefundRequest request)
+		{
+			return await _serviceHelper.Post<ChargeRefundResponse, ChargeRefundRequest>(request, string.Format("charges/{0}/refunds", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
 		}
 
 

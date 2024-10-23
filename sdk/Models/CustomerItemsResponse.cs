@@ -66,6 +66,11 @@ namespace Paydock_dotnet_sdk.Models
             public DateTime created_at { get; set; }
             public string _id { get; set; }
             public string type { get; set; }
+            public string external_payer_id { get; set; }
+            public string wallet_type { get; set; }
+            public string card_number_bin { get; set; }
+            public string card_issuer { get; set; }
+            public string card_funding_method { get; set; }
         }
 
     }

@@ -16,17 +16,24 @@ namespace Paydock_dotnet_sdk.Models
         {
             public int __v { get; set; }
             public string _id { get; set; }
+            public WalletChargeItem[] items { get; set; }
             public decimal amount { get; set; }
             public string company_id { get; set; }
             public DateTime created_at { get; set; }
             public string currency { get; set; }
             public string external_id { get; set; }
+            public string reference { get; set; }
+            public string reference2 { get; set; }
+            public string description { get; set; }
+            public string descriptor { get; set; }
+            public string initialization_source { get; set; }
             public DateTime updated_at { get; set; }
             public string user_id { get; set; }
             public Transaction[] transactions { get; set; }
             public bool one_off { get; set; }
             public Customer customer { get; set; }
             public string status { get; set; }
+            public string type { get; set; }
             public FraudBase fraud { get; set; }
         }
 
@@ -55,6 +62,7 @@ namespace Paydock_dotnet_sdk.Models
             public string card_scheme { get; set; }
             public string gateway_name { get; set; }
             public string gateway_type { get; set; }
+            public string wallet_type { get; set; }
         }
 
         public class Transaction
@@ -70,10 +78,18 @@ namespace Paydock_dotnet_sdk.Models
             public string gateway_specific_description { get; set; }
             public string _source_ip_address { get; set; }
             public string status { get; set; }
+            public string status_code_description { get; set; }
+            public string status_code { get; set; }
             public string type { get; set; }
             public DateTime pended_at { get; set; }
             public FraudResponse fraud { get; set; }
             public dynamic custom_fields { get; set; }
+            public string external_id { get; set; }
+            public string external_reference { get; set; }
+            public string external_reference2 { get; set; }
+            public string initialization_source { get; set; }
+            public string card_number_bin { get; set; }
+            public TransactionThreeDSecure _3ds { get; set; }
         }
     }
 }

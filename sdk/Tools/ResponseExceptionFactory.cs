@@ -21,6 +21,10 @@ namespace Paydock_dotnet_sdk.Tools
 			};
 
 
+
+			var errorMessage = "";
+			
+
 			var json = JObject.Parse(result);
 			if (json["error_summary"] != null)
 			{
@@ -32,7 +36,7 @@ namespace Paydock_dotnet_sdk.Tools
 					json["error_summary"]["message"]["message"].Count() == 0)
 					errorResponse.ErrorMessage = (string)json["error_summary"]["message"]["message"];
 
-
+				//else if (json["error"] != null && )
 				if (json["resource"] != null &&
 						json["resource"]["type"] != null &&
 							Convert.ToString(json["resource"]["type"]) == "charge")
@@ -50,8 +54,17 @@ namespace Paydock_dotnet_sdk.Tools
 				if (json["error_summary"]["details"] != null)
 					AddErrorDetails(errorResponse, result, obj);
 
+				errorMessage = errorResponse.ErrorMessage;
+
+				if(errorResponse.ErrorDetails !=null && errorResponse.ErrorDetails.messages.Any())
+                {
+					errorMessage = string.Join("; ", errorResponse.ErrorDetails.messages);
+
+				}
+
 			}
-			throw new ResponseException(errorResponse, errorResponse.Status.ToString(), innerException);
+
+			throw new ResponseException(errorResponse, errorMessage, innerException);
 		}
 
 		public static void AddExceptionChargeResponce(ErrorResponse errorResponse, string result)
@@ -89,7 +102,7 @@ namespace Paydock_dotnet_sdk.Tools
 				JsonResponse = "",
 				ErrorMessage = "Request Timeout"
 			};
-			throw new ResponseException(errorResponse, errorResponse.Status.ToString());
+			throw new ResponseException(errorResponse, errorResponse.ErrorMessage);
 		}
 	}
 }

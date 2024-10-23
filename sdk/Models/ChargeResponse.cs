@@ -17,12 +17,15 @@ namespace Paydock_dotnet_sdk.Models
             public string external_id { get; set; }
             public int __v { get; set; }
             public string _id { get; set; }
+            public WalletChargeItem[] items { get; set; }
             public decimal amount { get; set; }
             public string company_id { get; set; }
             public DateTime created_at { get; set; }
             public string currency { get; set; }
             public string reference { get; set; }
+            public string reference2 { get; set; }
             public DateTime updated_at { get; set; }
+            public string initialization_source { get; set; }
             public bool capture { get; set; }
             public string user_id { get; set; }
             public Transaction[] transactions { get; set; }
@@ -32,6 +35,8 @@ namespace Paydock_dotnet_sdk.Models
             public Customer customer { get; set; }
             public string status { get; set; }
             public string description { get; set; }
+            public string descriptor { get; set; }
+            public string type { get; set; }
             public FraudBase fraud { get; set; }
             public ShippingData shipping { get; set; }
         }
@@ -60,6 +65,7 @@ namespace Paydock_dotnet_sdk.Models
             public string account_type { get; set; }
             public string address_line1 { get; set; }
             public string address_line2 { get; set; }
+            public string address_line3 { get; set; }
             public string address_city { get; set; }
             public string address_state { get; set; }
             public string address_country { get; set; }
@@ -76,17 +82,27 @@ namespace Paydock_dotnet_sdk.Models
 			public string checkout_holder { get; set; }
 			public string checkout_email { get; set; }
             public string vault_token { get; set; }
+            public string external_payer_id { get; set; }
+            public string wallet_type { get; set; }
+            public string card_number_bin { get; set; }
+            public string card_issuer { get; set; }
+            public string card_funding_method { get; set; }
+            public string external_card_loyalty_id { get; set; }
         }
 
         public class Transaction
         {
             public string _id { get; set; }
             public decimal amount { get; set; }
+            public decimal? amount_fee { get; set; }
+            public decimal? amount_points { get; set; }
+            public decimal? points { get; set; }
             public DateTime created_at { get; set; }
             public DateTime updated_at { get; set; }
             public string currency { get; set; }
             public string status { get; set; }
             public string status_code { get; set; }
+            public string status_code_description { get; set; }
             public string error_code { get; set; }
             public string error_message { get; set; }
             public string gateway_specific_code { get; set; }
@@ -95,6 +111,14 @@ namespace Paydock_dotnet_sdk.Models
             public string type { get; set; }
             public FraudResponse fraud { get; set; }
             public dynamic custom_fields { get; set; }
+            public string external_id { get; set; }
+            public string external_reference { get; set; }
+            public string external_reference2 { get; set; }
+            public string external_payer_id { get; set; }
+            public string initialization_source { get; set; }
+            public WalletAmountDetails[] amount_details { get; set; }
+            public WalletCardAcceptor card_acceptor { get; set; }
+            public TransactionThreeDSecure _3ds { get; set; }
         }
     }
 }

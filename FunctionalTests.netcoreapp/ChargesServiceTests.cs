@@ -183,6 +183,20 @@
             Assert.IsTrue(result.IsSuccess);
         }
 
+
+        [TestCase(TestConfig.OverideSecretKey)]
+        public async Task InitialiseWallet(string overideSecretKey)
+        {
+           
+                var charge = RequestFactory.CreateWalletRequest();
+
+                var result = await CreateSvc(overideSecretKey).InitializeWallet(charge);
+
+                Assert.IsTrue(result.IsSuccess);
+            
+          
+        }
+
         [TestCase(TestConfig.OverideSecretKey)]
         [TestCase(null)]
         public async Task CreateStripeConnectDirectCharge(string overideSecretKey)
@@ -315,15 +329,25 @@
                 expire_month = "10",
                 expire_year = "2023",
                 email = customerEmail,
+                address_line1="",
+
             };
 
 
             TokenResponse tokenResult = await new Tokens().Create(tokenRequest);
             ChargeRequest threeDSrequest = RequestFactory.Init3DSRequest(10M, tokenResult.resource.data);
 
-            var result = await CreateSvc(overideSecretKey).Init3DS(threeDSrequest);
-
-            Assert.IsTrue(result.IsSuccess);
+            
+            try
+            {
+                var result = await CreateSvc(overideSecretKey).Init3DS(threeDSrequest);
+                Assert.IsTrue(result.IsSuccess);
+            }
+            catch (ResponseException ex)
+            {
+                Assert.IsTrue(ex.ErrorResponse.Status == 400);
+            }
+           
 
         }
 

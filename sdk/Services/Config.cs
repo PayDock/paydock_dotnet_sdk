@@ -17,38 +17,62 @@ namespace Paydock_dotnet_sdk.Services
         public static Environment Environment { get; private set; }
         public static string SecretKey { get; private set; }
         public static string PublicKey { get; private set; }
+        public static string AccessToken { get; private set; }
         public static IWebProxy WebProxy { get; private set; }
 		public static int TimeoutMilliseconds { get; set; }
+        public static string CustomUrl { get; private set; }
 
-		static Config()
+    static Config()
         {
             Environment = Environment.Sandbox;
 			TimeoutMilliseconds = 60000;
 		}
 
         /// <summary>
-        /// Initialise configuration for Paydock
+        /// Initialise configuration for Paydock (Deprecated)
         /// </summary>
         /// <param name="env">Environment to connect to</param>
         /// <param name="secretKey">Secret key for authentication</param>
         /// <param name="publicKey">Public key for authentication</param>
         /// <param name="webProxy"></param>
         /// <param name="timeoutMilliseconds">timeout for calls to the API</param>
-        public static void Initialise(Environment env, string secretKey, string publicKey, int timeoutMilliseconds = 60000, IWebProxy webProxy = null)
+        /// <param name="customUrl">Custom Base Url for API</param>
+        public static void Initialise(Environment env, string secretKey, string publicKey, int timeoutMilliseconds = 60000, IWebProxy webProxy = null, string customUrl = null)
         {
             Environment = env;
             SecretKey = secretKey;
             PublicKey = publicKey;
             WebProxy = webProxy;
 			TimeoutMilliseconds = timeoutMilliseconds;
+            CustomUrl = customUrl;
+            AccessToken = null;
 		}
-
+        /// <summary>
+        /// Initialise configuration for Paydock with AccessToken 
+        /// </summary>
+        /// <param name="env">Environment to connect to</param>
+        /// <param name="secretKey">Secret key for authentication</param>
+        /// <param name="publicKey">Public key for authentication</param>
+        /// <param name="webProxy"></param>
+        /// <param name="timeoutMilliseconds">timeout for calls to the API</param>
+        /// <param name="customUrl">Custom Base Url for API</param>
+        public static void Initialise(Environment env, string accessToken, int timeoutMilliseconds = 60000, IWebProxy webProxy = null, string customUrl = null)
+        {
+            Environment = env;
+            AccessToken = accessToken;
+            WebProxy = webProxy;
+            TimeoutMilliseconds = timeoutMilliseconds;
+            CustomUrl = customUrl;
+            SecretKey = null;
+            PublicKey = null;
+        }
         /// <summary>
         /// Base address for the API, based on environment
         /// </summary>
         /// <returns>URL for the environment</returns>
         public static string BaseUrl()
         {
+            if (CustomUrl!=null) return CustomUrl;
             return (Environment == Environment.Sandbox ? "https://api-sandbox.paydock.com/v1/" : "https://api.paydock.com/v1/");
         }
     }

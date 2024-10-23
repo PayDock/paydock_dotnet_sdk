@@ -19,18 +19,24 @@ namespace Paydock_dotnet_sdk.Models
         {
             public string _id { get; set; }
             public decimal amount { get; set; }
+            public WalletChargeItem[] items { get; set; }
             public DateTime created_at { get; set; }
             public string currency { get; set; }
             public string description { get; set; }
+            public string descriptor { get; set; }
             public string external_id { get; set; }
             public string reference { get; set; }
+            public string reference2 { get; set; }
+            public string initialization_source { get; set; }
             public DateTime updated_at { get; set; }
             public bool one_off { get; set; }
             public bool archived { get; set; }
             public Customer customer { get; set; }
             public string status { get; set; }
+            public string type { get; set; }
             public FraudBase fraud { get; set; }
             public ShippingData shipping { get; set; }
+            public ThreeDSecure _3ds { get; set; }
         }
 
         public class Customer
@@ -59,6 +65,7 @@ namespace Paydock_dotnet_sdk.Models
             public string account_bank_name { get; set; }
             public string address_line1 { get; set; }
             public string address_line2 { get; set; }
+            public string address_line3 { get; set; }
             public string address_city { get; set; }
             public string address_postcode { get; set; }
             public string address_state { get; set; }
@@ -71,6 +78,12 @@ namespace Paydock_dotnet_sdk.Models
             public string checkout_holder { get; set; }
             public string checkout_email { get; set; }
             public string vault_token { get; set; }
+            public string external_payer_id { get; set; }
+            public string wallet_type { get; set; }
+            public string card_number_bin { get; set; }
+            public string card_issuer { get; set; }
+            public string card_funding_method { get; set; }
+            public string external_card_loyalty_id { get; set; }
 
         }
     }
