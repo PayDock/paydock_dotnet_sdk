@@ -83,6 +83,7 @@ namespace Paydock_dotnet_sdk.Models
             public string card_number_bin { get; set; }
             public string card_issuer { get; set; }
             public string card_funding_method { get; set; }
+            public string external_card_loyalty_id { get; set; }
 
         }
     }

@@ -17,6 +17,7 @@ namespace Paydock_dotnet_sdk.Services
         public static Environment Environment { get; private set; }
         public static string SecretKey { get; private set; }
         public static string PublicKey { get; private set; }
+        public static string AccessToken { get; private set; }
         public static IWebProxy WebProxy { get; private set; }
 		public static int TimeoutMilliseconds { get; set; }
         public static string CustomUrl { get; private set; }
@@ -28,7 +29,7 @@ namespace Paydock_dotnet_sdk.Services
 		}
 
         /// <summary>
-        /// Initialise configuration for Paydock
+        /// Initialise configuration for Paydock (Deprecated)
         /// </summary>
         /// <param name="env">Environment to connect to</param>
         /// <param name="secretKey">Secret key for authentication</param>
@@ -44,8 +45,27 @@ namespace Paydock_dotnet_sdk.Services
             WebProxy = webProxy;
 			TimeoutMilliseconds = timeoutMilliseconds;
             CustomUrl = customUrl;
+            AccessToken = null;
 		}
-
+        /// <summary>
+        /// Initialise configuration for Paydock with AccessToken 
+        /// </summary>
+        /// <param name="env">Environment to connect to</param>
+        /// <param name="secretKey">Secret key for authentication</param>
+        /// <param name="publicKey">Public key for authentication</param>
+        /// <param name="webProxy"></param>
+        /// <param name="timeoutMilliseconds">timeout for calls to the API</param>
+        /// <param name="customUrl">Custom Base Url for API</param>
+        public static void Initialise(Environment env, string accessToken, int timeoutMilliseconds = 60000, IWebProxy webProxy = null, string customUrl = null)
+        {
+            Environment = env;
+            AccessToken = accessToken;
+            WebProxy = webProxy;
+            TimeoutMilliseconds = timeoutMilliseconds;
+            CustomUrl = customUrl;
+            SecretKey = null;
+            PublicKey = null;
+        }
         /// <summary>
         /// Base address for the API, based on environment
         /// </summary>

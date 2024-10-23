@@ -111,16 +111,25 @@ namespace Paydock_dotnet_sdk.Services
 				httpRequest.Content = new StringContent(jsonBody);
 				httpRequest.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 			}
-
-			// authentication
-			if (!excludeSecretKey)
+			// authentication with AccessToken
+			if (Config.AccessToken != null)
 			{
 				if (string.IsNullOrEmpty(overrideConfigSecretKey))
-					httpRequest.Headers.Add("x-user-secret-key", Config.SecretKey);
+					httpRequest.Headers.Add("x-access-token", Config.AccessToken);
 				else
-					httpRequest.Headers.Add("x-user-secret-key", overrideConfigSecretKey);
+					httpRequest.Headers.Add("x-access-token", overrideConfigSecretKey);
 			}
-
+			else
+			{
+				// authentication with Secret key (deprecated)
+				if (!excludeSecretKey)
+				{
+					if (string.IsNullOrEmpty(overrideConfigSecretKey))
+						httpRequest.Headers.Add("x-user-secret-key", Config.SecretKey);
+					else
+						httpRequest.Headers.Add("x-user-secret-key", overrideConfigSecretKey);
+				}
+			}
 			return (httpRequest: httpRequest, httpClient: httpClient);
 		}
 	}
