@@ -2,14 +2,15 @@
 <package >
   <metadata>
     <id>PaydockSdkNetStandard</id>
-    <version>1.3.20-rc</version>
+    <version>1.3.20-rc3</version>
     <authors>Paydock</authors>
     <owners>Paydock</owners>
+    <readme>docs\README.md</readme>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/PayDockDev/paydock_dotnet_sdk</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Paydock .Net Standard 1.2 SDK</description>
-    <releaseNotes>1.3.20-rc
+    <releaseNotes>1.3.20-rc3
     - AccessToken support
      </releaseNotes>
     <copyright>Copyright 2024</copyright>
@@ -23,5 +24,6 @@
   </metadata>
   <files>
     <file src="bin\release\netstandard1.2\Paydock_dotnet_sdk.dll" target="lib\netstandard1.2\Paydock_dotnet_sdk.dll" />
+    <file src="..\..\README.md" target="docs\" />
   </files>
 </package>

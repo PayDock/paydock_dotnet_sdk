@@ -4,10 +4,6 @@ This SDK provides a wrapper around the PayDock REST API.
 
 For more info on the Paydock API, see our [full documentation](https://docs.paydock.com).
 
-In order to support the different ways our customers use PayDock, we've released 2 versions of the SDK:
-* .Net 4.0 SDK (for pre .NET 4.5.1) - deprecated
-* .Net Standard SDK - with async support (for net451+ and netcoreapp1.0+)
-
 
 ## .Net Core SDK Usage
 

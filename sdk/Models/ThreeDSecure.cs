@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json.Converters;
 
 namespace Paydock_dotnet_sdk.Models
 {
@@ -16,7 +17,8 @@ namespace Paydock_dotnet_sdk.Models
         public Authentication authentication { get; set; }
         public Decoupled decoupled { get; set; }
         public Recurring recurring { get; set; }
-        
+        public ChallengePreference challenge_preference { get; set; }
+
     }
 
     public class Authentication
@@ -90,7 +92,19 @@ namespace Paydock_dotnet_sdk.Models
         public int? frequency_days { get; set; }
 
     }
+
+    public enum ChallengePreference
+    {
+        [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
+        CHALLENGE_MANDATED,           
+        CHALLENGE_PREFERRED,          
+        NO_CHALLENGE,                 
+        NO_PREFERENCE,                
+        REQUEST_TRUSTED_MERCHANT_LISTING
+    }
+
 }
+
 
 
 /** 
