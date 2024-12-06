@@ -1,4 +1,4 @@
-﻿`using System;
+﻿using System;
 
 namespace Paydock_dotnet_sdk.Models
 {
