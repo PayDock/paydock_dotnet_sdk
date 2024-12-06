@@ -17,6 +17,7 @@ namespace Paydock_dotnet_sdk.Models
         public Authentication authentication { get; set; }
         public Decoupled decoupled { get; set; }
         public Recurring recurring { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
         public ChallengePreference challenge_preference { get; set; }
 
     }
@@ -95,7 +96,6 @@ namespace Paydock_dotnet_sdk.Models
 
     public enum ChallengePreference
     {
-        [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
         CHALLENGE_MANDATED,           
         CHALLENGE_PREFERRED,          
         NO_CHALLENGE,                 
