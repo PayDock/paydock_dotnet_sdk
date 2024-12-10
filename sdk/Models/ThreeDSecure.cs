@@ -96,11 +96,11 @@ namespace Paydock_dotnet_sdk.Models
 
     public enum ChallengePreference
     {
-        CHALLENGE_MANDATED,           
-        CHALLENGE_PREFERRED,          
-        NO_CHALLENGE,                 
-        NO_PREFERENCE,                
-        REQUEST_TRUSTED_MERCHANT_LISTING
+        no_preference,
+        no_challenge,
+        challenge_mandated,
+        challenge_preferred,
+        request_trusted_merchant_listing
     }
 
 }
