@@ -1,0 +1,37 @@
+name: Publish to NuGet
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '7.x'
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Update version in project
+        run: |
+          sed -i "s|<PackageVersion>.*</PackageVersion>|<PackageVersion>${{ steps.version.outputs.VERSION }}</PackageVersion>|g" netstandardSdk/Sdk.csproj
+          sed -i "s|<Version>.*</Version>|<Version>${{ steps.version.outputs.VERSION }}</Version>|g" netstandardSdk/Sdk.csproj
+          sed -i "s|<AssemblyVersion>.*</AssemblyVersion>|<AssemblyVersion>${{ steps.version.outputs.VERSION }}</AssemblyVersion>|g" netstandardSdk/Sdk.csproj
+          sed -i "s|<FileVersion>.*</FileVersion>|<FileVersion>${{ steps.version.outputs.VERSION }}</FileVersion>|g" netstandardSdk/Sdk.csproj
+
+      - name: Build
+        run: dotnet build netstandardSdk/Sdk.csproj -c Production
+
+      - name: Pack
+        run: dotnet pack netstandardSdk/Sdk.csproj -c Production --no-build
+
+      - name: Push to NuGet
+        run: dotnet nuget push netstandardSdk/bin/Production/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
