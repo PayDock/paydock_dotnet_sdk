@@ -17,10 +17,6 @@
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="..\FunctionalTests\RequestFactory.cs" Link="RequestFactory.cs" />
-    <Compile Include="..\FunctionalTests\TestConfig.cs" Link="TestConfig.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />

@@ -13,9 +13,10 @@ namespace Paydock_dotnet_sdk.Tools
 		public static void CreateResponseException(string result, Exception innerException)
 		{
 			dynamic obj = JsonConvert.DeserializeObject<ExpandoObject>(result, new ExpandoObjectConverter());
+			var json = JObject.Parse(result);
 			var errorResponse = new ErrorResponse()
 			{
-				Status = Convert.ToInt32(obj.status),
+				Status = json["status"] != null ? Convert.ToInt32(json["status"]) : 0,
 				ExtendedInformation = obj,
 				JsonResponse = result
 			};
@@ -23,9 +24,7 @@ namespace Paydock_dotnet_sdk.Tools
 
 
 			var errorMessage = "";
-			
 
-			var json = JObject.Parse(result);
 			if (json["error_summary"] != null)
 			{
 				if (json["error_summary"]["message"] != null &&
