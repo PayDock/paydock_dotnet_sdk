@@ -320,6 +320,18 @@ namespace Paydock_dotnet_sdk.Services
 
 
 		/// <summary>
+		/// Abandon a wallet charge that was previously initialized but not used
+		/// </summary>
+		/// <param name="chargeId">id of the wallet charge to abandon</param>
+		/// <returns>Charge response</returns>
+		[RequiresConfig]
+		public async Task<ChargeResponse> AbandonWallet(string chargeId)
+		{
+			chargeId = Uri.EscapeUriString(chargeId);
+			return await _serviceHelper.Post<ChargeResponse, object>(null, string.Format("charges/wallet/{0}/abandon", chargeId), overrideConfigSecretKey: _overrideConfigSecretKey);
+		}
+
+		/// <summary>
 		/// Archive a transaction
 		/// </summary>
 		/// <param name="chargeId">id of the charge to archive</param>
