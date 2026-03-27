@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using Paydock_dotnet_sdk.Services;
 using Paydock_dotnet_sdk.Models;
 using System;
@@ -16,31 +16,32 @@ namespace FunctionalTests
             TestConfig.Init();
         }
 
-        private async Task<SubscriptionResponse> CreateBasicSubscription(string overideSecretKey = null)
+        private Subscriptions CreateSvc(bool useOverrideKey = false)
         {
-			var request = RequestFactory.CreateSubscriptionRequest();
-
-			if (overideSecretKey != null)
-                return await new Subscriptions(overideSecretKey).Add(request);
-            else
-                return await new Subscriptions().Add(request);
+            return useOverrideKey ? new Subscriptions(TestConfig.OverideSecretKey) : new Subscriptions();
         }
 
-        [TestCase(TestConfig.OverideSecretKey)]
-        [TestCase(null)]
-        public async Task CreateSubscription(string overideSecretKey)
+        private async Task<SubscriptionResponse> CreateBasicSubscription(bool useOverrideKey = false)
         {
-            var result = await CreateBasicSubscription(overideSecretKey);
+            var request = RequestFactory.CreateSubscriptionRequest();
+            return await CreateSvc(useOverrideKey).Add(request);
+        }
 
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task CreateSubscription(bool useOverrideKey)
+        {
+            Assume.That(!useOverrideKey || TestConfig.OverideSecretKey != null, "PAYDOCK_OVERRIDE_SECRET_KEY not configured");
+            var result = await CreateBasicSubscription(useOverrideKey);
             Assert.IsTrue(result.IsSuccess);
         }
 
-        [TestCase(TestConfig.OverideSecretKey)]
-        [TestCase(null)]
-        public async Task UpdateSubscription(string overideSecretKey)
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task UpdateSubscription(bool useOverrideKey)
         {
-            var subscription = await CreateBasicSubscription(overideSecretKey);
-
+            Assume.That(!useOverrideKey || TestConfig.OverideSecretKey != null, "PAYDOCK_OVERRIDE_SECRET_KEY not configured");
+            var subscription = await CreateBasicSubscription(useOverrideKey);
             var request = new SubscriptionUpdateRequest
             {
                 _id = subscription.resource.data._id,
@@ -54,69 +55,51 @@ namespace FunctionalTests
                     start_date = DateTime.Now
                 }
             };
-
-            SubscriptionResponse result;
-            if (overideSecretKey != null)
-                result = await new Subscriptions(overideSecretKey).Update(request);
-            else
-                result = await new Subscriptions().Update(request);
-
+            var result = await CreateSvc(useOverrideKey).Update(request);
             Assert.IsTrue(result.IsSuccess);
             Assert.AreEqual(request.amount, result.resource.data.amount);
             Assert.AreEqual(request.schedule.frequency, result.resource.data.schedule.frequency);
         }
 
-        [TestCase(TestConfig.OverideSecretKey)]
-        [TestCase(null)]
-        public async Task GetSubscriptions(string overideSecretKey)
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task GetSubscriptions(bool useOverrideKey)
         {
-            var subscription = await CreateBasicSubscription(overideSecretKey);
-            SubscriptionItemsResponse response;
-            if (overideSecretKey != null)
-                response = await new Subscriptions(overideSecretKey).Get();
-            else
-                response = await new Subscriptions().Get();
+            Assume.That(!useOverrideKey || TestConfig.OverideSecretKey != null, "PAYDOCK_OVERRIDE_SECRET_KEY not configured");
+            await CreateBasicSubscription(useOverrideKey);
+            var response = await CreateSvc(useOverrideKey).Get();
             Assert.IsTrue(response.IsSuccess);
         }
 
-        [TestCase(TestConfig.OverideSecretKey)]
-        [TestCase(null)]
-        public async Task GetSubscriptionsWithSearch(string overideSecretKey)
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task GetSubscriptionsWithSearch(bool useOverrideKey)
         {
-            var subscription = await CreateBasicSubscription(overideSecretKey);
+            Assume.That(!useOverrideKey || TestConfig.OverideSecretKey != null, "PAYDOCK_OVERRIDE_SECRET_KEY not configured");
+            var subscription = await CreateBasicSubscription(useOverrideKey);
             var request = new SubscriptionSearchRequest { customer_id = subscription.resource.data.customer.customer_id };
-            SubscriptionItemsResponse response;
-            if (overideSecretKey != null)
-                response = await new Subscriptions(overideSecretKey).Get(request);
-            else
-                response = await new Subscriptions().Get(request);
+            var response = await CreateSvc(useOverrideKey).Get(request);
             Assert.IsTrue(response.IsSuccess);
             Assert.AreEqual(1, response.resource.data.Count());
         }
 
-        [TestCase(TestConfig.OverideSecretKey)]
-        [TestCase(null)]
-        public async Task GetSingleSubscription(string overideSecretKey)
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task GetSingleSubscription(bool useOverrideKey)
         {
-            var subscription = await CreateBasicSubscription(overideSecretKey);
-            SubscriptionItemResponse response;
-            if (overideSecretKey != null)
-                response = await new Subscriptions(overideSecretKey).Get(subscription.resource.data._id);
-            else
-                response = await new Subscriptions().Get(subscription.resource.data._id);
+            Assume.That(!useOverrideKey || TestConfig.OverideSecretKey != null, "PAYDOCK_OVERRIDE_SECRET_KEY not configured");
+            var subscription = await CreateBasicSubscription(useOverrideKey);
+            var response = await CreateSvc(useOverrideKey).Get(subscription.resource.data._id);
             Assert.IsTrue(response.IsSuccess);
         }
 
-        [TestCase(TestConfig.OverideSecretKey)]
-        [TestCase(null)]
-        public async Task DeleteSubscription(string overideSecretKey)
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task DeleteSubscription(bool useOverrideKey)
         {
-            var subscription = await CreateBasicSubscription(overideSecretKey);
-            SubscriptionItemResponse response;
-            if (overideSecretKey != null)
-                response = await new Subscriptions(overideSecretKey).Delete(subscription.resource.data._id);
-            else
-                response = await new Subscriptions().Delete(subscription.resource.data._id);
+            Assume.That(!useOverrideKey || TestConfig.OverideSecretKey != null, "PAYDOCK_OVERRIDE_SECRET_KEY not configured");
+            var subscription = await CreateBasicSubscription(useOverrideKey);
+            var response = await CreateSvc(useOverrideKey).Delete(subscription.resource.data._id);
             Assert.IsTrue(response.IsSuccess);
         }
     }

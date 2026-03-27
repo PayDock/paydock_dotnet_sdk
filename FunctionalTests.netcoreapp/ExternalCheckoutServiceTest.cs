@@ -1,32 +1,28 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using Paydock_dotnet_sdk.Services;
 using Paydock_dotnet_sdk.Models;
 using System.Threading.Tasks;
 
 namespace FunctionalTests
 {
-	[TestFixture]
-	public class ExternalCheckoutServiceTests
-	{
-		[SetUp]
-		public void Init()
-		{
-			TestConfig.Init();
-		}
+    [TestFixture]
+    public class ExternalCheckoutServiceTests
+    {
+        [SetUp]
+        public void Init()
+        {
+            TestConfig.Init();
+        }
 
-		[TestCase(TestConfig.OverideSecretKey)]
-		[TestCase(null)]
-		public async Task CreateLink(string overideSecretKey)
-		{
-			var request = RequestFactory.CreateExternalCheckoutRequest();
-
-			ExternalCheckoutResponse result;
-			if (overideSecretKey != null)
-				result = await new ExternalCheckout(overideSecretKey).Create(request);
-			else
-				result = await new ExternalCheckout().Create(request);
-
-			Assert.IsTrue(result.IsSuccess);
-		}
-	}
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task CreateLink(bool useOverrideKey)
+        {
+            Assume.That(!useOverrideKey || TestConfig.OverideSecretKey != null, "PAYDOCK_OVERRIDE_SECRET_KEY not configured");
+            var request = RequestFactory.CreateExternalCheckoutRequest();
+            var svc = useOverrideKey ? new ExternalCheckout(TestConfig.OverideSecretKey) : new ExternalCheckout();
+            var result = await svc.Create(request);
+            Assert.IsTrue(result.IsSuccess);
+        }
+    }
 }

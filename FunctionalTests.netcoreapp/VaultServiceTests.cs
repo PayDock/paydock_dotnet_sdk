@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using Paydock_dotnet_sdk.Services;
 using Paydock_dotnet_sdk.Models;
 using System.Threading.Tasks;
@@ -12,53 +12,45 @@ namespace FunctionalTests
         public void Init()
         {
             TestConfig.Init();
-		}
+        }
 
-		private async Task<VaultResponse> CreateBasicToken(string overrideSecretKey)
-		{
-			var request = RequestFactory.CreateVaultRequest();
-			
-			if (overrideSecretKey != null)
-				return await new Vault(overrideSecretKey).Create(request);
-			else
-				return await new Vault().Create(request);
-		}
-
-		[TestCase(TestConfig.OverideSecretKey)]
-        [TestCase(null)]
-        public async Task Create(string overridePrivateKey)
+        private Vault CreateSvc(bool useOverrideKey = false)
         {
-			var result = await CreateBasicToken(overridePrivateKey);
+            return useOverrideKey ? new Vault(TestConfig.OverideSecretKey) : new Vault();
+        }
 
-			Assert.IsTrue(result.IsSuccess);
-		}
+        private async Task<VaultResponse> CreateBasicToken(bool useOverrideKey = false)
+        {
+            var request = RequestFactory.CreateVaultRequest();
+            return await CreateSvc(useOverrideKey).Create(request);
+        }
 
-		[TestCase(TestConfig.OverideSecretKey)]
-		[TestCase(null)]
-		public async Task GetSingleToken(string overridePrivateKey)
-		{
-			var result = await CreateBasicToken(overridePrivateKey);
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task Create(bool useOverrideKey)
+        {
+            Assume.That(!useOverrideKey || TestConfig.OverideSecretKey != null, "PAYDOCK_OVERRIDE_SECRET_KEY not configured");
+            var result = await CreateBasicToken(useOverrideKey);
+            Assert.IsTrue(result.IsSuccess);
+        }
 
-			VaultResponse response;
-			if (overridePrivateKey != null)
-				response = await new Vault(overridePrivateKey).Get(result.resource.data.vault_token);
-			else
-				response = await new Vault().Get(result.resource.data.vault_token);
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task GetSingleToken(bool useOverrideKey)
+        {
+            Assume.That(!useOverrideKey || TestConfig.OverideSecretKey != null, "PAYDOCK_OVERRIDE_SECRET_KEY not configured");
+            var result = await CreateBasicToken(useOverrideKey);
+            var response = await CreateSvc(useOverrideKey).Get(result.resource.data.vault_token);
+            Assert.IsTrue(response.IsSuccess);
+        }
 
-			Assert.IsTrue(response.IsSuccess);
-		}
-
-		[TestCase(TestConfig.OverideSecretKey)]
-		[TestCase(null)]
-		public async Task GetTokens(string overridePrivateKey)
-		{
-			VaultItemsResponse response;
-			if (overridePrivateKey != null)
-				response = await new Vault(overridePrivateKey).Get();
-			else
-				response = await new Vault().Get();
-
-			Assert.IsTrue(response.IsSuccess);
-		}
-	}
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task GetTokens(bool useOverrideKey)
+        {
+            Assume.That(!useOverrideKey || TestConfig.OverideSecretKey != null, "PAYDOCK_OVERRIDE_SECRET_KEY not configured");
+            var response = await CreateSvc(useOverrideKey).Get();
+            Assert.IsTrue(response.IsSuccess);
+        }
+    }
 }
