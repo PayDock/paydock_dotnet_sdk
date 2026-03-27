@@ -24,77 +24,77 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\sdk\Models\ChargeResponse.cs" Link="Models\ChargeResponse.cs" />
-    <Compile Include="..\sdk\Models\ChargeItemResponse.cs" Link="Models\ChargeItemResponse.cs" />
-    <Compile Include="..\sdk\Models\ChargeItemsResponse.cs" Link="Models\ChargeItemsResponse.cs" />
-    <Compile Include="..\sdk\Models\ChargeRefundRequest.cs" Link="Models\ChargeRefundRequest.cs" />
-    <Compile Include="..\sdk\Models\ChargeRefundResponse.cs" Link="Models\ChargeRefundResponse.cs" />
-    <Compile Include="..\sdk\Models\ChargeRequest.cs" Link="Models\ChargeRequest.cs" />
-    <Compile Include="..\sdk\Models\ChargeRequestBase.cs" Link="Models\ChargeRequestBase.cs" />
-    <Compile Include="..\sdk\Models\ChargeRequestStripeConnect.cs" Link="Models\ChargeRequestStripeConnect.cs" />
-    <Compile Include="..\sdk\Models\WalletResponse.cs" Link="Models\WalletResponse.cs" />
-    <Compile Include="..\sdk\Models\WalletAmountDetails.cs" Link="Models\WalletAmountDetails.cs" />
-    <Compile Include="..\sdk\Models\WalletCardAcceptor.cs" Link="Models\WalletCardAcceptor.cs" />
-    <Compile Include="..\sdk\Models\WalletChargeItem.cs" Link="Models\WalletChargeItem.cs" />
-    <Compile Include="..\sdk\Models\ChargeSearchRequest.cs" Link="Models\ChargeSearchRequest.cs" />
-    <Compile Include="..\sdk\Models\TransactionResponse.cs" Link="Models\TransactionResponse.cs" />
-    <Compile Include="..\sdk\Models\Customer.cs" Link="Models\Customer.cs" />
-    <Compile Include="..\sdk\Models\CustomerItemResponse.cs" Link="Models\CustomerItemResponse.cs" />
-    <Compile Include="..\sdk\Models\CustomerItemsResponse.cs" Link="Models\CustomerItemsResponse.cs" />
-    <Compile Include="..\sdk\Models\CustomerRequest.cs" Link="Models\CustomerRequest.cs" />
-    <Compile Include="..\sdk\Models\CustomerResponse.cs" Link="Models\CustomerResponse.cs" />
-    <Compile Include="..\sdk\Models\CustomerSearchRequest.cs" Link="Models\CustomerSearchRequest.cs" />
-    <Compile Include="..\sdk\Models\CustomerUpdateRequest.cs" Link="Models\CustomerUpdateRequest.cs" />
-    <Compile Include="..\sdk\Models\ErrorResponse.cs" Link="Models\ErrorResponse.cs" />
-    <Compile Include="..\sdk\Models\ErrorResponseBase.cs" Link="Models\ErrorResponseBase.cs" />
-    <Compile Include="..\sdk\Models\ExternalCheckoutRequest.cs" Link="Models\ExternalCheckoutRequest.cs" />
-    <Compile Include="..\sdk\Models\ExternalCheckoutResponse.cs" Link="Models\ExternalCheckoutResponse.cs" />
-    <Compile Include="..\sdk\Models\GatewayData.cs" Link="Models\GatewayData.cs" />
-    <Compile Include="..\sdk\Models\GatewayItemResponse.cs" Link="Models\GatewayItemResponse.cs" />
-    <Compile Include="..\sdk\Models\GatewayItemsResponse.cs" Link="Models\GatewayItemsResponse.cs" />
-    <Compile Include="..\sdk\Models\GatewayRequest.cs" Link="Models\GatewayRequest.cs" />
-    <Compile Include="..\sdk\Models\GatewayResponse.cs" Link="Models\GatewayResponse.cs" />
-    <Compile Include="..\sdk\Models\GatewayUpdateRequest.cs" Link="Models\GatewayUpdateRequest.cs" />
-    <Compile Include="..\sdk\Models\NotificationLogRequest.cs" Link="Models\NotificationLogRequest.cs" />
-    <Compile Include="..\sdk\Models\NotificationLogResponse.cs" Link="Models\NotificationLogResponse.cs" />
-    <Compile Include="..\sdk\Models\NotificationLogsResponse.cs" Link="Models\NotificationLogsResponse.cs" />
-    <Compile Include="..\sdk\Models\NotificationTemplateItemsResponse.cs" Link="Models\NotificationTemplateItemsResponse.cs" />
-    <Compile Include="..\sdk\Models\NotificationTemplateRequest.cs" Link="Models\NotificationTemplateRequest.cs" />
-    <Compile Include="..\sdk\Models\NotificationTemplateResponse.cs" Link="Models\NotificationTemplateResponse.cs" />
-    <Compile Include="..\sdk\Models\NotificationTemplateUpdateRequest.cs" Link="Models\NotificationTemplateUpdateRequest.cs" />
-    <Compile Include="..\sdk\Models\NotificationTriggerData.cs" Link="Models\NotificationTriggerData.cs" />
-    <Compile Include="..\sdk\Models\NotificationTriggerItemsResponse.cs" Link="Models\NotificationTriggerItemsResponse.cs" />
-    <Compile Include="..\sdk\Models\NotificationTriggerRequest.cs" Link="Models\NotificationTriggerRequest.cs" />
-    <Compile Include="..\sdk\Models\NotificationTriggerResponse.cs" Link="Models\NotificationTriggerResponse.cs" />
-    <Compile Include="..\sdk\Models\PaymentSource.cs" Link="Models\PaymentSource.cs" />
-    <Compile Include="..\sdk\Models\ThreeDSecure.cs" Link="Models\ThreeDSecure.cs" />
-    <Compile Include="..\sdk\Models\TransactionThreeDSecure.cs" Link="Models\TransactionThreeDSecure.cs" />
-    <Compile Include="..\sdk\Models\FraudData.cs" Link="Models\FraudData.cs" />
-    <Compile Include="..\sdk\Models\FraudBase.cs" Link="Models\FraudBase.cs" />
-    <Compile Include="..\sdk\Models\ShippingData.cs" Link="Models\ShippingData.cs" />
-    <Compile Include="..\sdk\Models\FraudResponse.cs" Link="Models\FraudResponse.cs" />
-    <Compile Include="..\sdk\Models\Response.cs" Link="Models\Response.cs" />
-    <Compile Include="..\sdk\Models\ResponseException.cs" Link="Models\ResponseException.cs" />
-    <Compile Include="..\sdk\Models\SubscriptionItemResponse.cs" Link="Models\SubscriptionItemResponse.cs" />
-    <Compile Include="..\sdk\Models\SubscriptionItemsResponse.cs" Link="Models\SubscriptionItemsResponse.cs" />
-    <Compile Include="..\sdk\Models\SubscriptionRequest.cs" Link="Models\SubscriptionRequest.cs" />
-    <Compile Include="..\sdk\Models\SubscriptionResponse.cs" Link="Models\SubscriptionResponse.cs" />
-    <Compile Include="..\sdk\Models\SubscriptionSchedule.cs" Link="Models\SubscriptionSchedule.cs" />
-    <Compile Include="..\sdk\Models\SubscriptionSearchRequest.cs" Link="Models\SubscriptionSearchRequest.cs" />
-    <Compile Include="..\sdk\Models\SubscriptionUpdateRequest.cs" Link="Models\SubscriptionUpdateRequest.cs" />
-    <Compile Include="..\sdk\Models\TokenRequest.cs" Link="Models\TokenRequest.cs" />
-    <Compile Include="..\sdk\Models\TokenResponse.cs" Link="Models\TokenResponse.cs" />
-    <Compile Include="..\sdk\Models\VaultItemsResponse.cs" Link="Models\VaultItemsResponse.cs" />
-    <Compile Include="..\sdk\Models\VaultRequest.cs" Link="Models\VaultRequest.cs" />
-    <Compile Include="..\sdk\Models\VaultResponse.cs" Link="Models\VaultResponse.cs" />
-    <Compile Include="..\sdk\Models\VaultType.cs" Link="Models\VaultType.cs" />
-    <Compile Include="..\sdk\Models\Webhooks\CardExpiration.cs" Link="Models\Webhooks\CardExpiration.cs" />
-    <Compile Include="..\sdk\Models\Webhooks\SubscriptionWebhook.cs" Link="Models\Webhooks\SubscriptionWebhook.cs" />
-    <Compile Include="..\sdk\Models\Webhooks\TransactionWebhook.cs" Link="Models\Webhooks\TransactionWebhook.cs" />
-    <Compile Include="..\sdk\Services\Config.cs" Link="Services\Config.cs" />
-    <Compile Include="..\sdk\Tools\RequiresConfigAttribute.cs" Link="Tools\RequiresConfigAttribute.cs" />
-    <Compile Include="..\sdk\Tools\ResponseExceptionFactory.cs" Link="Tools\ResponseExceptionFactory.cs" />
-    <Compile Include="..\sdk\Tools\UrlExtensionMethods.cs" Link="Tools\UrlExtensionMethods.cs" />
+    <Compile Include="Models\ChargeResponse.cs" />
+    <Compile Include="Models\ChargeItemResponse.cs" />
+    <Compile Include="Models\ChargeItemsResponse.cs" />
+    <Compile Include="Models\ChargeRefundRequest.cs" />
+    <Compile Include="Models\ChargeRefundResponse.cs" />
+    <Compile Include="Models\ChargeRequest.cs" />
+    <Compile Include="Models\ChargeRequestBase.cs" />
+    <Compile Include="Models\ChargeRequestStripeConnect.cs" />
+    <Compile Include="Models\WalletResponse.cs" />
+    <Compile Include="Models\WalletAmountDetails.cs" />
+    <Compile Include="Models\WalletCardAcceptor.cs" />
+    <Compile Include="Models\WalletChargeItem.cs" />
+    <Compile Include="Models\ChargeSearchRequest.cs" />
+    <Compile Include="Models\TransactionResponse.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerItemResponse.cs" />
+    <Compile Include="Models\CustomerItemsResponse.cs" />
+    <Compile Include="Models\CustomerRequest.cs" />
+    <Compile Include="Models\CustomerResponse.cs" />
+    <Compile Include="Models\CustomerSearchRequest.cs" />
+    <Compile Include="Models\CustomerUpdateRequest.cs" />
+    <Compile Include="Models\ErrorResponse.cs" />
+    <Compile Include="Models\ErrorResponseBase.cs" />
+    <Compile Include="Models\ExternalCheckoutRequest.cs" />
+    <Compile Include="Models\ExternalCheckoutResponse.cs" />
+    <Compile Include="Models\GatewayData.cs" />
+    <Compile Include="Models\GatewayItemResponse.cs" />
+    <Compile Include="Models\GatewayItemsResponse.cs" />
+    <Compile Include="Models\GatewayRequest.cs" />
+    <Compile Include="Models\GatewayResponse.cs" />
+    <Compile Include="Models\GatewayUpdateRequest.cs" />
+    <Compile Include="Models\NotificationLogRequest.cs" />
+    <Compile Include="Models\NotificationLogResponse.cs" />
+    <Compile Include="Models\NotificationLogsResponse.cs" />
+    <Compile Include="Models\NotificationTemplateItemsResponse.cs" />
+    <Compile Include="Models\NotificationTemplateRequest.cs" />
+    <Compile Include="Models\NotificationTemplateResponse.cs" />
+    <Compile Include="Models\NotificationTemplateUpdateRequest.cs" />
+    <Compile Include="Models\NotificationTriggerData.cs" />
+    <Compile Include="Models\NotificationTriggerItemsResponse.cs" />
+    <Compile Include="Models\NotificationTriggerRequest.cs" />
+    <Compile Include="Models\NotificationTriggerResponse.cs" />
+    <Compile Include="Models\PaymentSource.cs" />
+    <Compile Include="Models\ThreeDSecure.cs" />
+    <Compile Include="Models\TransactionThreeDSecure.cs" />
+    <Compile Include="Models\FraudData.cs" />
+    <Compile Include="Models\FraudBase.cs" />
+    <Compile Include="Models\ShippingData.cs" />
+    <Compile Include="Models\FraudResponse.cs" />
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\ResponseException.cs" />
+    <Compile Include="Models\SubscriptionItemResponse.cs" />
+    <Compile Include="Models\SubscriptionItemsResponse.cs" />
+    <Compile Include="Models\SubscriptionRequest.cs" />
+    <Compile Include="Models\SubscriptionResponse.cs" />
+    <Compile Include="Models\SubscriptionSchedule.cs" />
+    <Compile Include="Models\SubscriptionSearchRequest.cs" />
+    <Compile Include="Models\SubscriptionUpdateRequest.cs" />
+    <Compile Include="Models\TokenRequest.cs" />
+    <Compile Include="Models\TokenResponse.cs" />
+    <Compile Include="Models\VaultItemsResponse.cs" />
+    <Compile Include="Models\VaultRequest.cs" />
+    <Compile Include="Models\VaultResponse.cs" />
+    <Compile Include="Models\VaultType.cs" />
+    <Compile Include="Models\Webhooks\CardExpiration.cs" />
+    <Compile Include="Models\Webhooks\SubscriptionWebhook.cs" />
+    <Compile Include="Models\Webhooks\TransactionWebhook.cs" />
+    <Compile Include="Services\Config.cs" />
+    <Compile Include="Tools\RequiresConfigAttribute.cs" />
+    <Compile Include="Tools\ResponseExceptionFactory.cs" />
+    <Compile Include="Tools\UrlExtensionMethods.cs" />
     <None Include="..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
@@ -105,10 +105,6 @@
 
   <ItemGroup>
     <Folder Include="Models\Webhooks\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\sdk\paydock.snk" Link="paydock.snk" />
   </ItemGroup>
 
 </Project>
