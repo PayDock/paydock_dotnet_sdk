@@ -1,0 +1,33 @@
+name: Functional Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '7.x'
+
+      - name: Run functional tests
+        env:
+          PAYDOCK_SECRET_KEY: ${{ secrets.PAYDOCK_SECRET_KEY }}
+          PAYDOCK_PUBLIC_KEY: ${{ secrets.PAYDOCK_PUBLIC_KEY }}
+          PAYDOCK_GATEWAY_ID: ${{ secrets.PAYDOCK_GATEWAY_ID }}
+          PAYDOCK_PAYPAL_GATEWAY_ID: ${{ secrets.PAYDOCK_PAYPAL_GATEWAY_ID }}
+          PAYDOCK_AUTHORISE_GATEWAY_ID: ${{ secrets.PAYDOCK_AUTHORISE_GATEWAY_ID }}
+          PAYDOCK_OVERRIDE_SECRET_KEY: ${{ secrets.PAYDOCK_OVERRIDE_SECRET_KEY }}
+          PAYDOCK_OVERRIDE_PUBLIC_KEY: ${{ secrets.PAYDOCK_OVERRIDE_PUBLIC_KEY }}
+          PAYDOCK_STRIPE_GATEWAY_ID: ${{ secrets.PAYDOCK_STRIPE_GATEWAY_ID }}
+          PAYDOCK_STRIPE_ACCOUNT_ID: ${{ secrets.PAYDOCK_STRIPE_ACCOUNT_ID }}
+          PAYDOCK_MASTERCARD_GATEWAY_ID: ${{ secrets.PAYDOCK_MASTERCARD_GATEWAY_ID }}
+          PAYDOCK_FLYPAY_GATEWAY_ID: ${{ secrets.PAYDOCK_FLYPAY_GATEWAY_ID }}
+        run: dotnet test FunctionalTests.netcoreapp/FunctionalTests.netcoreapp.csproj
