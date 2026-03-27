@@ -7,13 +7,13 @@
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
     <RootNamespace>Paydock_dotnet_sdk</RootNamespace>
-    <AssemblyVersion>1.3.20.5</AssemblyVersion>
-    <FileVersion>1.3.20.5</FileVersion>
+    <AssemblyVersion>1.3.20</AssemblyVersion>
+    <FileVersion>1.3.20</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>PayDockOssKeyFile.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>PaydockSdk.Core</AssemblyName>
-    <PackageVersion>1.3.20-rc5</PackageVersion>
-    <Version>1.3.20-rc5</Version>
+    <PackageVersion>1.3.20</PackageVersion>
+    <Version>1.3.20</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>Paydock .Net Standard SDK</Description>
   </PropertyGroup>
@@ -87,6 +87,7 @@
     <Compile Include="..\sdk\Models\VaultItemsResponse.cs" Link="Models\VaultItemsResponse.cs" />
     <Compile Include="..\sdk\Models\VaultRequest.cs" Link="Models\VaultRequest.cs" />
     <Compile Include="..\sdk\Models\VaultResponse.cs" Link="Models\VaultResponse.cs" />
+    <Compile Include="..\sdk\Models\VaultType.cs" Link="Models\VaultType.cs" />
     <Compile Include="..\sdk\Models\Webhooks\CardExpiration.cs" Link="Models\Webhooks\CardExpiration.cs" />
     <Compile Include="..\sdk\Models\Webhooks\SubscriptionWebhook.cs" Link="Models\Webhooks\SubscriptionWebhook.cs" />
     <Compile Include="..\sdk\Models\Webhooks\TransactionWebhook.cs" Link="Models\Webhooks\TransactionWebhook.cs" />
@@ -98,7 +99,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
   </ItemGroup>
 

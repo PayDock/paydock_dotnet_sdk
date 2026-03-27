@@ -109,6 +109,7 @@
     <Compile Include="Models\VaultItemsResponse.cs" />
     <Compile Include="Models\VaultResponse.cs" />
     <Compile Include="Models\VaultRequest.cs" />
+    <Compile Include="Models\VaultType.cs" />
     <Compile Include="Models\Webhooks\CardExpiration.cs" />
     <Compile Include="Models\Webhooks\SubscriptionWebhook.cs" />
     <Compile Include="Models\Webhooks\TransactionWebhook.cs" />

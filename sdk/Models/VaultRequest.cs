@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System;
 
 namespace Paydock_dotnet_sdk.Models
 {
 	public class VaultRequest
 	{
-		[JsonConverter(typeof(StringEnumConverter))]
 		public PaymentType type { get; set; }
 		public string token { get; set; }
 		public string card_name { get; set; }
@@ -17,6 +15,6 @@ namespace Paydock_dotnet_sdk.Models
 		public string account_bsb { get; set; }
 		public string card_ccv { get; set; }
 		public bool? store_ccv { get; set; }
-		
+		public VaultType? vault_type { get; set; }
 	}
 }

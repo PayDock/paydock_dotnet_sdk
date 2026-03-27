@@ -38,6 +38,7 @@ namespace Paydock_dotnet_sdk.Models
 			public string company_id { get; set; }
 			public string _source_ip_address { get; set; }
 			public string type { get; set; }
+			public VaultType? vault_type { get; set; }
 		}
 	}
 }
