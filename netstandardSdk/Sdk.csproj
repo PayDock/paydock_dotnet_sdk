@@ -10,8 +10,8 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>PayDockOssKeyFile.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>PaydockSdk.Core</AssemblyName>
-    <PackageVersion>1.3.21-rc2</PackageVersion>
-    <Version>1.3.21-rc2</Version>
+    <PackageVersion>1.3.21</PackageVersion>
+    <Version>1.3.21</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>Paydock .Net Standard SDK</Description>
   </PropertyGroup>
